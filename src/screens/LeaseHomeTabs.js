@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import Animated from "react-native-reanimated";
-import { Constants } from "expo";
 import HomeScreen from "./homeScreen";
 import { connect } from "react-redux";
 import ProfileScreen from "./ProfileScreen";

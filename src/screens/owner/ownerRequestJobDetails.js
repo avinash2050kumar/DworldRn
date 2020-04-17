@@ -20,7 +20,7 @@ import {
 } from "../../actions";
 import { connect } from "react-redux";
 import { NavigationBar, Screen } from "../../theme/styledComponent";
-import { connectActionSheet } from "@expo/react-native-action-sheet";
+//import { connectActionSheet } from "@expo/react-native-action-sheet";
 import ImageView from "react-native-image-viewing";
 import FullScreenImage from "./fullScreenImage";
 import Button from "../../components/common/Buttons";
@@ -47,7 +47,7 @@ const DataContainer = styled.View`
 	justify-content: space-between;
 `;
 
-@connectActionSheet
+//@connectActionSheet
 class OwnerRequestJobDetails extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
@@ -73,7 +73,7 @@ class OwnerRequestJobDetails extends React.Component {
 		});
 	}
 
-	_onOpenFrontActionSheetForViewImage = () => {
+/*	_onOpenFrontActionSheetForViewImage = () => {
 		let options = ["Show Front licence Image", "Cancel"];
 		let cancelButtonIndex = 2;
 
@@ -96,9 +96,9 @@ class OwnerRequestJobDetails extends React.Component {
 				}
 			}
 		);
-	};
+	};*/
 
-	_onOpenBackActionSheetForViewImage = () => {
+/*	_onOpenBackActionSheetForViewImage = () => {
 		let options = ["Show Back licence Image", "Cancel"];
 		let cancelButtonIndex = 2;
 
@@ -121,7 +121,7 @@ class OwnerRequestJobDetails extends React.Component {
 				}
 			}
 		);
-	};
+	};*/
 
 	render() {
 		const item = this.props.navigation.getParam("item");
@@ -237,7 +237,7 @@ class OwnerRequestJobDetails extends React.Component {
 								>
 									<TouchableOpacity
 										onPress={() =>
-											this._onOpenFrontActionSheetForViewImage()
+											console.log('action sheets')//this._onOpenFrontActionSheetForViewImage()
 										}
 									>
 										<View
@@ -259,7 +259,7 @@ class OwnerRequestJobDetails extends React.Component {
 									</TouchableOpacity>
 									<TouchableOpacity
 										onPress={() =>
-											this._onOpenBackActionSheetForViewImage()
+											console.log('action sheets')	//this._onOpenBackActionSheetForViewImage()
 										}
 									>
 										<View

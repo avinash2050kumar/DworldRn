@@ -8,10 +8,6 @@ import {
 	KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
-import styled from "styled-components";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-import { connectActionSheet } from "@expo/react-native-action-sheet";
 
 import { isEmpty } from "../helper/string";
 import Button from "../components/common/Buttons";

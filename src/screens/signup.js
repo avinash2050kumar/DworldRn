@@ -18,11 +18,11 @@ import { Formik } from "formik";
 import Button from "../components/common/Buttons";
 import * as yup from "yup";
 import styles from "../theme/styles";
-import * as Facebook from "expo-facebook";
+/*import * as Facebook from "expo-facebook";*/
 import theme from "../theme/lightTheme";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import FormikTextInput from "../components/common/FormikTextInput";
-import * as Google from "expo-google-app-auth";
+/*import * as Google from "expo-google-app-auth";*/
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -65,7 +65,7 @@ class SignUpScreen extends Component {
 			});
 	};
 
-	_googleLogin = async () => {
+	/*_googleLogin = async () => {
 		const config = {
 			iosClientId: `35124116827-f6j6ue4j0c3obphpndm24npatto7rmp6.apps.googleusercontent.com`,
 			androidClientId: `35124116827-dpgetvd80tgm2364i8c0bpnmiis03quj.apps.googleusercontent.com`
@@ -74,9 +74,9 @@ class SignUpScreen extends Component {
 
 		const { type, accessToken } = res;
 		if (type === "success") {
-			/* Log-Out */
+			/!* Log-Out *!/
 			await Google.logOutAsync({ accessToken, ...config });
-			/* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests */
+			/!* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests *!/
 		}
 	};
 
@@ -105,7 +105,7 @@ class SignUpScreen extends Component {
 		} catch (e) {
 			alert(`Facebook Login Error:`);
 		}
-	};
+	};*/
 
 	render() {
 		const initialState = {
@@ -199,7 +199,7 @@ class SignUpScreen extends Component {
 								Or Continue with a social Account
 							</StyledText>
 							<Button
-								onPress={() => this._faceBookLogin()}
+								onPress={() => console.log('facebook')/*this._faceBookLogin()*/}
 								label="Facebook"
 								color="faceBook"
 								style={{ width: "100%", marginTop: 10 }}
@@ -207,7 +207,7 @@ class SignUpScreen extends Component {
 								iconColor={"#fff"}
 							/>
 							<Button
-								onPress={() => this._googleLogin()}
+								onPress={() => console.log('google')/*this._googleLogin()*/}
 								label="Gmail"
 								color="white"
 								style={{ width: "100%", marginTop: 10 }}

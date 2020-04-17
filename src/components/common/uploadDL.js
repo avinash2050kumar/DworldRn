@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-import { connectActionSheet } from "@expo/react-native-action-sheet";
+//import * as ImagePicker from "expo-image-picker";
+//import * as Permissions from "expo-permissions";
+//import { connectActionSheet } from "@expo/react-native-action-sheet";
 
 import * as yup from "yup";
 import { withNextInputAutoFocusForm } from "react-native-formik";
@@ -23,7 +23,7 @@ import ImageView from "react-native-image-viewing";
 import { API_URL } from "../../config/api_url";
 import axios from "axios";
 
-@connectActionSheet
+// @connectActionSheet
 class UploadDL extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
@@ -86,7 +86,7 @@ class UploadDL extends Component {
 			.catch(e => console.log("error", e));*/
 	};
 
-	_onOpenActionSheet = () => {
+/*	_onOpenActionSheet = () => {
 		let options = ["Take Photo", "Existing Photo", "Cancel"];
 		let cancelButtonIndex = 2;
 
@@ -145,9 +145,9 @@ class UploadDL extends Component {
 				}
 			}
 		);
-	};
+	};*/
 
-	_onOpenActionSheetForViewImage = () => {
+	/*_onOpenActionSheetForViewImage = () => {
 		let options = ["Show Image", "Cancel"];
 		let cancelButtonIndex = 2;
 
@@ -170,7 +170,7 @@ class UploadDL extends Component {
 				}
 			}
 		);
-	};
+	};*/
 
 	render() {
 		const {
@@ -208,7 +208,7 @@ class UploadDL extends Component {
 						{description}
 					</StyledText>
 					<Button
-						onPress={() => this._onOpenActionSheet()}
+						onPress={() => console.log('action sheet')}//this._onOpenActionSheet()}
 						label="Upload"
 						color="faceBook"
 						icon={"upload"}

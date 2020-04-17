@@ -30,8 +30,6 @@ import axios from "axios";
 import HomeCarousel from "../components/Home/Crousel";
 import theme from "../theme/lightTheme";
 import styles from "../theme/styles";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
 import styled from "styled-components";
 import i18n from "i18n-js";
 

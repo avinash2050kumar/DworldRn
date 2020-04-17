@@ -18,11 +18,11 @@ import { Formik } from "formik";
 import Button from "../components/common/Buttons";
 import * as yup from "yup";
 import styles from "../theme/styles";
-import * as Facebook from "expo-facebook";
+// import * as Facebook from "expo-facebook";
 import theme from "../theme/lightTheme";
 import FormikTextInput from "../components/common/FormikTextInput";
 import { withNextInputAutoFocusForm } from "react-native-formik";
-import * as Google from "expo-google-app-auth";
+// import * as Google from "expo-google-app-auth";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -64,7 +64,7 @@ class LoginScreen extends Component {
 		}
 	};
 
-	_googleLogin = async () => {
+	/*_googleLogin = async () => {
 		const config = {
 			expoClientId: `YOUR_WEB_CLIENT_ID`,
 			iosClientId: `35124116827-f6j6ue4j0c3obphpndm24npatto7rmp6.apps.googleusercontent.com`,
@@ -84,9 +84,9 @@ class LoginScreen extends Component {
 		this._handleSubmit(googleInfo, props);
 
 		if (type === "success") {
-			/* Log-Out */
+			/!* Log-Out *!/
 			await Google.logOutAsync({ accessToken, ...config });
-			/* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests */
+			/!* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests *!/
 		}
 	};
 
@@ -124,7 +124,7 @@ class LoginScreen extends Component {
 		} catch ({ message }) {
 			alert(`Facebook Login Error: ${message}`);
 		}
-	};
+	};*/
 
 	render() {
 		const initialState = {
@@ -215,7 +215,7 @@ class LoginScreen extends Component {
 										</StyledText>
 										<Button
 											onPress={() =>
-												this._faceBookLogin(props)
+												console.log('facebook')//this._faceBookLogin(props)
 											}
 											label="Facebook"
 											color="faceBook"
@@ -228,7 +228,7 @@ class LoginScreen extends Component {
 										/>
 										<Button
 											onPress={() =>
-												this._googleLogin(props)
+												console.log('google')//this._googleLogin(props)
 											}
 											label="Gmail"
 											color="white"

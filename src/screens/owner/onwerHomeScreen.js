@@ -30,7 +30,7 @@ import HomeCarousel from "../../components/Home/Crousel";
 import theme from "../../theme/lightTheme";
 import styles from "../../theme/styles";
 import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
+//import * as Location from "expo-location";
 import i18n from "i18n-js";
 import NavigationService from "../../config/NavigationService";
 import styled from "styled-components";
@@ -69,7 +69,7 @@ class OwnerHomeScreen extends Component {
 				errorMessage: "unable to fetch device loaction"
 			});
 		} else {
-			this._getLocationAsync();
+			//this._getLocationAsync();
 		}
 	}
 
@@ -81,7 +81,7 @@ class OwnerHomeScreen extends Component {
 		);
 	};
 
-	_getLocationAsync = async () => {
+	/*_getLocationAsync = async () => {
 		let { status } = await Permissions.askAsync(Permissions.LOCATION);
 		if (status !== "granted") {
 			this.setState({
@@ -103,7 +103,7 @@ class OwnerHomeScreen extends Component {
 			});
 
 		this.setState({ location });
-	};
+	};*/
 
 	color = index => {
 		const colors = [

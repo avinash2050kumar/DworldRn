@@ -29,7 +29,7 @@ import HomeCarousel from "../components/Home/Crousel";
 import theme from "../theme/lightTheme";
 import styles from "../theme/styles";
 import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
+// import * as Location from "expo-location";
 import i18n from "i18n-js";
 import NavigationService from "../config/NavigationService";
 
@@ -64,7 +64,7 @@ class HomeScreen extends Component {
 		);
 	};
 
-	_getLocationAsync = async () => {
+	/*_getLocationAsync = async () => {
 		let { status } = await Permissions.askAsync(Permissions.LOCATION);
 		if (status !== "granted") {
 			this.setState({
@@ -86,7 +86,7 @@ class HomeScreen extends Component {
 			});
 
 		this.setState({ location });
-	};
+	};*/
 
 	color = index => {
 		const colors = [

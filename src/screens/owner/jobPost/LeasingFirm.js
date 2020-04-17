@@ -30,9 +30,6 @@ import {
 } from "../../../actions";
 import theme from "../../../theme/lightTheme";
 import styles from "../../../theme/styles";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
-import i18n from "i18n-js";
 import NavigationService from "../../../config/NavigationService";
 import styled from "styled-components";
 

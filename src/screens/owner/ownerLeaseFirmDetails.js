@@ -20,9 +20,6 @@ import {
 } from "../../actions";
 import { connect } from "react-redux";
 import { NavigationBar, Screen } from "../../theme/styledComponent";
-import { connectActionSheet } from "@expo/react-native-action-sheet";
-import ImageView from "react-native-image-viewing";
-import FullScreenImage from "./fullScreenImage";
 import Button from "../../components/common/Buttons";
 
 const windowWidth = Dimensions.get("window").width;
