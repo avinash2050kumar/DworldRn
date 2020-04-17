@@ -1,0 +1,27 @@
+import { SET_CHOOSE_PROFILE_VISIBILITY } from "../actions/type";
+
+const chooseProfileVisibility = (
+	state = {
+		isChooseProfileVisible: true,
+		clientTypeId: 0,
+		ClientId: null
+	},
+	action
+) => {
+	switch (action.type) {
+		case SET_CHOOSE_PROFILE_VISIBILITY:
+			const { ClientId, value, clientTypeId } = action.payload;
+			return {
+				...state,
+				isChooseProfileVisible:
+					value !== undefined ? value : state.isChooseProfileVisible,
+				clientTypeId: clientTypeId ? clientTypeId : state.clientTypeId,
+				ClientId: ClientId ? ClientId : state.ClientId
+			};
+
+		default:
+			return state;
+	}
+};
+
+export default chooseProfileVisibility;

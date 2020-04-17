@@ -11,6 +11,11 @@
     "emulator": "cd C:\\Users\\Avinash\\AppData\\Local\\Android\\Sdk\\emulator && emulator -avd Google2"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.1",
+    "@react-native-community/netinfo": "^4.2.2",
+    "axios": "^0.19.0",
+    "concurrently": "^5.0.2",
+    "@react-native-community/viewpager": "^1.1.7",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "formik": "^2.1.4",
@@ -28,6 +33,7 @@
     "sha1": "^1.1.1",
     "styled-components": "^5.0.1",
     "yup": "^0.28.1",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-flash-message": "^0.1.15",
     "react-native-formik": "^1.7.7",
     "react-native-gesture-handler": "~1.5.0",

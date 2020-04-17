@@ -1,0 +1,8 @@
+OWNER:
+1.Job ads for driver and leasing firm >
+in every tab top navigator evrything is written as HATCHBACK and as well as in vehicle details.
+instead of request tab it should be APPROVE.
+
+2.Profile>Profile Details>
+Post Ads for vehicle (netwerk error)>
+PayScale tab(error:cannot read property of map,the error is  in OwnerPayscaleTabs file. )
