@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 
 import theme from "./src/theme";
-import Store from "./src/store/";
+import PersistStore from "./src/store/";
 import Entry from "./Entry";
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
     };
 
     return (
-      <Provider store={Store}>
+        <Provider store={PersistStore().store}>
         <ThemeProvider theme={theme}>
           <Entry />
         </ThemeProvider>
