@@ -26,7 +26,7 @@ class App extends Component {
     };
 
     return (
-      <Provider store={PersistStore().store}>
+        <Provider store={PersistStore().store}>
         <ThemeProvider theme={theme}>
           <Entry />
         </ThemeProvider>

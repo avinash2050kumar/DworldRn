@@ -16,7 +16,7 @@ import { isEmpty } from "../../helper/string";
 import styles from "../../theme/styles";
 import { Formik } from "formik";
 import theme from "../../theme/lightTheme";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import FormikTextInput from "../../components/common/FormikTextInput";
 import { Card, Screen, StyledText } from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
@@ -123,7 +123,7 @@ class OwnerDriverTripPayScale extends Component {
 								{props => (
 									<Form>
 										<View>
-											<Dropdown
+											{/*<Dropdown
 												onChangeText={(
 													value,
 													i,
@@ -162,7 +162,7 @@ class OwnerDriverTripPayScale extends Component {
 													props.values.price
 														.VehicleType.Name
 												}
-											/>
+											/>*/}
 											<FormikTextInput
 												label="Per day(In Rupee)"
 												name="price.price"

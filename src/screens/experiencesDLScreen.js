@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import UploadDL from "../components/common/uploadDL";
 import { getExperience } from "../actions";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import ImageView from "react-native-image-viewing";
 const Form = withNextInputAutoFocusForm(View);
 
@@ -105,7 +105,7 @@ class ExperiencesDLScreen extends Component {
 												type="name"
 												formikprops={props}
 											/>
-											<Dropdown
+											{/*<Dropdown
 												onChangeText={(
 													value,
 													i,
@@ -136,7 +136,7 @@ class ExperiencesDLScreen extends Component {
 													props.values.license
 														.LicenseType.Name
 												}
-											/>
+											/>*/}
 											<UploadDL
 												formikprops={props}
 												input={"FrontPage"}

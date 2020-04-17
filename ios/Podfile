@@ -85,6 +85,8 @@ target 'Dworld' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-razorpay', :path => '../node_modules/react-native-razorpay'
+
   target 'DworldTests' do
     inherit! :complete
     # Pods for testing

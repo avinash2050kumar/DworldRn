@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import theme from "../../theme/lightTheme";
 import { Screen, StyledText, StyledTitle } from "../../theme/styledComponent";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import update from "immutability-helper";
 import Button from "../common/Buttons";
 import { driverGetHourlyPay, saveDriverHourlyInfo } from "../../actions";
@@ -228,7 +228,7 @@ class DriverHourlyPay extends Component {
 															: 1
 												}}
 											>
-												<Dropdown
+												{/*<Dropdown
 													onChangeText={(
 														value,
 														i,
@@ -260,7 +260,7 @@ class DriverHourlyPay extends Component {
 															index
 														].VehicleType.Name
 													}
-												/>
+												/>*/}
 
 												<FormikTextInput
 													label="Hourly Pricing"

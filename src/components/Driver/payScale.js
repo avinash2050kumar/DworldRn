@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import theme from "../../theme/lightTheme";
 import { Screen, StyledText, StyledTitle } from "../../theme/styledComponent";
-import { Dropdown } from "react-native-material-dropdown";
 import update from "immutability-helper";
 import Button from "../common/Buttons";
 import DriverHourlyPay from "./driverHourlyPay";

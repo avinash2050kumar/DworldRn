@@ -21,12 +21,12 @@ import Button from "../components/common/Buttons";
 import * as yup from "yup";
 import theme from "../theme/lightTheme";
 import CountDown from "react-native-countdown-component";
-import {
+/*import {
 	CodeField,
 	Cursor,
 	useBlurOnFulfill,
 	useClearByFocusCell
-} from "react-native-confirmation-code-field";
+} from "react-native-confirmation-code-field";*/
 
 const validationSchema = yup.object().shape({});
 const CELL_COUNT = 4;
@@ -45,7 +45,7 @@ class OtpVerificationScreen extends Component {
 		otp: ""
 	};
 
-	OtpContainer = () => {
+/*	OtpContainer = () => {
 		const [value, setValue] = useState("");
 		const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
 		const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -80,7 +80,7 @@ class OtpVerificationScreen extends Component {
 				/>
 			</SafeAreaView>
 		);
-	};
+	};*/
 
 	_handleSubmit = async (payload, actions) => {
 		const res = await this.props.otpVerification(
@@ -130,7 +130,7 @@ class OtpVerificationScreen extends Component {
 							{props => (
 								<View>
 									<View style={{ alignSelf: "center" }}>
-										{this.OtpContainer()}
+										{/*{this.OtpContainer()}*/}
 										<Text
 											s
 											style={{

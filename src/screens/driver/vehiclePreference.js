@@ -17,7 +17,7 @@ import styles from "../../theme/styles";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";
 import { Formik } from "formik";
 import theme from "../../theme/lightTheme";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import FormikTextInput from "../../components/common/FormikTextInput";
 import { Card, Screen, StyledText } from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
@@ -91,7 +91,7 @@ class VehiclePreference extends Component {
 								{props => (
 									<Form>
 										<View>
-											<Dropdown
+											{/*<Dropdown
 												onChangeText={(
 													value,
 													i,
@@ -125,7 +125,7 @@ class VehiclePreference extends Component {
 													props.values.vehicleCategory
 														.VehicleCategoryName
 												}
-											/>
+											/>*/}
 											{props.values.vehicleCategory.VehicleType.map(
 												(vehicle, i) => (
 													<CheckBox
