@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import theme from "../../theme/lightTheme";
 import { Screen, StyledText, StyledTitle } from "../../theme/styledComponent";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import update from "immutability-helper";
 import Button from "../../components/common/Buttons";
 import { saveLeasePayScale, saveLeaseFirmPost } from "../../actions";
@@ -103,7 +103,7 @@ class LeaseKmPayScale extends Component {
 											borderBottomColor: theme.secondary
 										}}
 									>
-										<Dropdown
+										{/*<Dropdown
 											onChangeText={(value, i, data) =>
 												props.setFieldValue(
 													`VehicleType`,
@@ -145,7 +145,7 @@ class LeaseKmPayScale extends Component {
 											value={
 												props.values.VehicleType.Name
 											}
-										/>
+										/>*/}
 
 										<FormikTextInput
 											label="Price (Per Km )"

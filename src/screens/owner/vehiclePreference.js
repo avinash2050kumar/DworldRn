@@ -17,7 +17,7 @@ import styles from "../../theme/styles";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";
 import { Formik } from "formik";
 import theme from "../../theme/lightTheme";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import FormikTextInput from "../../components/common/FormikTextInput";
 import { Card, Screen, StyledText } from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
@@ -143,7 +143,7 @@ class OwnerVehiclePreference extends Component {
 									{props => (
 										<Form>
 											<View>
-												<Dropdown
+												{/*<Dropdown
 													onChangeText={(
 														value,
 														i,
@@ -177,7 +177,7 @@ class OwnerVehiclePreference extends Component {
 															.vehicleCategory
 															.VehicleCategoryName
 													}
-												/>
+												/>*/}
 												<FormikTextInput
 													label="Company"
 													name="vehicle.vehicleCompany"
@@ -235,7 +235,7 @@ class OwnerVehiclePreference extends Component {
 													formikprops={props}
 													keyboardType={"number-pad"}
 												/>
-												<Dropdown
+												{/*<Dropdown
 													onChangeText={(
 														value,
 														i,
@@ -268,7 +268,7 @@ class OwnerVehiclePreference extends Component {
 															? "Available"
 															: "Not Available"
 													}
-												/>
+												/>*/}
 												<Text style={{ marginTop: 10 }}>
 													Pay Scale
 												</Text>

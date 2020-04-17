@@ -16,7 +16,6 @@ import { isEmpty } from "../../helper/string";
 import styles from "../../theme/styles";
 import { Formik } from "formik";
 import theme from "../../theme/lightTheme";
-import { Dropdown } from "react-native-material-dropdown";
 import FormikTextInput from "../../components/common/FormikTextInput";
 import { Card, Screen, StyledText } from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
@@ -162,7 +161,7 @@ class PostRequirementsFirm extends Component {
 									{props => (
 										<Form>
 											<View>
-												<Dropdown
+												{/*<Dropdown
 													onChangeText={(
 														value,
 														i,
@@ -215,7 +214,7 @@ class PostRequirementsFirm extends Component {
 															.VehicleCategory
 															.Name
 													}
-												/>
+												/>*/}
 												<FormikTextInput
 													label="Company"
 													name="FirmVehicle.Company"

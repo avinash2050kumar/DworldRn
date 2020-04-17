@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import theme from "../../theme/lightTheme";
 import { Screen, StyledText, StyledTitle } from "../../theme/styledComponent";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import update from "immutability-helper";
 import Button from "../common/Buttons";
 import { driverGetKMPay, saveDriverKMInfo } from "../../actions";
@@ -201,7 +201,7 @@ class DriverKMPay extends Component {
 														: 1
 											}}
 										>
-											<Dropdown
+											{/*<Dropdown
 												onChangeText={(
 													value,
 													i,
@@ -231,7 +231,7 @@ class DriverKMPay extends Component {
 													props.values.KMPay[index]
 														.VehicleType.Name
 												}
-											/>
+											/>*/}
 
 											<FormikTextInput
 												label="Day Pricing"

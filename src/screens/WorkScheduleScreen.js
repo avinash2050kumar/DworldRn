@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { isEmpty } from "../helper/string";
 import { Screen, StyledText, StyledTitle } from "../theme/styledComponent";
 import theme from "../theme/lightTheme";
-import { Dropdown } from "react-native-material-dropdown";
+// import { Dropdown } from "react-native-material-dropdown";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";
 import update from "immutability-helper";
 import Button from "../components/common/Buttons";
@@ -110,7 +110,7 @@ class WorkScheduleScreen extends Component {
 					</StyledText>
 					{!this.isEmpty(workSchedules) && (
 						<View>
-							<Dropdown
+							{/*<Dropdown
 								onChangeText={(value, index, data) =>
 									this.setState(
 										update(this.state, {
@@ -167,7 +167,7 @@ class WorkScheduleScreen extends Component {
 										: []
 								}
 								value={workSchedules.JobType.Name}
-							/>
+							/>*/}
 							<StyledTitle style={{ marginTop: 15 }}>
 								Custom Days
 							</StyledTitle>
