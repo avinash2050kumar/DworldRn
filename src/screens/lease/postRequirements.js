@@ -29,6 +29,7 @@ import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
 import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
 import * as yup from "yup";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -161,12 +162,36 @@ class PostRequirementsFirm extends Component {
 									{props => (
 										<Form>
 											<View>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={	this.props
+														.vehicleCategories
+														? this.props.vehicleCategories.map(
+															vehicle => {
+																return {
+																	...vehicle,
+																	value:
+																	vehicle.VehicleCategoryName
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={`${props.values.FirmVehicle
+														.VehicleCategory
+														.Name}`} // Set default value
+													placeholder="Vehicle Category"
+
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														this.props
+															.vehicleCategories.map((val,index)=> {if(val.VehicleCategoryName===value)i=index})
 														props.setFieldValue(
 															`FirmVehicle.VehicleCategory`,
 															Object.assign(
@@ -176,45 +201,28 @@ class PostRequirementsFirm extends Component {
 																		.props
 																		.vehicleCategories[
 																		i
-																	]
+																		]
 																		.VehicleCategoryId,
 																	Name: this
 																		.props
 																		.vehicleCategories[
 																		i
-																	]
+																		]
 																		.VehicleCategoryName,
 																	VehicleType: this
 																		.props
 																		.vehicleCategories[
 																		i
-																	]
+																		]
 																		.VehicleType
 																}
 															)
 														)
-													}
-													label="Vehicle Category"
-													data={
-														this.props
-															.vehicleCategories
-															? this.props.vehicleCategories.map(
-																	vehicle => {
-																		return {
-																			...vehicle,
-																			value:
-																				vehicle.VehicleCategoryName
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.FirmVehicle
-															.VehicleCategory
-															.Name
-													}
-												/>*/}
+
+													}}
+												/>
+												{console.log('weel',props.values)}
+
 												<FormikTextInput
 													label="Company"
 													name="FirmVehicle.Company"
@@ -253,40 +261,7 @@ class PostRequirementsFirm extends Component {
 													formikprops={props}
 													keyboardType={"number-pad"}
 												/>
-												<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
-														props.setFieldValue(
-															`vehicle.Status`,
-															props.values.vehicle
-																.StatusDropDown[
-																i
-															].name
-														)
-													}
-													label="Status"
-													data={
-														props.values.vehicle
-															.StatusDropDown
-															? props.values.vehicle.StatusDropDown.map(
-																	vehicle => {
-																		return {
-																			...vehicle
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.vehicle
-															.Status
-															? "Available"
-															: "Not Available"
-													}
-												/>
+
 												<Text style={{ marginTop: 10 }}>
 													Pay Scale
 												</Text>

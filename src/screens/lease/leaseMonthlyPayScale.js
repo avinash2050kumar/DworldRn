@@ -25,6 +25,7 @@ import * as yup from "yup";
 import Store from "../../store";
 import { saveLeasePayScale } from "../../actions";
 import { saveLeaseFirmPost } from "../../actions";
+import Selector from "react-native-easy-select";
 
 const validationSchema = yup.object().shape({
 	HourlyPay: yup.array().of(
@@ -104,51 +105,59 @@ class LeaseMonthlyPayScale extends Component {
 											marginBottom: 15,
 											borderBottomColor: theme.secondary
 										}}
-									>
-										{/*<Dropdown
-											onChangeText={(value, i, data) =>
-												props.setFieldValue(
-													`VehicleType`,
-													Object.assign(
-														{},
-														{
-															Id: this.props
-																.vehicleCategories[
-																i
-															].VehicleCategoryId,
-															Name: this.props
-																.vehicleCategories[
-																i
-															]
-																.VehicleCategoryName,
-															VehicleType: this
-																.props
-																.vehicleCategories[
-																i
-															].VehicleType
-														}
-													)
-												)
-											}
-											label="Vehicle Description"
-											data={
-												this.props.vehicleCategories
-													? this.props.vehicleCategories.map(
-															vehicle => {
-																return {
-																	...vehicle,
-																	value:
-																		vehicle.VehicleCategoryName
-																};
-															}
-													  )
-													: []
-											}
-											value={
-												props.values.VehicleType.Name
-											}
-										/>*/}
+									><Selector
+										theme="dropdown" // Default: 'simple'
+										items={	this.props.vehicleCategories
+											? this.props.vehicleCategories.map(
+												vehicle => {
+													return {
+														...vehicle,
+														value:
+														vehicle.VehicleCategoryName
+													};
+												}
+											)
+											: []}
 
+										// Specify key
+										valueKey="value" // Default: 'value'
+										labelKey="value" // Default: 'label'
+
+										defaultValue={`${props.values.VehicleType.Name}`} // Set default value
+										placeholder="Vehicle Description"
+
+										placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+										iconStyle={{ tintColor: 'black' }}
+										onChange={(value) =>{
+											let i = 0
+											this.props
+												.vehicleCategories.map((val,index)=> {if(val.VehicleCategoryName===value)i=index})
+											props.setFieldValue(
+												`VehicleType`,
+												Object.assign(
+													{},
+													{
+														Id: this.props
+															.vehicleCategories[
+															i
+															].VehicleCategoryId,
+														Name: this.props
+															.vehicleCategories[
+															i
+															]
+															.VehicleCategoryName,
+														VehicleType: this
+															.props
+															.vehicleCategories[
+															i
+															].VehicleType
+													}
+												)
+											)
+
+										}}
+									/>
+										{console.log('weel',props.values)}
 										<FormikTextInput
 											label="Monthly Price"
 											name={`Price`}
