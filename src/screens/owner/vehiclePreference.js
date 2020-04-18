@@ -29,6 +29,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
 import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -143,41 +144,47 @@ class OwnerVehiclePreference extends Component {
 									{props => (
 										<Form>
 											<View>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={		this.props
+														.vehicleCategories
+														? this.props.vehicleCategories.map(
+															vehicle => {
+																return {
+																	...vehicle,
+																	value:
+																	vehicle.VehicleCategoryName
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={`${	props.values.vehicle
+														.vehicleCategory
+														.VehicleCategoryName}`} // Set default value
+													placeholder="Vehicle Category"
+
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														this.props
+															.vehicleCategories.map((val,index)=> {if(val.VehicleCategoryName===value)i=index})
 														props.setFieldValue(
 															`vehicle.vehicleCategory`,
 															this.props
 																.vehicleCategories[
 																i
-															]
+																]
 														)
-													}
-													label="Vehicle Category"
-													data={
-														this.props
-															.vehicleCategories
-															? this.props.vehicleCategories.map(
-																	vehicle => {
-																		return {
-																			...vehicle,
-																			value:
-																				vehicle.VehicleCategoryName
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.vehicle
-															.vehicleCategory
-															.VehicleCategoryName
-													}
-												/>*/}
+
+													}}
+												/>
+												{console.log('props',props.values)}
 												<FormikTextInput
 													label="Company"
 													name="vehicle.vehicleCompany"
@@ -235,40 +242,44 @@ class OwnerVehiclePreference extends Component {
 													formikprops={props}
 													keyboardType={"number-pad"}
 												/>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={		props.values.vehicle
+														.StatusDropDown
+														? props.values.vehicle.StatusDropDown.map(
+															vehicle => {
+																return {
+																	...vehicle
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={`${props.values.vehicle
+														.Status
+														? "Available"
+														: "Not Available"}`} // Set default value
+													placeholder="Status"
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														props.values.vehicle
+															.StatusDropDown.map((val,index)=> {if(val.value===value)i=index})
 														props.setFieldValue(
 															`vehicle.Status`,
 															props.values.vehicle
 																.StatusDropDown[
 																i
-															].name
+																].name
 														)
-													}
-													label="Status"
-													data={
-														props.values.vehicle
-															.StatusDropDown
-															? props.values.vehicle.StatusDropDown.map(
-																	vehicle => {
-																		return {
-																			...vehicle
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.vehicle
-															.Status
-															? "Available"
-															: "Not Available"
-													}
-												/>*/}
+
+													}}
+												/>
 												<Text style={{ marginTop: 10 }}>
 													Pay Scale
 												</Text>

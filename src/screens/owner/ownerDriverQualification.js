@@ -25,6 +25,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
 import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -95,37 +96,42 @@ class OwnerDriverQualification extends Component {
 									{props => (
 										<Form>
 											<View>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={	this.props.LicenseType
+														? this.props.LicenseType.map(
+															vehicle => {
+																return {
+																	...vehicle,
+																	value:
+																	vehicle.Name
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={`${props.values.DL
+														.LicenseType.Name}`} // Set default value
+													placeholder="License Type"
+
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														this.props
+															.LicenseType.map((val,index)=> {if(val.Name===value)i=index})
 														props.setFieldValue(
 															`DL.LicenseType`,
 															this.props
 																.LicenseType[i]
 														)
-													}
-													label="License Type"
-													data={
-														this.props.LicenseType
-															? this.props.LicenseType.map(
-																	vehicle => {
-																		return {
-																			...vehicle,
-																			value:
-																				vehicle.Name
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.DL
-															.LicenseType.Name
-													}
-												/>*/}
+
+													}}
+												/>
 												<FormikTextInput
 													label="Experience Year"
 													name="DL.ExperienceYear"

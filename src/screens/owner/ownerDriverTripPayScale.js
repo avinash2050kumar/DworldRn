@@ -29,6 +29,7 @@ import {
 } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import NavigationService from "../../config/NavigationService";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -123,46 +124,53 @@ class OwnerDriverTripPayScale extends Component {
 								{props => (
 									<Form>
 										<View>
-											{/*<Dropdown
-												onChangeText={(
-													value,
-													i,
-													data
-												) =>
+											<Selector
+												theme="dropdown" // Default: 'simple'
+												items={	this.props.vehicleCategories
+													? this.props.vehicleCategories.map(
+														vehicle => {
+															return {
+																...vehicle,
+																value:
+																vehicle.VehicleCategoryName
+															};
+														}
+													)
+													: []}
+
+												// Specify key
+												valueKey="value" // Default: 'value'
+												labelKey="value" // Default: 'label'
+
+												defaultValue={`${	props.values.price
+													.VehicleType.Name}`} // Set default value
+												placeholder="Driver Description"
+
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+												iconStyle={{ tintColor: 'black' }}
+												onChange={(value) =>{
+													let i = 0
+													this.props
+														.vehicleCategories.map((val,index)=> {if(val.VehicleCategoryName===value)i=index})
 													props.setFieldValue(
 														`price.VehicleType`,
 														Object.assign({
 															Id: this.props
 																.vehicleCategories[
 																i
-															].VehicleCategoryId,
+																].VehicleCategoryId,
 															Name: this.props
 																.vehicleCategories[
 																i
-															]
+																]
 																.VehicleCategoryName
 														})
 													)
-												}
-												label="Driver Description"
-												data={
-													this.props.vehicleCategories
-														? this.props.vehicleCategories.map(
-																vehicle => {
-																	return {
-																		...vehicle,
-																		value:
-																			vehicle.VehicleCategoryName
-																	};
-																}
-														  )
-														: []
-												}
-												value={
-													props.values.price
-														.VehicleType.Name
-												}
-											/>*/}
+
+												}}
+											/>
+											{console.log('weel',props.values)}
+
 											<FormikTextInput
 												label="Per day(In Rupee)"
 												name="price.price"
