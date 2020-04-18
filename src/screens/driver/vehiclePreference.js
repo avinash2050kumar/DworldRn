@@ -27,6 +27,7 @@ import {
 } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -91,41 +92,46 @@ class VehiclePreference extends Component {
 								{props => (
 									<Form>
 										<View>
-											{/*<Dropdown
-												onChangeText={(
-													value,
-													i,
-													data
-												) =>
+											<Selector
+												theme="dropdown" // Default: 'simple'
+												items={this.state
+													.vehiclePreferences
+													.vehicleCategoryDropdown
+													? this.state.vehiclePreferences.vehicleCategoryDropdown.map(
+														vehicle => {
+															return {
+																...vehicle,
+																value:
+																vehicle.VehicleCategoryName
+															};
+														}
+													)
+													: []}
+
+												// Specify key
+												valueKey="value" // Default: 'value'
+												labelKey="value" // Default: 'label'
+
+												defaultValue={`${props.values.vehicleCategory
+													.VehicleCategoryName}`} // Set default value
+												placeholder="Shifts"
+
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+												iconStyle={{ tintColor: 'black' }}
+												onChange={(value) =>{
+													let i = 0
+													props.values
+														.vehicleCategoryDropdown.map((val,index)=> {if(val.VehicleCategoryName===value)i=index})
 													props.setFieldValue(
 														`vehicleCategory`,
 														props.values
 															.vehicleCategoryDropdown[
 															i
-														]
+															]
 													)
-												}
-												label="Shifts"
-												data={
-													this.state
-														.vehiclePreferences
-														.vehicleCategoryDropdown
-														? this.state.vehiclePreferences.vehicleCategoryDropdown.map(
-																vehicle => {
-																	return {
-																		...vehicle,
-																		value:
-																			vehicle.VehicleCategoryName
-																	};
-																}
-														  )
-														: []
-												}
-												value={
-													props.values.vehicleCategory
-														.VehicleCategoryName
-												}
-											/>*/}
+
+												}}
+											/>
 											{props.values.vehicleCategory.VehicleType.map(
 												(vehicle, i) => (
 													<CheckBox

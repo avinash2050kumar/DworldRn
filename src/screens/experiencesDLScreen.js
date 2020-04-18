@@ -21,6 +21,7 @@ import UploadDL from "../components/common/uploadDL";
 import { getExperience } from "../actions";
 // import { Dropdown } from "react-native-material-dropdown";
 import ImageView from "react-native-image-viewing";
+import Selector from "react-native-easy-select";
 const Form = withNextInputAutoFocusForm(View);
 
 const validationSchema = yup.object({
@@ -105,38 +106,43 @@ class ExperiencesDLScreen extends Component {
 												type="name"
 												formikprops={props}
 											/>
-											{/*<Dropdown
-												onChangeText={(
-													value,
-													i,
-													data
-												) =>
+											<Selector
+												theme="dropdown" // Default: 'simple'
+												items={this.state.experiences
+													.licenseType
+													? this.state.experiences.licenseType.map(
+														license => {
+															return {
+																...license,
+																value:
+																license.Name
+															};
+														}
+													)
+													: []}
+
+												// Specify key
+												valueKey="value" // Default: 'value'
+												labelKey="value" // Default: 'label'
+
+												defaultValue={`${props.values.license
+													.LicenseType.Name}`} // Set default value
+												placeholder="Driving Licence Type"
+
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+												iconStyle={{ tintColor: 'black' }}
+												onChange={(value) =>{
+													let i = 0
+													props.values
+														.licenseType.map((val,index)=> {if(val.Name===value)i=index})
 													props.setFieldValue(
 														`license.LicenseType`,
 														props.values
 															.licenseType[i]
 													)
-												}
-												label="Driving Licence Type"
-												data={
-													this.state.experiences
-														.licenseType
-														? this.state.experiences.licenseType.map(
-																license => {
-																	return {
-																		...license,
-																		value:
-																			license.Name
-																	};
-																}
-														  )
-														: []
-												}
-												value={
-													props.values.license
-														.LicenseType.Name
-												}
-											/>*/}
+
+												}}
+											/>
 											<UploadDL
 												formikprops={props}
 												input={"FrontPage"}
