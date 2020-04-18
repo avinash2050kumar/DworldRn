@@ -27,6 +27,7 @@ import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
 import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
 import TextInput from "react-native-web/src/exports/TextInput";
+import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -116,7 +117,7 @@ class OwnerDriverWorkSchedule extends Component {
 					<View>
 						<Text>
 							Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry.
+							typesetting industry.s
 						</Text>
 						{!this.isEmpty(this.props.postAdsDriverDummy) && (
 							<KeyboardAvoidingView behavior="padding" enabled>
@@ -129,71 +130,79 @@ class OwnerDriverWorkSchedule extends Component {
 									{props => (
 										<Form>
 											<View>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={this.props.ShiftType
+														? this.props.ShiftType.map(
+															work => {
+																return {
+																	...work,
+																	value:
+																	work.Name
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={props.values.work
+														.ShitType.Name.toString()} // Set default value
+													placeholder="Shifts"
+
+													placeholderContainerStyle={{ paddingVertical:15}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														this.props.ShiftType.map((val,index)=> {if(val.Name===value)i=index})
 														props.setFieldValue(
 															`work.ShitType`,
-															this.props.JobType[
+															this.props.ShiftType[
 																i
-															]
+																]
 														)
-													}
-													label="Shifts"
-													data={
-														this.props.ShiftType
-															? this.props.ShiftType.map(
-																	work => {
-																		return {
-																			...work,
-																			value:
-																				work.Name
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.work
-															.ShitType.Name
-													}
-												/>*/}
+													}}
+												/>
+												{console.log('value', props.values,this.props.JobType)}
 											</View>
 											<View>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												<Selector
+													theme="dropdown" // Default: 'simple'
+													items={this.props.JobType
+														? this.props.JobType.map(
+															job => {
+																return {
+																	...job,
+																	value:
+																	job.Name
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={props.values.work
+														.JobType.Name.toString()} // Set default value
+													placeholder="Job Type"
+
+													placeholderContainerStyle={{ paddingVertical:15}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														this.props.JobType.map((val,index)=> {if(val.Name===value)i=index})
 														props.setFieldValue(
 															`work.JobType`,
-															this.props
-																.ShiftType[i]
+															this.props.JobType[
+																i
+																]
 														)
-													}
-													label="Job Type"
-													data={
-														this.props.JobType
-															? this.props.JobType.map(
-																	job => {
-																		return {
-																			...job,
-																			value:
-																				job.Name
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.work
-															.JobType.Name
-													}
-												/>*/}
+													}}
+												/>
 												<Text
 													style={{
 														marginTop: 10,
