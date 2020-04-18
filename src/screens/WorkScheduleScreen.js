@@ -17,7 +17,7 @@ import theme from "../theme/lightTheme";
 // import { Dropdown } from "react-native-material-dropdown";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";
 import update from "immutability-helper";
-import Button from "../components/common/Buttons";
+import Button from "../components/common/Buttons";import Selector from "react-native-easy-select";
 
 const CheckBox = styled.TouchableOpacity`
 	padding: 10px;
@@ -109,65 +109,86 @@ class WorkScheduleScreen extends Component {
 						typesetting industry. ,
 					</StyledText>
 					{!this.isEmpty(workSchedules) && (
-						<View>
-							{/*<Dropdown
-								onChangeText={(value, index, data) =>
-									this.setState(
-										update(this.state, {
-											workSchedules: {
-												ShitType: {
-													$set: this.state
-														.workSchedules
-														.ShitTypeData[index]
-												}
+						<View><Selector
+							theme="dropdown" // Default: 'simple'
+							items={workSchedules.ShitTypeData
+								? workSchedules.ShitTypeData.map(
+									shift => {
+										return {
+											...shift,
+											value: shift.Name
+										};
+									}
+								)
+								: []}
+
+							// Specify key
+							valueKey="value" // Default: 'value'
+							labelKey="value" // Default: 'label'
+
+							defaultValue={workSchedules.ShitType.Name.toString()} // Set default value
+							placeholder="Shifts"
+
+							placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+							iconStyle={{ tintColor: 'black' }}
+							onChange={(value) =>{
+								let i = 0
+								this.state
+									.workSchedules
+									.ShitTypeData.map((val,index)=> {if(val.Name===value)i=index})
+								this.setState(
+									update(this.state, {
+										workSchedules: {
+											ShitType: {
+												$set: this.state
+													.workSchedules
+													.ShitTypeData[i]
 											}
-										})
-									)
-								}
-								label="Shifts"
-								data={
-									workSchedules.ShitTypeData
-										? workSchedules.ShitTypeData.map(
-												shift => {
-													return {
-														...shift,
-														value: shift.Name
-													};
-												}
-										  )
-										: []
-								}
-								value={workSchedules.ShitType.Name}
-							/>
-							<Dropdown
-								onChangeText={(value, index, data) =>
-									this.setState(
-										update(this.state, {
-											workSchedules: {
-												JobType: {
-													$set: this.state
-														.workSchedules
-														.JobTypeData[index]
-												}
+										}
+									})
+								)
+							}}
+						/><Selector
+							theme="dropdown" // Default: 'simple'
+							items={workSchedules.JobTypeData
+								? workSchedules.JobTypeData.map(
+									jobtype => {
+										return {
+											...jobtype,
+											value: jobtype.Name
+										};
+									}
+								)
+								: []}
+
+							// Specify key
+							valueKey="value" // Default: 'value'
+							labelKey="value" // Default: 'label'
+
+							defaultValue={`${workSchedules.JobType.Name}`} // Set default value
+							placeholder="Job Type"
+
+							placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+							iconStyle={{ tintColor: 'black' }}
+							onChange={(value) =>{
+								let i = 0
+								this.state
+									.workSchedules
+									.JobTypeData.map((val,index)=> {if(val.Name===value)i=index})
+								this.setState(
+									update(this.state, {
+										workSchedules: {
+											JobType: {
+												$set: this.state
+													.workSchedules
+													.JobTypeData[i]
 											}
-										})
-									)
-								}
-								label="Job Type"
-								data={
-									workSchedules.JobTypeData
-										? workSchedules.JobTypeData.map(
-												jobtype => {
-													return {
-														...jobtype,
-														value: jobtype.Name
-													};
-												}
-										  )
-										: []
-								}
-								value={workSchedules.JobType.Name}
-							/>*/}
+										}
+									})
+								)
+							}}
+						/>
+							{console.log('props',this.state)}
 							<StyledTitle style={{ marginTop: 15 }}>
 								Custom Days
 							</StyledTitle>

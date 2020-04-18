@@ -23,6 +23,7 @@ import styles from "../../theme/styles";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import * as yup from "yup";import AntDesign from "react-native-vector-icons/dist/AntDesign";
 import Store from "../../store";
+import Selector from "react-native-easy-select";
 
 const validationSchema = yup.object().shape({
 	HourlyPay: yup.array().of(
@@ -229,42 +230,44 @@ class DriverWeeklyPay extends Component {
 															? 0
 															: 1
 												}}
-											>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
-														props.setFieldValue(
-															`WeeklyPay[${index}].VehicleType`,
-															props.values
-																.VehicleList[i]
-														)
-													}
-													label="Driver Description"
-													data={
-														this.state.weeklyPay
-															.VehicleList
-															? this.state.weeklyPay.VehicleList.map(
-																	vehicle => {
-																		return {
-																			...vehicle,
-																			value:
-																				vehicle.Name
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.WeeklyPay[
-															index
-														].VehicleType.Name
-													}
-												/>*/}
+											><Selector
+												theme="dropdown" // Default: 'simple'
+												items={this.state.weeklyPay
+													.VehicleList
+													? this.state.weeklyPay.VehicleList.map(
+														vehicle => {
+															return {
+																...vehicle,
+																value:
+																vehicle.Name
+															};
+														}
+													)
+													: []}
 
-												<FormikTextInput
+												// Specify key
+												valueKey="value" // Default: 'value'
+												labelKey="value" // Default: 'label'
+
+												defaultValue={`${props.values.WeeklyPay[
+													index
+													].VehicleType.Name}`} // Set default value
+												placeholder="Driver Description"
+
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+												iconStyle={{ tintColor: 'black' }}
+												onChange={(value) =>{
+													let i = 0
+													props.values
+														.VehicleList.map((val,index)=> {if(val.Name===value)i=index})
+													props.setFieldValue(
+														`WeeklyPay[${index}].VehicleType`,
+														props.values
+															.VehicleList[i]
+													)
+												}}
+											/>{console.log('va',props.values)}
+											<FormikTextInput
 													label="Weekly Pricing"
 													name={`WeeklyPay[${index}].WeeklyPrice`}
 													type="name"
@@ -275,40 +278,44 @@ class DriverWeeklyPay extends Component {
 													}
 													formikprops={props}
 													keyboardType={"number-pad"}
-												/>
-												{/*<Dropdown
-													onChangeText={(
-														value,
-														i,
-														data
-													) =>
+												/><Selector
+													theme="dropdown" // Default: 'simple'
+													items={this.state.weeklyPay
+														.Holiday
+														? this.state.weeklyPay.Holiday.map(
+															holiday => {
+																return {
+																	...holiday,
+																	value:
+																	holiday.Name
+																};
+															}
+														)
+														: []}
+
+													// Specify key
+													valueKey="value" // Default: 'value'
+													labelKey="value" // Default: 'label'
+
+													defaultValue={`${props.values.WeeklyPay[
+														index
+														].Holiday + " Days"}`} // Set default value
+													placeholder="Holidays"
+
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+													iconStyle={{ tintColor: 'black' }}
+													onChange={(value) =>{
+														let i = 0
+														props.values
+															.Holiday.map((val,index)=> {if(val.Name===value)i=index})
 														props.setFieldValue(
 															`WeeklyPay[${index}].Holiday`,
 															props.values
 																.Holiday[i].No
 														)
-													}
-													label="Holidays"
-													data={
-														this.state.weeklyPay
-															.Holiday
-															? this.state.weeklyPay.Holiday.map(
-																	holiday => {
-																		return {
-																			...holiday,
-																			value:
-																				holiday.Name
-																		};
-																	}
-															  )
-															: []
-													}
-													value={
-														props.values.WeeklyPay[
-															index
-														].Holiday + " Days"
-													}
-												/>*/}
+
+													}}
+												/>
 												<FormikTextInput
 													label="Extra Hours"
 													name={`WeeklyPay[${index}].ExtraHours`}
