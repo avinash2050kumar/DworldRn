@@ -7,7 +7,6 @@ import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.razorpay.rn.RazorpayPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactInstanceManager;
