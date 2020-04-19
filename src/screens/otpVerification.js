@@ -21,6 +21,7 @@ import Button from "../components/common/Buttons";
 import * as yup from "yup";
 import theme from "../theme/lightTheme";
 import CountDown from "react-native-countdown-component";
+import OtpInputs from "react-native-otp-inputs";
 /*import {
 	CodeField,
 	Cursor,
@@ -129,8 +130,16 @@ class OtpVerificationScreen extends Component {
 						>
 							{props => (
 								<View>
+									{console.log('state',this.state)}
 									<View style={{ alignSelf: "center" }}>
 										{/*{this.OtpContainer()}*/}
+										<OtpInputs
+											handleChange={code => this.setState({otp:code})}
+											numberOfInputs={4}
+											inputStyles={{fontWeight:'bold',color:theme.secondary,fontSize:16,textAlign:'center'}}
+											inputContainerStyles={{borderWidth: 1,borderRadius:5,borderColor:theme.secondary,aspectRatio:.7}}
+											style={{flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}
+										/>
 										<Text
 											s
 											style={{
@@ -207,6 +216,7 @@ class OtpVerificationScreen extends Component {
 			</ScrollView>
 		);
 	}
+
 }
 
 const mapStateToProps = state => ({ auth: state.auth });

@@ -19,7 +19,6 @@ import {
 	StyledText,
 	StyledTitle
 } from "../../theme/styledComponent";
-import { WebView } from "react-native-webview";
 import {
 	setHomeScreenVisibility,
 	setHomeScreenNoOfWork,

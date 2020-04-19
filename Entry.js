@@ -49,7 +49,7 @@ class Entry extends Component {
     const { message, description, type } = nextProps.msg;
     await this.setState({ count: this.state.count + 1 });
     if (this.state.count != 1) {
-      if (this.state.message !== message)
+   /*   if (this.state.message !== message)*/
         showMessage({
           message,
           description,
