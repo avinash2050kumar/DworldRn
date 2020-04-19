@@ -45,7 +45,6 @@ import DriverJobOfferScreen from "../screens/driverJobOffer";
 import JobOfferDescriptionScreen from "../screens/JobOfferDescriptionScreen";
 import OwnerLeaseFirmTabs from "../screens/owner/ownerLeaseFirmTabs";
 import OwnerLeaseFirmDetails from "../screens/owner/ownerLeaseFirmDetails";
-import PaymentScreen from "../screens/PaymentPage";
 import FindAllLeaseFirmOwner from "../screens/lease/FindAllOwner";
 import HomeScreenChildLeaseFirmTabs from "../screens/lease/HomeScreenChildLeaseFirmTabs";
 import LeaseFirmOwnerDetails from "../screens/lease/LeaseFirmOwnerDetails";
@@ -99,7 +98,6 @@ const UserStack = createStackNavigator(
 		LeaseFirmOwnerDetails,
 		JobOfferDescriptionScreen,
 		OwnerLeaseFirmDetails,
-		PaymentScreen,
 		FindAllLeaseFirmOwner,
 		HomeScreenChildLeaseFirmTabs,
 		OwnerLeaseFirmTabs,
