@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "983653217725",
+    "firebase_url": "https://dworld-3c572.firebaseio.com",
+    "project_id": "dworld-3c572",
+    "storage_bucket": "dworld-3c572.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983653217725:android:4b5f1916f3f04462fb8ed4",
+        "android_client_info": {
+          "package_name": "com.dworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983653217725-g145s4r24hfccpu5ppa754uffbrdr83l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTIlY-fnSiN7ZbiO8ar9UWZy8I2X5LEug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983653217725-g145s4r24hfccpu5ppa754uffbrdr83l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "983653217725-e680jkdecj8l6622c12umqrltqj969gq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dworld.avinash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

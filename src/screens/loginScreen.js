@@ -25,6 +25,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 // import * as Google from "expo-google-app-auth";
 
 import { LoginButton, AccessToken ,GraphRequest,LoginManager,GraphRequestManager} from 'react-native-fbsdk';
+import { GoogleSignin, GoogleSigninButton , statusCodes} from 'react-native-google-signin';
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -46,6 +47,19 @@ class LoginScreen extends Component {
 			title: "Sign In"
 		};
 	};
+
+	componentDidMount() {
+		GoogleSignin.configure({
+			scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+			webClientId: '983653217725-g145s4r24hfccpu5ppa754uffbrdr83l.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+			offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+			//hostedDomain: '', // specifies a hosted domain restriction
+			//loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+			forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
+			//accountName: '', // [Android] specifies an account name on the device that should be used
+			//iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+		});
+	}
 
 	_handleSubmit = async (payload, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 3000);
@@ -236,9 +250,9 @@ console.log('value', await fetch(
 										>
 											Or Continue with a social Account
 										</StyledText>
-										{/*<Button
+										<Button
 											onPress={() =>
-												this.loginFacebook()
+												this.handleFacebookLogin(props)
 											}
 											label="Facebook"
 											color="faceBook"
@@ -248,7 +262,8 @@ console.log('value', await fetch(
 											}}
 											icon={"facebook-box"}
 											iconColor={"#fff"}
-										/>*/}<LoginButton
+										/>
+										{/*<LoginButton
 										publishPermissions={['publish_actions']}
 										readPermissions={['public_profile', 'email', 'user_friends']}
 										onLoginFinished={
@@ -268,10 +283,15 @@ console.log('value', await fetch(
 												}
 											}
 										}
-										onLogoutFinished={()=>console.log('logout')} />
+										onLogoutFinished={()=>console.log('logout')} />*/}
+										{/*<GoogleSigninButton
+											style={{ width: 192, height: 48 }}
+											size={GoogleSigninButton.Size.Wide}
+											color={GoogleSigninButton.Color.Dark}
+											onPress={this.signIn}/>*/}
 										<Button
 											onPress={() =>
-												console.log('google')//this._googleLogin(props)
+												this.signIn(props)
 											}
 											label="Gmail"
 											color="white"
@@ -314,6 +334,63 @@ console.log('value', await fetch(
 			</ScrollView>
 		);
 	}
+
+	handleFacebookLogin (getUserInfo) {
+		LoginManager.logInWithPermissions(['public_profile', 'email', ]).then(
+			function (result) {
+				if (result.isCancelled) {
+					console.log('Login cancelled')
+				} else {
+					AccessToken.getCurrentAccessToken().then((data) => {
+						console.log('data',data)
+						const { accessToken } = data
+						const infoRequest = new GraphRequest('/me', {
+							accessToken: accessToken,
+							parameters: {
+								fields: {
+									string: 'id, email,name, picture.type(large)'
+								}
+							}
+						},(err,res)=>console.log('ere',err,res,this));
+						// Execute the graph request created above
+						new GraphRequestManager().addRequest(infoRequest).start();
+
+					}).catch(e=>console.log('catch',e))
+				}
+			},
+			function (error) {
+				console.log('Login fail with error: ' + error)
+			}
+		)
+	}
+
+	signIn = async (props) => {
+		try {
+			await GoogleSignin.hasPlayServices();
+			const userInfo = await GoogleSignin.signIn();
+			console.log(userInfo,'userInfo')
+			const { type, accessToken, user } = userInfo;
+			const googleInfo = Object.assign(
+				{},
+				{
+					loginId: user.email,
+					password: null,
+					IsLoginBySocialMedia: true
+				}
+			);
+			this._handleSubmit(googleInfo, props);
+		} catch (error) {
+			if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+				// user cancelled the login flow
+			} else if (error.code === statusCodes.IN_PROGRESS) {
+				// operation (f.e. sign in) is in progress already
+			} else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+				// play services not available or outdated
+			} else {
+				console.log(error,'eror')
+			}
+		}
+	};
 }
 
 const mapStateToProps = state => ({});
