@@ -24,6 +24,8 @@ import FormikTextInput from "../components/common/FormikTextInput";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 // import * as Google from "expo-google-app-auth";
 
+import { LoginButton, AccessToken ,GraphRequest,LoginManager,GraphRequestManager} from 'react-native-fbsdk';
+
 const Form = withNextInputAutoFocusForm(View);
 
 const validationSchema = yup.object().shape({
@@ -126,6 +128,27 @@ class LoginScreen extends Component {
 		}
 	};*/
 
+	initUser =async (token) => {
+		console.log('token',token)
+console.log('value', await fetch(
+	`https://graph.facebook.com/me/?fields=id,email,birthday,hometown,picture.height(600),name&access_token=${token}`
+))
+		const response = await fetch(
+			`https://graph.facebook.com/me/?fields=id,email,birthday,hometown,picture.height(600),name&access_token=${token}`
+		);
+		const res = await response.json();
+		const facebookInfo = Object.assign(
+			{},
+			{
+				loginId: res.email,
+				password: null,
+				IsLoginBySocialMedia: true
+			}
+		);
+		console.log("faceboo", facebookInfo);
+		this._handleSubmit(facebookInfo, props);
+	}
+
 	render() {
 		const initialState = {
 			loginId: "sandeep@singh.com",
@@ -213,9 +236,9 @@ class LoginScreen extends Component {
 										>
 											Or Continue with a social Account
 										</StyledText>
-										<Button
+										{/*<Button
 											onPress={() =>
-												console.log('facebook')//this._faceBookLogin(props)
+												this.loginFacebook()
 											}
 											label="Facebook"
 											color="faceBook"
@@ -225,7 +248,27 @@ class LoginScreen extends Component {
 											}}
 											icon={"facebook-box"}
 											iconColor={"#fff"}
-										/>
+										/>*/}<LoginButton
+										publishPermissions={['publish_actions']}
+										readPermissions={['public_profile', 'email', 'user_friends']}
+										onLoginFinished={
+											(error, result) => {
+												if (error) {
+													console.log('login has error: ', result.error)
+												} else if (result.isCancelled) {
+													console.log('login is cancelled.')
+												} else {
+													console.log('error',error,result)
+													AccessToken.getCurrentAccessToken().then((data) => {
+														console.log('data',data)
+														const { accessToken } = data
+														// console.log(accessToken);
+														this.initUser(accessToken)
+													}).catch(e=>console.log('catch',e))
+												}
+											}
+										}
+										onLogoutFinished={()=>console.log('logout')} />
 										<Button
 											onPress={() =>
 												console.log('google')//this._googleLogin(props)

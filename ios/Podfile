@@ -87,6 +87,8 @@ target 'Dworld' do
 
   pod 'react-native-razorpay', :path => '../node_modules/react-native-razorpay'
 
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
   target 'DworldTests' do
     inherit! :complete
     # Pods for testing
