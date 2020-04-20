@@ -83,7 +83,6 @@ class SignUpScreen extends Component {
 					IsLoginBySocialMedia: true
 				}
 			);
-			console.log('google',googleInfo)
 			this._handleSubmit(googleInfo, props);
 		} catch (error) {
 			if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -98,26 +97,6 @@ class SignUpScreen extends Component {
 		}
 	}
 
-	initUser =async (token) => {
-		console.log('token',token)
-		console.log('value', await fetch(
-			`https://graph.facebook.com/me/?fields=id,email,birthday,hometown,picture.height(600),name&access_token=${token}`
-		))
-		const response = await fetch(
-			`https://graph.facebook.com/me/?fields=id,email,birthday,hometown,picture.height(600),name&access_token=${token}`
-		);
-		const res = await response.json();
-		const facebookInfo = Object.assign(
-			{},
-			{
-				loginId: res.email,
-				password: null,
-				IsLoginBySocialMedia: true
-			}
-		);
-		console.log("faceboo", facebookInfo);
-		this._handleSubmit(facebookInfo, props);
-	}
 
 	_handleSubmit = async (payload, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 5000);
@@ -136,7 +115,21 @@ class SignUpScreen extends Component {
 	}
 
 
-	handleFacebookLogin (getUserInfo) {
+	handleFacebookLogin (props) {
+		const handleFacebookResponse=(err,success)=>{
+			const facebookInfo = Object.assign(
+				{},
+				{
+					FirstName: "New",
+					LastName: "User",
+					Email: "avinash2050kumar@gmail.com",
+					ClientTypeId: 1,
+					Mobile: "7903735386",
+					IsLoginBySocialMedia: true
+				}
+			);
+			this._handleSubmit(facebookInfo, props);
+		}
 		LoginManager.logInWithPermissions(['public_profile', 'email', ]).then(
 			function (result) {
 				if (result.isCancelled) {
@@ -152,10 +145,9 @@ class SignUpScreen extends Component {
 									string: 'id, email,name, picture.type(large)'
 								}
 							}
-						},(err,res)=>console.log('ere',err,res,this));
+						},handleFacebookResponse);
 						// Execute the graph request created above
 						new GraphRequestManager().addRequest(infoRequest).start();
-
 					}).catch(e=>console.log('catch',e))
 				}
 			},
@@ -294,29 +286,8 @@ class SignUpScreen extends Component {
 									>
 										Or Continue with a social Account
 									</StyledText>
-									{/*<LoginButton
-										publishPermissions={['publish_actions']}
-										readPermissions={['public_profile', 'email', 'user_friends']}
-										onLoginFinished={
-											(error, result) => {
-												if (error) {
-													console.log('login has error: ', result.error)
-												} else if (result.isCancelled) {
-													console.log('login is cancelled.')
-												} else {
-													console.log('error',error,result)
-													AccessToken.getCurrentAccessToken().then((data) => {
-														console.log('data',data)
-														const { accessToken } = data
-														// console.log(accessToken);
-														this.initUser(accessToken)
-													}).catch(e=>console.log('catch',e))
-												}
-											}
-										}
-										onLogoutFinished={()=>console.log('logout')} />*/}
 									<Button
-										onPress={()=>this.handleFacebookLogin(this.initUser)/*this._faceBookLogin()*/}
+										onPress={()=>this.handleFacebookLogin(props)/*this._faceBookLogin()*/}
 										label="Facebook"
 										color="faceBook"
 										style={{ width: "100%", marginTop: 10 }}

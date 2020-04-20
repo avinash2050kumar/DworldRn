@@ -335,7 +335,20 @@ console.log('value', await fetch(
 		);
 	}
 
-	handleFacebookLogin (getUserInfo) {
+
+
+	handleFacebookLogin (props) {
+		const handleFacebookResponse=(err,success)=>{
+			const facebookInfo = Object.assign(
+				{},
+				{
+					loginId: success.email,
+					password: null,
+					IsLoginBySocialMedia: true
+				}
+			);
+			this._handleSubmit(facebookInfo, props);
+		}
 		LoginManager.logInWithPermissions(['public_profile', 'email', ]).then(
 			function (result) {
 				if (result.isCancelled) {
@@ -351,10 +364,9 @@ console.log('value', await fetch(
 									string: 'id, email,name, picture.type(large)'
 								}
 							}
-						},(err,res)=>console.log('ere',err,res,this));
+						},handleFacebookResponse);
 						// Execute the graph request created above
-						new GraphRequestManager().addRequest(infoRequest).start();
-
+					new GraphRequestManager().addRequest(infoRequest).start();
 					}).catch(e=>console.log('catch',e))
 				}
 			},
