@@ -32,6 +32,8 @@ import * as Permissions from "expo-permissions";
 // import * as Location from "expo-location";
 import i18n from "i18n-js";
 import NavigationService from "../config/NavigationService";
+import {PERMISSIONS, requestMultiple} from "react-native-permissions";
+import Geolocation from "@react-native-community/geolocation";
 
 class HomeScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -41,19 +43,47 @@ class HomeScreen extends Component {
 	};
 
 	state = {
-		location: null,
+		location: 'Unable to fetch your location',
 		errorMessage: null
 	};
 
 	componentDidMount() {
 		this.props.setHomeScreenNoOfWork();
-		if (Platform.OS === "android" && !Constants.isDevice) {
-			this.setState({
-				errorMessage: "unable to fetch device loaction"
-			});
-		} else {
-			this._getLocationAsync();
-		}
+		requestMultiple([PERMISSIONS.IOS.LOCATION_ALWAYS,PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION]).then(
+			(statuses) => {
+				console.log('Camera', statuses[PERMISSIONS.IOS.LOCATION_ALWAYS]);
+				if(statuses[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION]=='granted')
+					Geolocation.getCurrentPosition(location => {
+						axios
+							.get(
+								`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
+							)
+							.then(response => {
+								this.props.setDeviceLocation(
+									location,
+									response.data.results[0]
+								);
+							});
+
+						this.setState({ location });
+					})
+				if(statuses[PERMISSIONS.IOS.LOCATION_ALWAYS]=='granted')
+					Geolocation.getCurrentPosition(location => {
+						axios
+							.get(
+								`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
+							)
+							.then(response => {
+								this.props.setDeviceLocation(
+									location,
+									response.data.results[0]
+								);
+							});
+
+						this.setState({ location });
+					})
+			},
+		);
 	}
 
 	_handleSubmit = payload => {

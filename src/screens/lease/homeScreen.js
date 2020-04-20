@@ -7,7 +7,7 @@ import {
 	Text,
 	FlatList,
 	TouchableOpacity,
-	Image
+	Image,Platform
 } from "react-native";
 import { connect } from "react-redux";
 import Constants from "expo-constants";
@@ -35,6 +35,8 @@ import i18n from "i18n-js";
 import NavigationService from "../../config/NavigationService";
 import styled from "styled-components";
 import AdPostModal from "./adPostModal";
+import Geolocation from '@react-native-community/geolocation';
+import {check, PERMISSIONS, RESULTS, request, requestMultiple} from 'react-native-permissions';
 
 const AddPostButton = styled.TouchableOpacity`
 	padding: 16px;
@@ -55,7 +57,7 @@ class LeaseHomeScreen extends Component {
 	};
 
 	state = {
-		location: null,
+		location: 'Unable to fetch your location',
 		errorMessage: null,
 		isDriverPostFullVisible: false,
 		isLeasingJobPostFullVisible: false,
@@ -65,13 +67,41 @@ class LeaseHomeScreen extends Component {
 	componentDidMount() {
 		this.props.setHomeScreenNoOfWork();
 		this.props.getLeaseDashBoard();
-		if (Platform.OS === "android" && !Constants.isDevice) {
-			this.setState({
-				errorMessage: "unable to fetch device loaction"
-			});
-		} else {
-			// this._getLocationAsync();
-		}
+		requestMultiple([PERMISSIONS.IOS.LOCATION_ALWAYS,PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION]).then(
+			(statuses) => {
+				console.log('Camera', statuses[PERMISSIONS.IOS.LOCATION_ALWAYS]);
+				if(statuses[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION]=='granted')
+					Geolocation.getCurrentPosition(location => {
+						axios
+							.get(
+								`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
+							)
+							.then(response => {
+								this.props.setDeviceLocation(
+									location,
+									response.data.results[0]
+								);
+							});
+
+						this.setState({ location });
+			})
+				if(statuses[PERMISSIONS.IOS.LOCATION_ALWAYS]=='granted')
+					Geolocation.getCurrentPosition(location => {
+						axios
+							.get(
+								`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
+							)
+							.then(response => {
+								this.props.setDeviceLocation(
+									location,
+									response.data.results[0]
+								);
+							});
+
+						this.setState({ location });
+					})
+			},
+		);
 	}
 
 	_handleSubmit = payload => {
