@@ -218,7 +218,7 @@ class OwnerHomeScreen extends Component {
 		}
 
 		return (
-			<View style={{ paddingTop: 22 }}>
+			<View>
 				<NavigationBar
 					style={[
 						styles.flex_row,
@@ -301,8 +301,8 @@ class OwnerHomeScreen extends Component {
 											"OwnerJobTabs"
 										)
 									}
-									ListFooterComponent={() => (
-										<TouchableOpacity
+									ListFooterComponent={() =>
+										ownerDashBoard.DriverJob.length>6?<TouchableOpacity
 											style={{ alignSelf: "flex-end" }}
 											onPress={() =>
 												this.setState({
@@ -321,8 +321,8 @@ class OwnerHomeScreen extends Component {
 													? "Show Less"
 													: "Show more"}
 											</Text>
-										</TouchableOpacity>
-									)}
+										</TouchableOpacity>:null
+									}
 									extraData={
 										this.state.isDriverPostFullVisible
 									}
@@ -354,8 +354,8 @@ class OwnerHomeScreen extends Component {
 											"OwnerLeaseFirmTabs"
 										)
 									}
-									ListFooterComponent={() => (
-										<TouchableOpacity
+									ListFooterComponent={() =>
+										ownerDashBoard.LeasingJob.length>6?<TouchableOpacity
 											style={{ alignSelf: "flex-end" }}
 											onPress={() =>
 												this.setState({
@@ -374,8 +374,8 @@ class OwnerHomeScreen extends Component {
 													? "Show Less"
 													: "Show more"}
 											</Text>
-										</TouchableOpacity>
-									)}
+										</TouchableOpacity>:null
+									}
 									extraData={
 										this.state.isLeasingJobPostFullVisible
 									}

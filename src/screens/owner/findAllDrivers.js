@@ -85,20 +85,20 @@ class FindAllDrivers extends Component {
 						]}
 					>
 						<View>
-							<StyledPropText>Vehicle Type</StyledPropText>
+							{item.MonthlyPay[0] &&<StyledPropText>Vehicle Type</StyledPropText>}
 							<StyledPropText>Experience</StyledPropText>
-							<StyledPropText>Salary</StyledPropText>
+							{item.MonthlyPay[0] &&<StyledPropText>Salary</StyledPropText>}
 						</View>
 						<View style={{ alignItems: "flex-end" }}>
-							<StyledPropText>
+							{item.MonthlyPay[0] &&<StyledPropText>
 								{item.MonthlyPay[0].VehicleType.Name}
-							</StyledPropText>
+							</StyledPropText>}
 							<StyledPropText>
 								{item.license.ExpYear} years
 							</StyledPropText>
-							<StyledPropText>
+							{item.MonthlyPay[0] &&<StyledPropText>
 								₹ {item.MonthlyPay[0].MonthlyCharge}
-							</StyledPropText>
+							</StyledPropText>}
 						</View>
 					</View>
 					<HorizontalLine />

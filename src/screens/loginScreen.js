@@ -165,7 +165,7 @@ console.log('value', await fetch(
 
 	render() {
 		const initialState = {
-			loginId: "sandeep@singh.com",
+			loginId: "ankit@rajupoot.com",
 			password: "raju@123",
 			IsLoginBySocialMedia: false
 		};
@@ -263,32 +263,6 @@ console.log('value', await fetch(
 											icon={"facebook-box"}
 											iconColor={"#fff"}
 										/>
-										{/*<LoginButton
-										publishPermissions={['publish_actions']}
-										readPermissions={['public_profile', 'email', 'user_friends']}
-										onLoginFinished={
-											(error, result) => {
-												if (error) {
-													console.log('login has error: ', result.error)
-												} else if (result.isCancelled) {
-													console.log('login is cancelled.')
-												} else {
-													console.log('error',error,result)
-													AccessToken.getCurrentAccessToken().then((data) => {
-														console.log('data',data)
-														const { accessToken } = data
-														// console.log(accessToken);
-														this.initUser(accessToken)
-													}).catch(e=>console.log('catch',e))
-												}
-											}
-										}
-										onLogoutFinished={()=>console.log('logout')} />*/}
-										{/*<GoogleSigninButton
-											style={{ width: 192, height: 48 }}
-											size={GoogleSigninButton.Size.Wide}
-											color={GoogleSigninButton.Color.Dark}
-											onPress={this.signIn}/>*/}
 										<Button
 											onPress={() =>
 												this.signIn(props)

@@ -98,7 +98,7 @@ class DriverEarningScreen extends Component {
 			<View style={{ flex: 1 }}>
 				<View
 					style={{
-						paddingTop: 22,
+						//paddingTop: 22,
 						backgroundColor: theme.secondThemeColor
 					}}
 				>

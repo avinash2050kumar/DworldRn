@@ -154,7 +154,6 @@ class PostedLeaseFirm extends Component {
 			<View>
 				<View
 					style={{
-						paddingTop: 22,
 						backgroundColor: theme.secondThemeColor
 					}}
 				>

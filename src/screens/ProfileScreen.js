@@ -177,7 +177,7 @@ class ProfileScreen extends Component {
 			Mobile
 		} = this.props.personalDetails;
 		return (
-			<View style={{ paddingTop: 22 }}>
+			<View style={{ /*paddingTop: 22 */}}>
 				<NavigationBar
 					style={[
 						styles.flex_row,

@@ -194,7 +194,7 @@ class HomeScreen extends Component {
 			text = JSON.stringify(this.state.location);
 		}
 		return (
-			<View style={{ paddingTop: 22 }}>
+			<View style={{ /*paddingTop: 22*/ }}>
 				<NavigationBar
 					style={[
 						styles.flex_row,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions, FlatList } from "react-native";
+import { View, StyleSheet, Dimensions, FlatList,Text } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import {
 	postOwnerDriverJob,
@@ -45,7 +45,7 @@ class OwnerJobTabs extends React.Component {
 		console.log("this is value", this.props);
 		const routes = [
 			{
-				key: "requested",
+				key: "ownerDriverJobList",
 				title: "Requested",
 				item: navigation.getParam("item")
 			},
@@ -57,13 +57,12 @@ class OwnerJobTabs extends React.Component {
 		];
 
 		const renderScene = SceneMap({
-			requested: OwnerDriverJobList,
+			ownerDriverJobList:OwnerDriverJobList,
 			findDriver: FindAllDrivers
 		});
 
 		const index = this.state.index;
 		return (
-			<View style={{ paddingTop: 22 }}>
 				<TabView
 					navigationState={{ index, routes }}
 					renderScene={renderScene}
@@ -72,18 +71,11 @@ class OwnerJobTabs extends React.Component {
 					renderTabBar={this.renderTabBar}
 					tabStyle={{ backgroundColor: "red" }}
 				/>
-			</View>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	postAdsDriver: state.main.owner.postAdsDriver,
-	postAdsDriverDummy: state.main.owner.postAdsDriverDummy,
-	vehicleCategories: state.main.owner.postAdsDriverDummy.vehicleCategories,
-	ShiftType: state.main.owner.postAdsDriverDummy.ShiftType,
-	JobType: state.main.owner.postAdsDriverDummy.JobType,
-	adsIndex: state.main.owner.adsIndex
 });
 
 const mapDispatchToProps = {

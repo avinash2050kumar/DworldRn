@@ -221,7 +221,7 @@ class LeaseHomeScreen extends Component {
 		}
 
 		return (
-			<View style={{ paddingTop: 22 }}>
+			<View >
 				<NavigationBar
 					style={[
 						styles.flex_row,
