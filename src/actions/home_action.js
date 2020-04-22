@@ -5,7 +5,7 @@ import {
 	SET_LOGOUT,
 	SET_FILTERED_HOME_WORK_DATA,
 	SET_DRIVER_JOB_OFFERS_FOR_DRIVER,
-	SET_LEASE_DASHBOARD
+	SET_LEASE_DASHBOARD,RESET_HOME
 } from "./type";
 import client from "../helper/ApiClient";
 import { setAppMessage } from "./message_action";
@@ -26,6 +26,10 @@ export const setHomeScreenNoOfWork = () => async dispatch => {
 		});
 	} catch (e) {}
 };
+
+export const resetHome=()=>dispatch=>{
+	dispatch({type:RESET_HOME})
+}
 
 export const setDeviceLocation = (location, formattedAddress) => dispatch => {
 	dispatch({

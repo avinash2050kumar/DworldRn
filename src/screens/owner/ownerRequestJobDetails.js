@@ -20,7 +20,7 @@ import {
 } from "../../actions";
 import { connect } from "react-redux";
 import { NavigationBar, Screen } from "../../theme/styledComponent";
-//import { connectActionSheet } from "@expo/react-native-action-sheet";
+import RBSheet from "react-native-raw-bottom-sheet";
 import ImageView from "react-native-image-viewing";
 import FullScreenImage from "./fullScreenImage";
 import Button from "../../components/common/Buttons";
@@ -47,7 +47,6 @@ const DataContainer = styled.View`
 	justify-content: space-between;
 `;
 
-//@connectActionSheet
 class OwnerRequestJobDetails extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
@@ -66,66 +65,16 @@ class OwnerRequestJobDetails extends React.Component {
 
 	componentDidMount() {
 		const item = this.props.navigation.getParam("item");
-		const license = item ? item.license : { FrontPage: "", BackPage: "" };
+		const license = item ? item.license?item.license : { FrontPage: "", BackPage: "" }: { FrontPage: "", BackPage: "" };
 		this.setState({
 			imageFront: license.FrontPage,
 			imageBack: license.BackPage
 		});
 	}
 
-/*	_onOpenFrontActionSheetForViewImage = () => {
-		let options = ["Show Front licence Image", "Cancel"];
-		let cancelButtonIndex = 2;
-
-		this.props.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex
-			},
-			async buttonIndex => {
-				const options = {
-					mediaTypes: "Images"
-				};
-				switch (buttonIndex) {
-					case 0:
-						this.setState({ isFrontImageVisible: true });
-						break;
-
-					default:
-						return null;
-				}
-			}
-		);
-	};*/
-
-/*	_onOpenBackActionSheetForViewImage = () => {
-		let options = ["Show Back licence Image", "Cancel"];
-		let cancelButtonIndex = 2;
-
-		this.props.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex
-			},
-			async buttonIndex => {
-				const options = {
-					mediaTypes: "Images"
-				};
-				switch (buttonIndex) {
-					case 0:
-						this.setState({ isBackImageVisible: true });
-						break;
-
-					default:
-						return null;
-				}
-			}
-		);
-	};*/
-
 	render() {
 		const item = this.props.navigation.getParam("item");
-
+		{console.log('data', item)}
 		return (
 			<View style={{ flex: 1 }}>
 				<View
@@ -190,18 +139,18 @@ class OwnerRequestJobDetails extends React.Component {
 									]}
 								>
 									<View>
-										<StyledPropText>
+										{item.license&&<StyledPropText>
 											Licence Type
-										</StyledPropText>
-										<StyledPropText>
+										</StyledPropText>}
+										{item.license&&<StyledPropText>
 											Driving Licence No.
-										</StyledPropText>
+										</StyledPropText>}
 										<StyledPropText>
 											Contact Number
 										</StyledPropText>
-										<StyledPropText>
+										{item.MonthlyPay&&<StyledPropText>
 											Salary(Per Month)
-										</StyledPropText>
+										</StyledPropText>}
 									</View>
 									{console.log(
 										"this isdaf",
@@ -209,18 +158,18 @@ class OwnerRequestJobDetails extends React.Component {
 										item
 									)}
 									<View style={{ alignItems: "flex-end" }}>
-										<StyledPropText>
+										{item.license&&<StyledPropText>
 											{item.license.LicenseType.Name}
-										</StyledPropText>
-										<StyledPropText>
+										</StyledPropText>}
+										{item.license&&<StyledPropText>
 											{item.license.LicenseNumber}
-										</StyledPropText>
+										</StyledPropText>}
 										<StyledPropText>
 											{item.MobileNumber}
 										</StyledPropText>
-										<StyledPropText>
+										{item.MonthlyPay&&<StyledPropText>
 											{item.MonthlyPay[0].MonthlyCharge}
-										</StyledPropText>
+										</StyledPropText>}
 									</View>
 								</View>
 
@@ -236,8 +185,8 @@ class OwnerRequestJobDetails extends React.Component {
 									]}
 								>
 									<TouchableOpacity
-										onPress={() =>
-											console.log('action sheets')//this._onOpenFrontActionSheetForViewImage()
+										onPress={() =>this.RBSheet.open()
+											//this._onOpenFrontActionSheetForViewImage()
 										}
 									>
 										<View
@@ -259,7 +208,7 @@ class OwnerRequestJobDetails extends React.Component {
 									</TouchableOpacity>
 									<TouchableOpacity
 										onPress={() =>
-											console.log('action sheets')	//this._onOpenBackActionSheetForViewImage()
+											this.BackImage.open()	//this._onOpenBackActionSheetForViewImage()
 										}
 									>
 										<View
@@ -320,25 +269,25 @@ class OwnerRequestJobDetails extends React.Component {
 									]}
 								>
 									<View>
-										<StyledPropText>Shifts</StyledPropText>
-										<StyledPropText>
+										{item.work&&<StyledPropText>Shifts</StyledPropText>}
+										{item.work&&<StyledPropText>
 											Job Type
-										</StyledPropText>
-										<StyledPropText>
+										</StyledPropText>}
+										{item.work&&<StyledPropText>
 											Job Prefer Days
-										</StyledPropText>
+										</StyledPropText>}
 									</View>
 									{console.log("this isdaf", item)}
 									<View style={{ alignItems: "flex-end" }}>
-										<StyledPropText>
+										{item.work&&<StyledPropText>
 											{item.work.ShitType.Name}
-										</StyledPropText>
-										<StyledPropText>
+										</StyledPropText>}
+										{item.work&&<StyledPropText>
 											{item.work.JobType.Name}
-										</StyledPropText>
-										<StyledPropText>
+										</StyledPropText>}
+										{item.work&&<StyledPropText>
 											{item.work.PreferDays}
-										</StyledPropText>
+										</StyledPropText>}
 									</View>
 								</View>
 							</Card>
@@ -404,16 +353,16 @@ class OwnerRequestJobDetails extends React.Component {
 									</View>
 									<View style={{ alignItems: "flex-end" }}>
 										<StyledPropText>
-											{item.HourlyPay[0].HourlyPrice}
+											{item.HourlyPay?item.HourlyPay[0].HourlyPrice:item.Pricing.price}
 										</StyledPropText>
 										<StyledPropText>
-											{item.HourlyPay[0].ExtraHours}
+											{item.HourlyPay?item.HourlyPay[0].ExtraHours:item.Pricing.Extra}
 										</StyledPropText>
 										<StyledPropText>
-											{item.HourlyPay[0].NightHours}
+											{item.HourlyPay?item.HourlyPay[0].NightHours:item.Pricing.Night}
 										</StyledPropText>
 										<StyledPropText>
-											{item.HourlyPay[0].NightExtraHours}
+											{item.HourlyPay?item.HourlyPay[0].NightExtraHours:item.Pricing.NightExtra}
 										</StyledPropText>
 									</View>
 								</View>
@@ -432,6 +381,70 @@ class OwnerRequestJobDetails extends React.Component {
 						</View>
 					</Screen>
 				</ScrollView>
+				<RBSheet
+					ref={ref => {
+						this.RBSheet = ref;
+					}}
+					height={120}
+					duration={250}
+					customStyles={{
+						container: {
+							padding:16,
+							borderTopRightRadius:10,
+							borderTopLeftRadius:10,
+							draggableIcon: {
+								backgroundColor: "#000"
+							}
+							,justifyContent: "center",
+							//alignItems: "center"
+						}
+					}}
+				>
+					<TouchableOpacity
+						onPress={()=>this.setState({ isFrontImageVisible: true })}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Show Front licence Image</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>this.RBSheet.close()}
+						style={{padding:16}}
+					>
+						<Text style={{color:'red'}}>Cancel</Text>
+					</TouchableOpacity>
+				</RBSheet>
+				<RBSheet
+					ref={ref => {
+						this.BackImage = ref;
+					}}
+					height={120}
+					duration={250}
+					customStyles={{
+						container: {
+							padding:16,
+							borderTopRightRadius:10,
+							borderTopLeftRadius:10,
+							draggableIcon: {
+								backgroundColor: "#000"
+							}
+							,justifyContent: "center",
+							//alignItems: "center"
+						}
+					}}
+				>
+				<TouchableOpacity
+				onPress={()=>this.setState({ isBackImageVisible: true })}
+				style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+				>
+					<Text>Show Back licence Image</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={()=>this.BackImage.close()}
+				style={{padding:16}}
+				>
+					<Text style={{color:'red'}}>Cancel</Text>
+				</TouchableOpacity>
+				</RBSheet>
 				<FullScreenImage
 					image={this.state.imageFront}
 					modalVisible={this.state.isFrontImageVisible}

@@ -95,6 +95,8 @@ target 'Dworld' do
 
   pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
 
+pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
 pre_install do |installer|
   installer.pod_targets.each do |pod|
     if pod.name.eql?('RNPermissions') || pod.name.start_with?('Permission-')

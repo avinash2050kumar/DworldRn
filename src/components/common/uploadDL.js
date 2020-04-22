@@ -5,10 +5,11 @@ import {
 	View,
 	Text,
 	ScrollView,
-	KeyboardAvoidingView
+	KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import RBSheet from "react-native-raw-bottom-sheet";
 //import * as ImagePicker from "expo-image-picker";
 //import * as Permissions from "expo-permissions";
 //import { connectActionSheet } from "@expo/react-native-action-sheet";
@@ -22,6 +23,7 @@ import theme from "../../theme";
 import ImageView from "react-native-image-viewing";
 import { API_URL } from "../../config/api_url";
 import axios from "axios";
+import FullScreenImage from "../../screens/owner/fullScreenImage";
 
 // @connectActionSheet
 class UploadDL extends Component {
@@ -207,17 +209,17 @@ class UploadDL extends Component {
 					>
 						{description}
 					</StyledText>
-					<Button
+					{/*<Button
 						onPress={() => console.log('action sheet')}//this._onOpenActionSheet()}
 						label="Upload"
 						color="faceBook"
 						icon={"upload"}
 						iconColor={"#fff"}
-					/>
-					{/*	{formikprops.values.license[input] ? (
+					/>*/}
+						{formikprops.values.license[input] ? (
 						<Button
 							onPress={() =>
-								this._onOpenActionSheetForViewImage()
+								this.BackFront.open()
 							}
 							label="View"
 							color="faceBook"
@@ -226,14 +228,91 @@ class UploadDL extends Component {
 						/>
 					) : (
 						<Button
-							onPress={() => this._onOpenActionSheet()}
+							onPress={() => this.BackImage.open()}
 							label="Upload"
 							color="faceBook"
 							icon={"upload"}
 							iconColor={"#fff"}
 						/>
-					)}*/}
+					)}
 				</View>
+				<RBSheet
+					ref={ref => {
+						this.BackFront= ref;
+					}}
+					height={120}
+					duration={250}
+					customStyles={{
+						container: {
+							padding:16,
+							borderTopRightRadius:10,
+							borderTopLeftRadius:10,
+							draggableIcon: {
+								backgroundColor: "#000"
+							}
+							,justifyContent: "center",
+							//alignItems: "center"
+						}
+					}}
+				>
+					<TouchableOpacity
+						onPress={()=>this.props._setVisiblity(true, this.props.url)}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Show Image</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>this.BackFront.close()}
+						style={{padding:16}}
+					>
+						<Text style={{color:'red'}}>Cancel</Text>
+					</TouchableOpacity>
+				</RBSheet>
+				<RBSheet
+					ref={ref => {
+						this.BackImage = ref;
+					}}
+					height={160}
+					duration={250}
+					customStyles={{
+						container: {
+							padding:16,
+							borderTopRightRadius:10,
+							borderTopLeftRadius:10,
+							draggableIcon: {
+								backgroundColor: "#000"
+							}
+							,justifyContent: "center",
+							//alignItems: "center"
+						}
+					}}
+				>
+					<TouchableOpacity
+						onPress={()=>this.setState({ isBackImageVisible: true })}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Take Photo</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>this.setState({ isBackImageVisible: true })}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Existing Photo</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>this.BackImage.close()}
+						style={{padding:16}}
+					>
+						<Text style={{color:'red'}}>Cancel</Text>
+					</TouchableOpacity>
+				</RBSheet>
+				<FullScreenImage
+					image={this.state.image}
+					modalVisible={this.state.isVisible}
+					setModalVisible={() =>
+						this.setState({ isVisible: false })
+					}
+				/>
 			</Card>
 		);
 	}

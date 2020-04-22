@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Image, StatusBar, View } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { setLogout, resetAuth, resetDriver } from "../actions";
+import { setLogout, resetAuth, resetDriver ,resetHome} from "../actions";
 import { Screen } from "../theme/styledComponent";
 
 import { isEmpty } from "../helper/string";
@@ -21,6 +21,7 @@ class LogoutScreen extends Component {
 		this.props.resetAuth();
 		this.props.resetDriver();
 		this.props.navigation.navigate("SplashSrn");
+		this.props.resetHome()
 		return (
 			<Screen>
 				<StatusBar barStyle="dark-content" />
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	setLogout,
 	resetAuth,
-	resetDriver
+	resetDriver,resetHome
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutScreen);

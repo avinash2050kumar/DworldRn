@@ -100,7 +100,7 @@ class JobDescriptionScreen extends React.Component {
 					<View
 						style={{
 							position: "absolute",
-							top: 80
+							top: 58
 						}}
 					>
 						<View

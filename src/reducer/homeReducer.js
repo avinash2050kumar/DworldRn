@@ -5,30 +5,32 @@ import {
 	SET_OWNER_DASHBOARD,
 	SET_FILTERED_HOME_WORK_DATA,
 	SET_DRIVER_JOB_OFFERS_FOR_DRIVER,
-	SET_LEASE_DASHBOARD
+	SET_LEASE_DASHBOARD,RESET_HOME
 } from "../actions/type";
 
-const homeReducerInitialState = (
-	state = {
-		isHomeScreenVisible: false,
-		work: {
-			title: "",
-			type: "",
-			data: [
-				{ type: "", number: 0 },
-				{ type: "", number: 0 },
-				{ type: "", number: 0 },
-				{ type: "", number: 0 },
-				{ type: "", number: 0 },
-				{ type: "", number: 0 }
-			],
-			location: {},
-			address: {}
-		},
-		ownerDashBoard: {},
-		driverJobOffer: [],
-		leaseDashBoard: []
+const initialState={
+	isHomeScreenVisible: false,
+	work: {
+		title: "",
+		type: "",
+		data: [
+			{ type: "", number: 0 },
+			{ type: "", number: 0 },
+			{ type: "", number: 0 },
+			{ type: "", number: 0 },
+			{ type: "", number: 0 },
+			{ type: "", number: 0 }
+		],
+		location: {},
+		address: {}
 	},
+	ownerDashBoard: {},
+	driverJobOffer: [],
+	leaseDashBoard: []
+}
+
+const homeReducerInitialState = (
+	state = initialState,
 	action
 ) => {
 	switch (action.type) {
@@ -40,6 +42,9 @@ const homeReducerInitialState = (
 				...state,
 				isHomeScreenVisible: action.payload
 			};
+
+		case RESET_HOME:
+			return {...initialState}
 
 		case SET_OWNER_DASHBOARD:
 			return {

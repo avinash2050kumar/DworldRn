@@ -165,7 +165,7 @@ console.log('value', await fetch(
 
 	render() {
 		const initialState = {
-			loginId: "ankit@rajupoot.com",
+			loginId: "rajukr2010@gmail.com",
 			password: "raju@123",
 			IsLoginBySocialMedia: false
 		};
