@@ -13,6 +13,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 //import * as ImagePicker from "expo-image-picker";
 //import * as Permissions from "expo-permissions";
 //import { connectActionSheet } from "@expo/react-native-action-sheet";
+import ImagePicker from 'react-native-image-picker';
 
 import * as yup from "yup";
 import { withNextInputAutoFocusForm } from "react-native-formik";
@@ -24,6 +25,8 @@ import ImageView from "react-native-image-viewing";
 import { API_URL } from "../../config/api_url";
 import axios from "axios";
 import FullScreenImage from "../../screens/owner/fullScreenImage";
+import {PERMISSIONS, requestMultiple} from "react-native-permissions";
+import Geolocation from "@react-native-community/geolocation";
 
 // @connectActionSheet
 class UploadDL extends Component {
@@ -35,144 +38,38 @@ class UploadDL extends Component {
 
 	state = { image: "", isVisible: false };
 
-	_uploadImage = async img_uri => {
-		let base_url = `${API_URL}/api/Driver/UploadLicense`;
-		/*let uploadData = new FormData();
-		uploadData.append("submit", "ok");
-		uploadData.append("file", {
-			type: "image/jpg",
-			uri: img_uri,
-			name: "avinash.jpg"
-		});*/
-
-		const traveourl =
-			"https://traveodevapi.azurewebsites.net/api/Attachment/UploadAttachment";
-
-		var data = new FormData();
-		data.append("file", {
-			uri: img_uri,
-			name: "file",
-			type: "image/jpg"
-		});
-
-		fetch(traveourl, {
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "multipart/form-data",
-				LoginId: 1068,
-				EmployeeId: 1068,
-				UserToken: "F74DF7B7-DF75-4A8C-B1B7-2190D945909A",
-				CompanyId: 1005
+	componentDidMount() {
+		requestMultiple([PERMISSIONS.ANDROID.CAMERA,PERMISSIONS.ANDROID.RECORD_AUDIO,PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,PERMISSIONS.IOS.CAMERA,PERMISSIONS.IOS.PHOTO_LIBRARY]).then(
+			(statuses) => {
+				/*if(statuses[PERMISSIONS.ANDROID.CAMERA]=='granted')
+					ImagePicker.launchCamera(options, (response) => {
+						console.log('res',response)
+					})
+				if(statuses[PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE]=='granted')
+					ImagePicker.launchCamera(options, (response) => {
+						console.log('res',response)
+					})*/
 			},
-			method: "POST",
-			body: data
+		);
+	}
+
+	uploadImage=(response,formikprops,input)=>{
+		axios.post(`${API_URL}/api/Driver/UploadMobileAttachment`, {
+			data:response.data,    //put here base 64 string
+			type:response.type,              //put file type
+			fileName:response.fileName    //file name,
+			, headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+		},
 		})
-			.then(async response => {
-				console.log("succ ");
-				console.log(await response.json());
+			.then(function (imageUrl) {
+				formikprops.setFieldValue(`license.${input}`,imageUrl.data)
 			})
-			.catch(err => {
-				console.log("err ");
-				console.log(err);
+			.catch(function (error) {
+				console.log('error',error);
 			});
-
-		/*	fetch(base_url, {
-			method: "post",
-			body: uploadData
-		})
-			.then(response => {
-				console.log("resp,", response);
-				response.json();
-			})
-			.then(response => console.log("success", response))
-			.catch(e => console.log("error", e));*/
-	};
-
-/*	_onOpenActionSheet = () => {
-		let options = ["Take Photo", "Existing Photo", "Cancel"];
-		let cancelButtonIndex = 2;
-
-		this.props.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex
-			},
-			async buttonIndex => {
-				const options = {
-					mediaTypes: "Images"
-				};
-				switch (buttonIndex) {
-					case 0:
-						{
-							const { status } = await Permissions.askAsync(
-								Permissions.CAMERA_ROLL
-							);
-							const {
-								status: cameraPermissionStatus
-							} = await Permissions.askAsync(Permissions.CAMERA);
-							if (
-								status === "granted" &&
-								cameraPermissionStatus === "granted"
-							) {
-								let result = await ImagePicker.launchCameraAsync(
-									options
-								);
-								if (result) {
-									this._uploadImage(result.uri);
-								}
-							} else {
-								return null;
-							}
-						}
-						break;
-					case 1:
-						{
-							const { status } = await Permissions.askAsync(
-								Permissions.CAMERA_ROLL
-							);
-							if (status === "granted") {
-								let result = await ImagePicker.launchImageLibraryAsync(
-									options
-								);
-								if (result) {
-									this._uploadImage(result.uri);
-								}
-							} else {
-								return null;
-							}
-						}
-						break;
-					default:
-						return null;
-				}
-			}
-		);
-	};*/
-
-	/*_onOpenActionSheetForViewImage = () => {
-		let options = ["Show Image", "Cancel"];
-		let cancelButtonIndex = 2;
-
-		this.props.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex
-			},
-			async buttonIndex => {
-				const options = {
-					mediaTypes: "Images"
-				};
-				switch (buttonIndex) {
-					case 0:
-						this.props._setVisiblity(true, this.props.url);
-						break;
-
-					default:
-						return null;
-				}
-			}
-		);
-	};*/
+	}
 
 	render() {
 		const {
@@ -183,6 +80,15 @@ class UploadDL extends Component {
 			input,
 			url
 		} = this.props;
+
+		const options = {
+			title: 'Select Avatar',
+			customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+			storageOptions: {
+				skipBackup: true,
+				path: 'images',
+			},
+		};
 
 		return (
 			<Card style={[styles.flex_row]}>
@@ -233,8 +139,7 @@ class UploadDL extends Component {
 							color="faceBook"
 							icon={"upload"}
 							iconColor={"#fff"}
-						/>
-					)}
+						/>)}
 				</View>
 				<RBSheet
 					ref={ref => {
@@ -256,7 +161,8 @@ class UploadDL extends Component {
 					}}
 				>
 					<TouchableOpacity
-						onPress={()=>this.props._setVisiblity(true, this.props.url)}
+						onPress={()=>{this.BackFront.close();
+						this.props._setVisiblity(true, this.props.url)}}
 						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
 					>
 						<Text>Show Image</Text>
@@ -288,13 +194,17 @@ class UploadDL extends Component {
 					}}
 				>
 					<TouchableOpacity
-						onPress={()=>this.setState({ isBackImageVisible: true })}
+						onPress={()=>{this.BackImage.close();ImagePicker.launchCamera(options, (response) => {
+							this.uploadImage(response,formikprops,input)	// Same code as in above section!
+						})}}
 						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
 					>
 						<Text>Take Photo</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						onPress={()=>this.setState({ isBackImageVisible: true })}
+						onPress={()=>{this.BackImage.close();ImagePicker.launchImageLibrary(options, (response) => {
+							this.uploadImage(response,formikprops,input)
+						})}}
 						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
 					>
 						<Text>Existing Photo</Text>

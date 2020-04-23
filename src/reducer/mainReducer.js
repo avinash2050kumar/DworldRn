@@ -18,7 +18,7 @@ import {
 	SET_OWNER_DASHBOARD,
 	SAVE_LEASE_FIRM_VEHICLE_DETAILS,
 	SAVE_LEASE_CONTRACT_DETAILS,
-	SAVE_LEASE_PAY_SCALE
+	SAVE_LEASE_PAY_SCALE,SAVE_DRIVER_EXPERIENCE
 } from "../actions/type";
 
 import Store from "../store";
@@ -171,6 +171,12 @@ const intro = (state = initialState, action) => {
 				...state,
 				experiences: action.payload
 			};
+
+		case SAVE_DRIVER_EXPERIENCE:
+			return {
+				...state,
+				experiences:{...state.experiences,license:action.payload}
+			}
 
 		case SET_MAIN_SCREEN_DRIVER_HOURLY_PAY:
 			return {

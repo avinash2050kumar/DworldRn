@@ -18,15 +18,12 @@ import FormikTextInput from "../components/common/FormikTextInput";
 import * as yup from "yup";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import UploadDL from "../components/common/uploadDL";
-import { getExperience } from "../actions";
+import { getExperience ,SaveExperience} from "../actions";
 // import { Dropdown } from "react-native-material-dropdown";
 import ImageView from "react-native-image-viewing";
 import Selector from "react-native-easy-select";
 const Form = withNextInputAutoFocusForm(View);
 
-const validationSchema = yup.object({
-	firstName: yup.string().required("First Name is required")
-});
 
 class ExperiencesDLScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -57,10 +54,9 @@ class ExperiencesDLScreen extends Component {
 		return Object.keys(obj).length === 0;
 	};
 
-	_Submit = (values, actions) => {
+	_Submit = (values, actions) => {console.log('yaha mein aaya na',values)
 		setTimeout(() => actions.setSubmitting(false), 3000);
-
-		this.props.saveDriverMonthlyInfo({ monthly: values.MonthlyPay });
+		this.props.SaveExperience(values.license)
 	};
 
 	_setVisiblity = async (value, data) => {
@@ -93,12 +89,14 @@ class ExperiencesDLScreen extends Component {
 							<Formik
 								initialValues={this.state.experiences}
 								onSubmit={(values, actions) => {
+									console.log('deakh')
 									this._Submit(values, actions);
 								}}
-								validationSchema={validationSchema}
 							>
 								{props => (
 									<View style={[styles.flex_col_btwn]}>
+										{console.log('experience dl screen',!this.isEmpty(this.state.experiences),this.state.experiences,props.values.license
+											.LicenseType)}
 										<Form>
 											<FormikTextInput
 												label="Driving Licence Number"
@@ -195,7 +193,7 @@ class ExperiencesDLScreen extends Component {
 												onPress={props.handleSubmit}
 												label="Save & Next"
 												color="secondary"
-												disabled={false}
+												disabled={props.isSubmitting}
 											/>
 											{/*)}*/}
 										</View>
@@ -224,7 +222,7 @@ class ExperiencesDLScreen extends Component {
 
 const mapStateToProps = state => ({ experiences: state.main.experiences });
 
-const mapDispatchToProps = { getExperience };
+const mapDispatchToProps = { getExperience,SaveExperience };
 
 export default connect(
 	mapStateToProps,

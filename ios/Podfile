@@ -97,6 +97,14 @@ target 'Dworld' do
 
 pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+
+pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary.podspec"
+
+pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
+
+pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
+
 pre_install do |installer|
   installer.pod_targets.each do |pod|
     if pod.name.eql?('RNPermissions') || pod.name.start_with?('Permission-')

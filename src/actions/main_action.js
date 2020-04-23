@@ -15,7 +15,7 @@ import {
 	SAVE_MAIN_SCREEN_OWNER_DRIVER_PAY_SCALE,
 	RESET_OWNER_JOB_POST,
 	SET_OWNER_ADS_INDEX,
-	SET_OWNER_DASHBOARD
+	SET_OWNER_DASHBOARD,SAVE_DRIVER_EXPERIENCE
 } from "./type";
 
 import client from "../helper/ApiClient";
@@ -42,6 +42,10 @@ export const getExperience = () => async dispatch => {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
 };
+
+export const SaveExperience=(value)=> dispatch =>{
+	dispatch({type:SAVE_DRIVER_EXPERIENCE,payload:value})
+}
 
 export const getWorkSchedule = () => async dispatch => {
 	try {

@@ -190,7 +190,7 @@ class ProfileFormScreen extends Component {
 												onPress={props.handleSubmit}
 												label="Save & Next"
 												color="secondary"
-												disabled={false}
+												disabled={props.isSubmitting}
 											/>
 											{/*)}*/}
 										</View>
