@@ -106,7 +106,7 @@ class LeasingFirmFirmList extends Component {
 							}}
 							onPress={() =>
 								NavigationService.navigate(
-									"OwnerRequestJobDetails",
+									"OwnerLeaseFirmDetails",
 									{
 										item,
 										buttonTitle: "Approve"

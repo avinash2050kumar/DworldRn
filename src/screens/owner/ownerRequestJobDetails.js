@@ -51,8 +51,8 @@ class OwnerRequestJobDetails extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: navigation.getParam("item")
-				? navigation.getParam("item").MonthlyPay[0].VehicleType.Name
-				: ""
+				? navigation.getParam("item").Monthly?Paynavigation.getParam("item").MonthlyPay[0].VehicleType.Name:navigation.getParam("item").vehicleCompany
+				: navigation.getParam("item").vehicleCompany
 		};
 	};
 

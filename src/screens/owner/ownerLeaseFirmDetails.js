@@ -48,8 +48,8 @@ class OwnerLeaseFirmDetails extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: navigation.getParam("item")
-				? navigation.getParam("item").vhicle.VehicleType.Name
-				: ""
+				? navigation.getParam("item").vhicle?navigation.getParam("item").vhicle.VehicleType.Name:navigation.getParam("item").VehicleType.Name
+				: "Detail"
 		};
 	};
 
@@ -58,8 +58,9 @@ class OwnerLeaseFirmDetails extends React.Component {
 	}
 
 	render() {
-		console.log("itesdfagfdasgm", this.props);
 		const item = this.props.navigation.getParam("item");
+		console.log('alsdkjfmasfd',item)
+
 
 		return (
 			<View style={{ flex: 1 }}>
@@ -145,13 +146,13 @@ class OwnerLeaseFirmDetails extends React.Component {
 									</View>
 									<View style={{ alignItems: "flex-end" }}>
 										<StyledPropText>
-											{item.vhicle.VehicleCategory.Name}
+											{item.vhicle?item.vhicle.VehicleCategory.Name:item.VehicleCategory.Name}
 										</StyledPropText>
 										<StyledPropText>
-											{item.vhicle.Company}
+											{item.vhicle?item.vhicle.Company:item.Company}
 										</StyledPropText>
 										<StyledPropText>
-											{item.vhicle.VehicleType.Name}
+											{item.vhicle?item.vhicle.VehicleType.Name:item.VehicleType.Name}
 										</StyledPropText>
 										<StyledPropText>
 											MFG Year
