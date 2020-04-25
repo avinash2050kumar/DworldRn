@@ -139,7 +139,7 @@ class DriverJOBOfferScreen extends Component {
 						<FlatList
 							data={this.props.driverJobOffer}
 							renderItem={({ item, index }) => (
-								<DriverJobOfferCard item={item} index={index} />
+								<DriverJobOfferCard item={item} index={index} driverApplyJob={(e)=>console.log('e',e)} />
 							)}
 							keyExtractor={(item, index) => index}
 							showsHorizontalScrollIndicator={false}

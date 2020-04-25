@@ -27,7 +27,7 @@ import {
 	setDeviceLocation,
 	getOwnerAllDriverById,
 	getOwnerJobDetailById,
-	getOwnerAllLeaseById
+	getOwnerAllLeaseById,getApplyOwnerFindFirm
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -127,9 +127,10 @@ class FindAllLeaseFirm extends Component {
 								backgroundColor: theme.secondary,
 								borderBottomRightRadius: 20
 							}}
+							onPress={()=>this.props.getApplyOwnerFindFirm(item.ClientId,this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								Request
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -190,7 +191,7 @@ const mapDispatchToProps = {
 	setHomeScreenNoOfWork,
 	getOwnerJobDetailById,
 	getOwnerAllLeaseById,
-	getOwnerAllDriverById
+	getOwnerAllDriverById,getApplyOwnerFindFirm
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindAllLeaseFirm);

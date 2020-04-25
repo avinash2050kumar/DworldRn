@@ -19,6 +19,7 @@ import theme from "../theme/lightTheme";
 import { cardBorderRadius, cardPadding } from "../helper/styles";
 import styles from "../theme/styles";
 import RazorpayCheckout from 'react-native-razorpay';
+import Store from "../store";
 
 const NoOfAdsText = styled.Text`
 	color: ${props => props.theme.themeText};
@@ -71,22 +72,26 @@ export default class SubscriptionPlan extends React.Component {
 					{
 						packageName: "Package available for 30 days",
 						noOfAds: 1,
-						amount: "₹​199"
+						amount: "₹​199",
+						price:19900
 					},
 					{
 						packageName: "Package available for 3 Months",
 						noOfAds: 2,
-						amount: "₹​399"
+						amount: "₹​399",
+						price:39900
 					},
 					{
 						packageName: "Package available for 6 Months",
 						noOfAds: 4,
-						amount: "₹​799"
+						amount: "₹​799",
+						price:79900
 					},
 					{
 						packageName: "Package available for 1 Year",
 						noOfAds: 12,
-						amount: "₹​799"
+						amount: "₹​799",
+						price:79900
 					}
 				]
 			},
@@ -96,12 +101,14 @@ export default class SubscriptionPlan extends React.Component {
 					{
 						packageName: "Package available for 30 days",
 						noOfAds: 1,
-						amount: "₹​199"
+						amount: "₹​199",
+						price:19900
 					},
 					{
 						packageName: "Package available for 3 Months",
 						noOfAds: 2,
-						amount: "₹​399"
+						amount: "₹​399",
+						price:39900
 					}
 				]
 			},
@@ -109,10 +116,60 @@ export default class SubscriptionPlan extends React.Component {
 				name: "Custom Plan",
 				data: [
 					{
-						packageName: "Package available for 1 Year",
-						noOfAds: 12,
-						amount: "₹​799"
-					}
+						packageName: "Package available for 1 Day",
+						noOfAds: 1,
+						amount: "₹​40",
+						price:4000
+					},{
+						packageName: "Package available for 1 Day",
+						noOfAds: 2,
+						amount: "₹​60",
+					    price:6000
+
+					},{
+						packageName: "Package available for 1 Day",
+						noOfAds: 3,
+						amount: "₹​100",
+
+					price:10000
+					},{
+						packageName: "Package available for 1 Day",
+						noOfAds: 4,
+						amount: "₹​125",
+						price:12500
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: 5,
+						amount: "₹​150",
+					price:15000
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: '6+',
+						amount: "₹​199",
+						price:19900
+
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: 1,
+						amount: "₹​50",
+						price:5000
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: 2,
+						amount: "₹​80",
+						price:8000
+
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: 3,
+						amount: "₹​130",
+						price:13000
+					},{
+						packageName: "Package available for 2 Days",
+						noOfAds: 4,
+						amount: "₹​150",
+					price:15000
+					},
 				]
 			}
 		];
@@ -184,26 +241,28 @@ export default class SubscriptionPlan extends React.Component {
 						borderBottomLeftRadius: 10
 					}}
 					onPress={() => {
+						const { FirstName,LastName,Mobile,Email } = Store().store.getState().auth;
 						var options = {
-							description: 'Credits towards consultation',
-							image: 'https://i.imgur.com/3g7nmJC.png',
+							description: 'Dworld',
+							image: require('../assets/images/traveo.jpg'), /*https://i.imgur.com/3g7nmJC.png',*/
 							currency: 'INR',
 							key: "rzp_test_tFZq3APEo2OP2O",
-							amount: '100',
-							name: 'foo',
+							amount: `${item.price}`,
+							name: `${FirstName?FirstName:''} ${LastName?LastName:''}`,
 							prefill: {
-								email: 'void@razorpay.com',
-								contact: '9191919191',
+								email: Email,
+								contact: Mobile,
 								name: 'Razorpay Software'
 							},
-							theme: {color: '#F37254'}
+							theme: {color: theme.secondary}
 						}
 						RazorpayCheckout.open(options).then((data) => {
 							// handle success
+							console.log(JSON.stringify(data))
 							alert(`Success: ${data.razorpay_payment_id}`);
 						}).catch((error) => {
 							// handle failure
-							alert(`Error: ${error.code} | ${error.description}`);
+							alert(`Error: Cancelled order`);
 						});
 					}}
 				>

@@ -258,6 +258,18 @@ const Client = () => {
 					`/api/LeasingFirm/PostedRequirement?ClientId=${ClientId}`
 				);
 			},
+			applyOwnerFindDriver(offerToClientId,JobId) {
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Owner/OfferJob?OfferByClientId=${ClientId}&OfferToClientId=${offerToClientId}&JobId=${JobId}`
+				);
+			},
+			applyOwnerFindFirm(offerToClientId,JobId) {
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Owner/RequestFirm?OfferByClientId=${ClientId}&OfferToClientId=${offerToClientId}&JobId=${JobId}`
+				);
+			},
 			saveLeaseFirmRequirement(value) {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.post(

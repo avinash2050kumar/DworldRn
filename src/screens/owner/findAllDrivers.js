@@ -26,7 +26,7 @@ import {
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
 	getOwnerAllDriverById,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,getApplyOwnerFindDriver
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -132,6 +132,8 @@ class FindAllDrivers extends Component {
 								backgroundColor: theme.secondary,
 								borderBottomRightRadius: 20
 							}}
+
+							onPress={()=>this.props.getApplyOwnerFindDriver(item.ClientId,this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
 								Request
@@ -194,7 +196,7 @@ const mapDispatchToProps = {
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
 	getOwnerJobDetailById,
-	getOwnerAllDriverById
+	getOwnerAllDriverById,getApplyOwnerFindDriver
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindAllDrivers);

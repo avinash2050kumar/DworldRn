@@ -17,6 +17,39 @@ export const getOwnerJobDetailById = jobId => async dispatch => {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
 };
+
+export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch => {
+	try {
+		const res = await client.main.applyOwnerFindDriver(offerToClientId,JobId);
+		res.status===200 &&
+		dispatch(
+			setAppMessage(
+				"Success",
+				"Successfully Requested",
+				"success"
+			)
+		);
+		dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
+	}
+};
+export const getApplyOwnerFindFirm = (OfferToClientId,JobId)=> async dispatch => {
+	try {
+		const res = await client.main.applyOwnerFindFirm(OfferToClientId,JobId);
+		res.status===200 &&
+		dispatch(
+			setAppMessage(
+				"Success",
+				"Successfully Requested",
+				"success"
+			)
+		);
+		dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
+	}
+};
 export const getOwnerAllDriverById = jobId => async dispatch => {
 	try {
 		const res = await client.main.getAllDriverOwner(jobId);

@@ -168,15 +168,6 @@ class PostedLeaseFirm extends Component {
 						]}
 					>
 						<View style={[styles.flex_row]}>
-							<TouchableOpacity
-								onPress={() => this.props.navigation.pop()}
-							>
-								<Ionicons
-									name={"ios-arrow-round-back"}
-									size={30}
-									color={theme.white}
-								/>
-							</TouchableOpacity>
 							<StyledTitle
 								style={{
 									color: "#fff",

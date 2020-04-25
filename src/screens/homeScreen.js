@@ -94,30 +94,6 @@ class HomeScreen extends Component {
 		);
 	};
 
-	/*_getLocationAsync = async () => {
-		let { status } = await Permissions.askAsync(Permissions.LOCATION);
-		if (status !== "granted") {
-			this.setState({
-				errorMessage: "Permission to access location was denied"
-			});
-		}
-
-		let location = await Location.getCurrentPositionAsync({});
-
-		await axios
-			.get(
-				`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
-			)
-			.then(response => {
-				this.props.setDeviceLocation(
-					location,
-					response.data.results[0]
-				);
-			});
-
-		this.setState({ location });
-	};*/
-
 	color = index => {
 		const colors = [
 			"rgba(0, 203, 153, 0.6)",
