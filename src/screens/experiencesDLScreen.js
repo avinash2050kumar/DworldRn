@@ -18,10 +18,11 @@ import FormikTextInput from "../components/common/FormikTextInput";
 import * as yup from "yup";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import UploadDL from "../components/common/uploadDL";
-import { getExperience ,SaveExperience} from "../actions";
+import { getExperience ,SaveExperience,saveExperienceAndDl} from "../actions";
 // import { Dropdown } from "react-native-material-dropdown";
 import ImageView from "react-native-image-viewing";
 import Selector from "react-native-easy-select";
+import NavigationService from "../config/NavigationService";
 const Form = withNextInputAutoFocusForm(View);
 
 
@@ -54,9 +55,13 @@ class ExperiencesDLScreen extends Component {
 		return Object.keys(obj).length === 0;
 	};
 
-	_Submit = (values, actions) => {console.log('yaha mein aaya na',values)
+	_Submit = async (values, actions) => {
+		console.log('yaha mein aaya na',values)
 		setTimeout(() => actions.setSubmitting(false), 3000);
 		this.props.SaveExperience(values.license)
+		const res = await this.props.saveExperienceAndDl(values.license)
+		if(res.status ===200)
+        NavigationService.navigate('WorkScheduleScreen')
 	};
 
 	_setVisiblity = async (value, data) => {
@@ -222,7 +227,7 @@ class ExperiencesDLScreen extends Component {
 
 const mapStateToProps = state => ({ experiences: state.main.experiences });
 
-const mapDispatchToProps = { getExperience,SaveExperience };
+const mapDispatchToProps = { getExperience,SaveExperience ,saveExperienceAndDl};
 
 export default connect(
 	mapStateToProps,

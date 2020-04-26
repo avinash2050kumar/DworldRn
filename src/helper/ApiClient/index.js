@@ -170,6 +170,10 @@ const Client = () => {
 				return instance.post(`/api/Owner/SaveOwnerJob`, OwnerJob);
 			},
 
+			saveExperienceAndDl(payload){
+				 return instance.post(`/api/Driver/SaveLicense`,payload);
+			},
+
 			SaveOwnerFirm(value) {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.post(`/api/Owner/SaveLeasingFirmJob`, value);

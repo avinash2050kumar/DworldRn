@@ -460,6 +460,37 @@ export const postOwnerVehicleFirm = () => async dispatch => {
 	}
 };
 
+export const saveExperienceAndDl = (payload)=>async dispatch=>{
+	try {
+		const res = await client.main.saveExperienceAndDl(payload);
+
+		res.status === 200
+			? dispatch(
+			setAppMessage(
+				"Success",
+				"Successfully Save your Dl Info",
+				"success"
+			)
+			)
+			: dispatch(
+			setAppMessage(
+				"Error",
+				"Unable to save Dl Info",
+				"danger"
+			)
+			);
+		return res
+	} catch (e) {
+		dispatch(
+			setAppMessage(
+				"Error",
+				"Something went wrong, please try again",
+				"danger"
+			)
+		);
+	}
+}
+
 export const resetOwner = values => async dispatch => {
 	dispatch({
 		type: RESET_OWNER_JOB_POST,

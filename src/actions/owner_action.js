@@ -20,7 +20,7 @@ export const getOwnerJobDetailById = jobId => async dispatch => {
 
 export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch => {
 	try {
-		const res = await client.main.applyOwnerFindDriver(offerToClientId,JobId);
+		const res = await client.main.applyOwnerFindDriver(offerToClientId,JobId);console.log('res',res)
 		res.status===200 &&
 		dispatch(
 			setAppMessage(
@@ -29,7 +29,7 @@ export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch 
 				"success"
 			)
 		);
-		dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
+		res.status===204 &&dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -37,6 +37,7 @@ export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch 
 export const getApplyOwnerFindFirm = (OfferToClientId,JobId)=> async dispatch => {
 	try {
 		const res = await client.main.applyOwnerFindFirm(OfferToClientId,JobId);
+		console.log('res',res)
 		res.status===200 &&
 		dispatch(
 			setAppMessage(
@@ -45,7 +46,7 @@ export const getApplyOwnerFindFirm = (OfferToClientId,JobId)=> async dispatch =>
 				"success"
 			)
 		);
-		dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
+		res.status===204 &&dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}

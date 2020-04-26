@@ -44,8 +44,6 @@ class WorkScheduleScreen extends Component {
 				workSchedules: props.workSchedules
 			};
 		}
-
-		// Return null if the state hasn't changed
 		return null;
 	}
 
