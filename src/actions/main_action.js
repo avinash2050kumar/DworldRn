@@ -68,7 +68,7 @@ export const postWorkSchedule = payload => async dispatch => {
 				)
 			);
 
-		dispatch(
+		res.status === 204 &&dispatch(
 			setAppMessage("Error", "Unable to save Work Schedule", "danger")
 		);
 		return res
@@ -102,13 +102,14 @@ export const saveDriverHourlyInfo = values => async dispatch => {
 					"success"
 				)
 			);
-		dispatch(
+		res.status === 204 && dispatch(
 			setAppMessage(
 				"Error",
 				"Unable to save Driver hourly values",
 				"danger"
 			)
 		);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -136,13 +137,14 @@ export const saveDriverWeeklyInfo = values => async dispatch => {
 					"success"
 				)
 			);
-		dispatch(
+		res.status === 204 && dispatch(
 			setAppMessage(
 				"Error",
 				"Unable to save Driver Weekly values",
 				"danger"
 			)
 		);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -172,13 +174,14 @@ export const saveDriverMonthlyInfo = values => async dispatch => {
 					"success"
 				)
 			);
-		dispatch(
+		res.status === 204 && dispatch(
 			setAppMessage(
 				"Error",
 				"Unable to save Driver Weekly values",
 				"danger"
 			)
 		);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -205,9 +208,10 @@ export const saveDriverKMInfo = values => async dispatch => {
 					"success"
 				)
 			);
-		dispatch(
+		res.status === 204 && dispatch(
 			setAppMessage("Error", "Unable to save Driver KM values", "danger")
 		);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -234,13 +238,14 @@ export const saveDriverTripPayInfo = values => async dispatch => {
 					"success"
 				)
 			);
-		dispatch(
+		res.status === 204 && dispatch(
 			setAppMessage(
 				"Error",
 				"Unable to save Driver Trip values",
 				"danger"
 			)
 		);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -278,6 +283,7 @@ export const driverSaveVehiclePreferences = values => async dispatch => {
 					"danger"
 				)
 			);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}

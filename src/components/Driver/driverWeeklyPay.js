@@ -24,6 +24,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import * as yup from "yup";import AntDesign from "react-native-vector-icons/dist/AntDesign";
 import Store from "../../store";
 import Selector from "react-native-easy-select";
+import NavigationService from "../../config/NavigationService";
 
 const validationSchema = yup.object().shape({
 	WeeklyPay: yup.array().of(
@@ -91,10 +92,13 @@ class DriverWeeklyPay extends Component {
 		return Object.keys(obj).length === 0;
 	};
 
-	_Submit = (values, actions) => {
+	_Submit = async (values, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 3000);
 
-		this.props.saveDriverWeeklyInfo({ weekly: values.WeeklyPay });
+		const res = await this.props.saveDriverWeeklyInfo({ weekly: values.WeeklyPay });
+
+		if(res.status==200)
+			NavigationService.navigate('VehiclePreferenceScreen')
 	};
 
 	renderDriverWeeklyPay = (item, index) => {

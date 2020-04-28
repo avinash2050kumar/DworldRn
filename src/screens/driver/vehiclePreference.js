@@ -29,6 +29,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import Selector from "react-native-easy-select";
 import * as yup from "yup";
+import NavigationService from "../../config/NavigationService";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -77,12 +78,15 @@ class VehiclePreference extends Component {
 		return Object.keys(obj).length === 0;
 	};
 
-	_Submit = (values, actions) => {
+	_Submit = async (values, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 3000);
 
-		this.props.driverSaveVehiclePreferences({
+		const res = await this.props.driverSaveVehiclePreferences({
 			vehicleCategory: values.vehicleCategory
 		});
+
+		if(res.status==200)
+			NavigationService.navigate('Home')
 	};
 
 	render() {

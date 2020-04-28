@@ -200,16 +200,7 @@ class HomeScreen extends Component {
 							</Text>
 						</View>
 					</View>
-					{/*<View>
-						<Image
-							source={require("../assets/images/Notification.png")}
-							style={{
-								width: 25,
-								height: 25,
-								resizeMode: "contain"
-							}}
-						/>
-					</View>*/}
+
 				</NavigationBar>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					<Screen style={{ backgroundColor: "#fff" }}>

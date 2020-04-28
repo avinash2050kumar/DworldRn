@@ -54,6 +54,7 @@ import LeaseFirmApplicant from "../screens/owner/jobPost/LeasingFirm";
 import PostRequirementsFirm from "../screens/lease/postRequirements";
 import LeaseContractDetails from "../screens/lease/contractDetails";
 import LeaseFirmPayScaleTabs from "../screens/lease/LeaseFirmPayScaleTabs";
+import NoInternet from "../screens/NoInternet";
 
 // Stack Navigators
 
@@ -89,7 +90,7 @@ const UserStack = createStackNavigator(
 		OwnerDriverWorkSchedule,
 		OwnerDriverPayScaleTabs,
 		OwnerDriverJobList,
-		OwnerJobTabs,
+		OwnerJobTabs,NoInternet,
 		OwnerRequestJobDetails,
 		Policy,
 		SubscriptionPlan,

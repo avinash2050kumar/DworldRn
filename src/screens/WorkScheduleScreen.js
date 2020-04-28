@@ -40,9 +40,17 @@ class WorkScheduleScreen extends Component {
 
 	static getDerivedStateFromProps(props, state) {
 		const isEmpty = Object.keys(state.workSchedules).length === 0;
-		if (isEmpty) {
+		const workEmpty = Object.keys(props.workSchedules).length === 0;
+		if (isEmpty&&!workEmpty) {
 			return {
-				workSchedules: props.workSchedules
+				workSchedules: Object.assign({},props.workSchedules, {SelectedJobDays: props.workSchedules.JobDays[0],PreferDays:props.workSchedules.JobDays[0].Name,
+					IsFri: false,
+					IsMon: false,
+					IsSat: false,
+					IsSun: false,
+					IsThu: false,
+					IsTue: false,
+					IsWed: false})
 			};
 		}
 		return null;
@@ -57,9 +65,22 @@ class WorkScheduleScreen extends Component {
 	};
 
 	handleSubmit=async ()=>{
+		const beforeValue = Object.assign({},this.state.workSchedules, {PreferDays:this.state.workSchedules.PreferDays &&
+			this.state.workSchedules.PreferDays==="Custom Days" ?
+				this.getDaysString():this.state.workSchedules.PreferDays})
+
+		const afterValue = Object.assign({},{workSheduleId:0,
+			ClientId:beforeValue.ClientId,
+			ShitType:beforeValue.ShitType,
+			JobType:beforeValue.JobType,
+			PreferDays:beforeValue.PreferDays
+		})
+		console.log(JSON.stringify(afterValue))
+
 		const res = await this.props.postWorkSchedule(
-			this.state.workSchedules
+			afterValue
 		)
+		console.log('this is response', res)
 		if(res && res.status === 200)
 			NavigationService.navigate('PayScaleScreen')
 	}
@@ -116,7 +137,9 @@ class WorkScheduleScreen extends Component {
 						typesetting industry. ,
 					</StyledText>
 					{!this.isEmpty(workSchedules) && (
-						<View><Selector
+						<View>
+							{console.log('workschedule',this.state)}
+							<Selector
 							theme="dropdown" // Default: 'simple'
 							items={workSchedules.ShitTypeData
 								? workSchedules.ShitTypeData.map(
@@ -194,7 +217,52 @@ class WorkScheduleScreen extends Component {
 									})
 								)
 							}}
+						/><Selector
+							theme="dropdown" // Default: 'simple'
+							items={workSchedules.JobDays
+								? workSchedules.JobDays.map(
+									shift => {
+										return {
+											...shift,
+											value: shift.Name
+										};
+									}
+								)
+								: []}
+
+							// Specify key
+							valueKey="value" // Default: 'value'
+							labelKey="value" // Default: 'label'
+
+							defaultValue={workSchedules.SelectedJobDays?workSchedules.SelectedJobDays.Name:''} // Set default value
+							placeholder="Prefered Days"
+
+							placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+							iconStyle={{ tintColor: 'black' }}
+							onChange={(value) =>{
+								let i = 0
+								this.state
+									.workSchedules
+									.JobDays.map((val,index)=> {if(val.Name===value)i=index})
+								this.setState(
+									update(this.state, {
+										workSchedules: {
+											SelectedJobDays: {
+												$set: this.state
+													.workSchedules
+													.JobDays[i]
+											},
+											PreferDays:{
+												$set: this.state
+													.workSchedules
+													.JobDays[i].Name
+											}
+										}
+									})
+								)
+							}}
 						/>
+						{workSchedules.PreferDays && workSchedules.PreferDays==="Custom Days" && <View>
 							<StyledTitle style={{ marginTop: 15 }}>
 								Custom Days
 							</StyledTitle>
@@ -232,13 +300,14 @@ class WorkScheduleScreen extends Component {
 								workSchedules.IsSat,
 								"IsSat",
 								"Saturday"
-							)}
+							)}</View>}
 							<Button
 								onPress={() =>
 									this.handleSubmit()
 								}
 								label="Save & Next"
 								color="secondary"
+								style={{marginTop:10}}
 								disabled={false}
 							/>
 						</View>
@@ -246,6 +315,22 @@ class WorkScheduleScreen extends Component {
 				</Screen>
 			</ScrollView>
 		);
+	}
+
+	getDaysString() {
+		const {IsFri,IsMon,IsSat,IsSun,IsThu,IsTue,	IsWed} = this.state.workSchedules
+		let day ='';
+
+		day= IsMon? day+'Mon,':day
+		day= IsTue? day+'Tues,':day
+		day= IsWed? day+'Wed,':day
+		day= IsThu? day+'Thu,':day
+		day= IsFri? day+'Fri,':day
+		day= IsSat? day+'Sat,,':day
+		day= IsSun? day+'Sun':day
+
+		console.log('day',day)
+		return day
 	}
 }
 

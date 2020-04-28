@@ -24,6 +24,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import * as yup from "yup";import AntDesign from "react-native-vector-icons/dist/AntDesign";
 import Store from "../../store";
 import Selector from "react-native-easy-select";
+import NavigationService from "../../config/NavigationService";
 
 const validationSchema = yup.object().shape({
 	HourlyPay: yup.array().of(
@@ -89,10 +90,12 @@ class DriverHourlyPay extends Component {
 		return Object.keys(obj).length === 0;
 	};
 
-	_Submit = (values, actions) => {
+	_Submit = async (values, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 3000);
 
-		this.props.saveDriverHourlyInfo({ Hourly: values.HourlyPay });
+		const res = await this.props.saveDriverHourlyInfo({ Hourly: values.HourlyPay });
+		if(res.status==200)
+			NavigationService.navigate('VehiclePreferenceScreen')
 	};
 
 	renderDriverHourlyPay = (item, index) => {

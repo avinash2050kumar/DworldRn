@@ -145,7 +145,7 @@ class UploadDL extends Component {
 					ref={ref => {
 						this.BackFront= ref;
 					}}
-					height={120}
+					height={250}
 					duration={250}
 					customStyles={{
 						container: {
@@ -166,6 +166,22 @@ class UploadDL extends Component {
 						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
 					>
 						<Text>Show Image</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>{this.BackFront.close();ImagePicker.launchCamera(options, (response) => {
+							this.uploadImage(response,formikprops,input)	// Same code as in above section!
+						})}}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Take Photo</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={()=>{this.BackFront.close();ImagePicker.launchImageLibrary(options, (response) => {
+							this.uploadImage(response,formikprops,input)
+						})}}
+						style={{padding:16,borderBottomWidth:1,borderColor:'#eee',}}
+					>
+						<Text>Existing Photo</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						onPress={()=>this.BackFront.close()}

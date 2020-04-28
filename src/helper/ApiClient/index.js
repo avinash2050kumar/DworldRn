@@ -60,7 +60,9 @@ const Client = () => {
 				);
 			},
 			postWorkSchedule(value) {
-				return instance.post(`/api/Driver/SaveWorkSchedule`, value);
+				const { ClientId } = Store().store.getState().auth;
+				const FinalValue = Object.assign({},value,{ClientId})
+				return instance.post(`/api/Driver/SaveWorkSchedule`, FinalValue);
 			},
 			/*===========================================*/
 			driverGetHourlyPay() {

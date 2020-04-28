@@ -64,12 +64,10 @@ class PersonalDetailScreen extends Component {
 	_handleSubmit = async payload => {
 		const { ClientTypeId} = Store().store.getState().auth;
 		const res = await this.props.SaveProfile(payload);
-
-		console.log('inter',res.status === 200&&ClientTypeId===1,res.status === 200,ClientTypeId===1 ,res,ClientTypeId)
 		if(res&&res.status === 200&&ClientTypeId===1)
 			NavigationService.navigate('ExperiencesDLScreen')
 		if(res&&res.status === 200&&ClientTypeId===2)
-			NavigationService.navigate('PostAdsByOwner')
+			this.props.navigation.pop()
 		if(res&&res.status === 200&&ClientTypeId===3)
 			NavigationService.navigate('PostRequirementsFirm')
 	};

@@ -236,7 +236,7 @@ class OwnerHomeScreen extends Component {
 								resizeMode: "contain"
 							}}
 						/>
-						<View style={{ marginLeft: 10, width: "70%" }}>
+						<View style={{ marginLeft: 10, width: "75%" }}>
 							<Text style={{ color: theme.textLightColor }}>
 								You are here
 							</Text>
@@ -246,16 +246,6 @@ class OwnerHomeScreen extends Component {
 									: "unable to get Location"}
 							</Text>
 						</View>
-					</View>
-					<View>
-						<Image
-							source={require("../../assets/images/Notification.png")}
-							style={{
-								width: 25,
-								height: 25,
-								resizeMode: "contain"
-							}}
-						/>
 					</View>
 				</NavigationBar>
 				<ScrollView showsVerticalScrollIndicator={false}>

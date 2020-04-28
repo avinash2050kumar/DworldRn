@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect, Provider } from "react-redux";
 import FlashMessage from "react-native-flash-message";
-import { View } from "react-native";
+import {View, Text, Image} from "react-native";
 
 import theme from "./src/theme";
 import NavigationRoot from "./src/config/Navigator";
@@ -13,10 +13,19 @@ import hi from "./src/helper/Language/hindi";
 import ta from "./src/helper/Language/tamil";
 import te from "./src/helper/Language/telugu";
 import kn from "./src/helper/Language/Kannada";
+import NetInfo from "@react-native-community/netinfo";
+import NetworkManager from "./src/helper/internetInfo";
 
 class Entry extends Component {
-  state = { count: 0, message: "" };
+  constructor(props) {
+    super(props);
+    NetworkManager.RegisterConnectionChangeCallback((isAvailable)=>{this.setState({isConnected:isAvailable})})
+  }
 
+  state = { count: 0, message: "" , isConnected:true};
+
+  //handleInternet=(isAvailable)=>{this.setState({isConnected:isAvailable}); if(isAvailable)NavigationService.navigate('NoInternet')}
+//(isAvailable)=>{this.setState({isConnected:isAvailable}); if(isAvailable)NavigationService.navigate('NoInternet')}
   componentDidMount() {
     i18n.translations = {
       en,
@@ -30,6 +39,9 @@ class Entry extends Component {
     i18n.locale = this.props.language.langCode || "en";
     // When a value is missing from a language it'll fallback to another language with the key present.
     i18n.fallbacks = true;
+
+  this.setState({isConnected:NetworkManager.IsInternetAvailable})
+
   }
 
   async componentWillReceiveProps(nextProps, nextContext) {
@@ -61,14 +73,19 @@ class Entry extends Component {
     }
   }
 
+
+
   render() {
     return (
         <View style={{ flex: 1 }}>
-          <NavigationRoot
+          {!this.state.isConnected &&<View style={{flex:1,alignItems:'center', justifyContent:'center'}}>
+          <Text style={{fontSize:22}}>Matherchod online aa </Text>
+         </View>}
+          {this.state.isConnected &&<NavigationRoot
               ref={navigatorRef => {
                 NavigationService.setTopLevelNavigator(navigatorRef);
               }}
-          />
+          />}
           <FlashMessage
               position="top"
               textStyle={{ color: theme.white }}
