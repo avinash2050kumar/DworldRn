@@ -28,6 +28,7 @@ import {
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import Selector from "react-native-easy-select";
+import * as yup from "yup";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -37,6 +38,13 @@ const CheckBox = styled.TouchableOpacity`
 	flex-direction: row;
 	align-items: center;
 `;
+
+const validationSchema = yup.object().shape({
+			vehicleCategory: yup.object().shape({
+				VehicleCategoryName: yup.string().required("Vehicle Category is required")
+
+		})
+})
 
 class VehiclePreference extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -80,6 +88,7 @@ class VehiclePreference extends Component {
 	render() {
 		return (
 			<Screen style={{ backgroundColor: theme.white }}>
+				{console.log('vehicle Pref',this.state)}
 				<View>
 					{!this.isEmpty(this.state.vehiclePreferences) && (
 						<KeyboardAvoidingView behavior="padding" enabled>
@@ -88,9 +97,11 @@ class VehiclePreference extends Component {
 								onSubmit={(values, actions) => {
 									this._Submit(values, actions);
 								}}
+								validationSchema={validationSchema}
 							>
 								{props => (
 									<Form>
+										{console.log('value',props)}
 										<View>
 											<Selector
 												theme="dropdown" // Default: 'simple'
@@ -114,10 +125,11 @@ class VehiclePreference extends Component {
 
 												defaultValue={`${props.values.vehicleCategory
 													.VehicleCategoryName}`} // Set default value
-												placeholder="Shifts"
-
-												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
-												iconStyle={{ tintColor: 'black' }}
+												placeholder="Vehicle Category"
+												placeholderStyle={{color:props.errors.vehicleCategory? props.errors.vehicleCategory.VehicleCategoryName?'red':'#444':'#444' }}
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10 ,
+													borderColor:props.errors.vehicleCategory? props.errors.vehicleCategory.VehicleCategoryName?'red':'#aaa':'#aaa' }}
+												iconStyle={{ tintColor:props.errors.vehicleCategory? props.errors.vehicleCategory.VehicleCategoryName?'red':'black':'black' }}
 												onChange={(value) =>{
 													let i = 0
 													props.values

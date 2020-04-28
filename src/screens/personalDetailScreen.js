@@ -21,6 +21,8 @@ import {
 import { setAppMessage, getPersonalDetails, SaveProfile } from "../actions";
 import * as yup from "yup";
 import FormikTextInput from "../components/common/FormikTextInput";
+import Store from "../store";
+import NavigationService from "../config/NavigationService";
 const Form = withNextInputAutoFocusForm(View);
 
 const validationSchema = yup.object({
@@ -59,8 +61,17 @@ class PersonalDetailScreen extends Component {
 		this.props.getPersonalDetails();
 	}
 
-	_handleSubmit = payload => {
-		this.props.SaveProfile(payload);
+	_handleSubmit = async payload => {
+		const { ClientTypeId} = Store().store.getState().auth;
+		const res = await this.props.SaveProfile(payload);
+
+		console.log('inter',res.status === 200&&ClientTypeId===1,res.status === 200,ClientTypeId===1 ,res,ClientTypeId)
+		if(res&&res.status === 200&&ClientTypeId===1)
+			NavigationService.navigate('ExperiencesDLScreen')
+		if(res&&res.status === 200&&ClientTypeId===2)
+			NavigationService.navigate('PostAdsByOwner')
+		if(res&&res.status === 200&&ClientTypeId===3)
+			NavigationService.navigate('PostRequirementsFirm')
 	};
 
 	isEmpty = obj => {

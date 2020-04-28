@@ -15,7 +15,7 @@ import {
 	SAVE_MAIN_SCREEN_OWNER_DRIVER_PAY_SCALE,
 	RESET_OWNER_JOB_POST,
 	SET_OWNER_ADS_INDEX,
-	SET_OWNER_DASHBOARD,SAVE_DRIVER_EXPERIENCE
+	SET_OWNER_DASHBOARD,SAVE_DRIVER_EXPERIENCE,RESET_MAIN_REDUCER
 } from "./type";
 
 import client from "../helper/ApiClient";
@@ -71,6 +71,7 @@ export const postWorkSchedule = payload => async dispatch => {
 		dispatch(
 			setAppMessage("Error", "Unable to save Work Schedule", "danger")
 		);
+		return res
 	} catch (e) {
 		dispatch(
 			setAppMessage("Error", "Unable to save Work Schedule", "danger")
@@ -340,6 +341,7 @@ export const SaveProfile = value => async dispatch => {
 					"danger"
 				)
 			);
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
@@ -514,3 +516,7 @@ export const getOwnerDashboard = () => async dispatch => {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
 	}
 };
+
+export const resetMainScreen = () => dispatch=>{
+	dispatch({type:RESET_MAIN_REDUCER})
+}

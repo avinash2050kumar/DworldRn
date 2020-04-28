@@ -35,12 +35,12 @@ export default class Policy extends React.Component {
 							Disclaimers
 						</Text>
 					</View>
-					<TouchableOpacity
+					{/*<TouchableOpacity
 						onPress={() => console.log("log")}
 						style={{ padding: 16 }}
 					>
 						<Text>Submit</Text>
-					</TouchableOpacity>
+					</TouchableOpacity>*/}
 					<Text>
 						<Text
 							style={{

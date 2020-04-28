@@ -26,16 +26,16 @@ import Store from "../../store";
 import Selector from "react-native-easy-select";
 
 const validationSchema = yup.object().shape({
-	HourlyPay: yup.array().of(
+	MonthlyPay: yup.array().of(
 		yup.object().shape({
-			HourlyPrice: yup.string().required("Hourly Pricing is required"),
+			MonthlyCharge: yup.string().required("MonthlyCharge is required"),
 			ExtraHours: yup.string().required("Extra Hours Time is required"),
 			NightHours: yup
 				.string()
 				.required("Night Charges (Hour) is required"),
-			NightExtraHours: yup
+			/*NightExtraHours: yup
 				.string()
-				.required("Night Charges (Extra Hour) is required")
+				.required("Night Charges (Extra Hour) is required")*/
 		})
 	)
 });
@@ -62,10 +62,7 @@ class DriverMonthlyPay extends Component {
 		dummy: {
 			ClientId: Store().store.getState().auth.ClientId,
 			MonthlyPayId: 0,
-			VehicleType: {
-				Id: 0,
-				Name: "Choose"
-			},
+			VehicleType: {Id: 1, Name: "HatchBack"},
 			MonthlyCharge: 0,
 			Holiday: 1,
 			ExtraHours: 0,
@@ -213,7 +210,25 @@ class DriverMonthlyPay extends Component {
 							validationSchema={validationSchema}
 						>
 							{props => (
-								<Form>
+								<Form>{this.state.isCardVisible&&props
+									.values
+									.MonthlyPay.length===0&&props.setFieldValue(
+									"MonthlyPay",
+									[
+										...props
+											.values
+											.MonthlyPay,
+										Object.assign(
+											{},
+											this
+												.state
+												.dummy,
+											{
+												MonthlyPayId: 0
+											}
+										)
+									]
+								)}
 									{props.values.MonthlyPay.map(
 										(weekly, index) => (
 											<View

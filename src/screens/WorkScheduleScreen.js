@@ -18,6 +18,7 @@ import theme from "../theme/lightTheme";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";
 import update from "immutability-helper";
 import Button from "../components/common/Buttons";import Selector from "react-native-easy-select";
+import NavigationService from "../config/NavigationService";
 
 const CheckBox = styled.TouchableOpacity`
 	padding: 10px;
@@ -54,6 +55,14 @@ class WorkScheduleScreen extends Component {
 	isEmpty = obj => {
 		return Object.keys(obj).length === 0;
 	};
+
+	handleSubmit=async ()=>{
+		const res = await this.props.postWorkSchedule(
+			this.state.workSchedules
+		)
+		if(res && res.status === 200)
+			NavigationService.navigate('PayScaleScreen')
+	}
 
 	_renderCheckBox = (value, title, text) => {
 		return value ? (
@@ -186,7 +195,6 @@ class WorkScheduleScreen extends Component {
 								)
 							}}
 						/>
-							{console.log('props',this.state)}
 							<StyledTitle style={{ marginTop: 15 }}>
 								Custom Days
 							</StyledTitle>
@@ -227,9 +235,7 @@ class WorkScheduleScreen extends Component {
 							)}
 							<Button
 								onPress={() =>
-									this.props.postWorkSchedule(
-										this.state.workSchedules
-									)
+									this.handleSubmit()
 								}
 								label="Save & Next"
 								color="secondary"

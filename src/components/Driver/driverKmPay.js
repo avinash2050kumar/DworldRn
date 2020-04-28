@@ -26,16 +26,16 @@ import Store from "../../store";
 import Selector from "react-native-easy-select";
 
 const validationSchema = yup.object().shape({
-	HourlyPay: yup.array().of(
+	KMPay: yup.array().of(
 		yup.object().shape({
-			HourlyPrice: yup.string().required("Hourly Pricing is required"),
-			ExtraHours: yup.string().required("Extra Hours Time is required"),
-			NightHours: yup
+			DayCharge: yup.string().required("DayCharge is required"),
+			//ExtraHours: yup.string().required("Extra Hours Time is required"),
+			NightCharge: yup
 				.string()
-				.required("Night Charges (Hour) is required"),
-			NightExtraHours: yup
+				.required("Night Charges is required"),
+			/*NightExtraHours: yup
 				.string()
-				.required("Night Charges (Extra Hour) is required")
+				.required("Night Charges (Extra Hour) is required")*/
 		})
 	)
 });
@@ -61,10 +61,7 @@ class DriverKMPay extends Component {
 		dummy: {
 			ClientId: Store().store.getState().auth.ClientId,
 			KMPayId: 0,
-			VehicleType: {
-				Id: 0,
-				Name: "Choose"
-			},
+			VehicleType: {Id: 1, Name: "HatchBack"},
 			DayCharge: 0,
 			NightCharge: 0
 		}
@@ -187,7 +184,14 @@ class DriverKMPay extends Component {
 							validationSchema={validationSchema}
 						>
 							{props => (
-								<Form>
+								<Form>{this.state.isCardVisible&&props.values.KMPay.length===0&&props.setFieldValue(
+									"KMPay",
+									[
+										...props.values
+											.KMPay,
+										this.state.dummy
+									]
+								)}
 									{props.values.KMPay.map((km, index) => (
 										<View
 											style={{

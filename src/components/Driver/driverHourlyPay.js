@@ -61,10 +61,7 @@ class DriverHourlyPay extends Component {
 		dummy: {
 			ClientId: Store().store.getState().auth.ClientId,
 			HourlyPayId: 0,
-			VehicleType: {
-				Id: 0,
-				Name: "Choose"
-			},
+			VehicleType: {Id: 1, Name: "HatchBack"},
 			HourlyPrice: 0,
 			ExtraHours: 0,
 			NightHours: 0,
@@ -76,7 +73,7 @@ class DriverHourlyPay extends Component {
 		const isEmpty = Object.keys(state.hourlyPay).length === 0;
 		if (isEmpty) {
 			return {
-				hourlyPay: props.hourlyPay
+				hourlyPay: props.hourlyPay,
 			};
 		}
 
@@ -213,6 +210,18 @@ class DriverHourlyPay extends Component {
 						>
 							{props => (
 								<Form>
+									{this.state.isCardVisible&&props
+										.values
+										.HourlyPay.length===0&&props.setFieldValue(
+										"HourlyPay",
+										[
+											...props
+												.values
+												.HourlyPay,
+											this.state
+												.dummy
+										]
+									)}
 									{props.values.HourlyPay.map(
 										(hourly, index) => (
 											<View
@@ -243,9 +252,8 @@ class DriverHourlyPay extends Component {
 													)
 													: []}
 
-												// Specify key
-												valueKey="value" // Default: 'value'
-												labelKey="value" // Default: 'label'
+												valueKey="value"
+												labelKey="value"
 
 												defaultValue={`${props.values.HourlyPay[
 													index
@@ -343,6 +351,7 @@ class DriverHourlyPay extends Component {
 														</StyledText>
 													</TouchableOpacity>
 												)}
+
 											</View>
 										)
 									)}
@@ -390,7 +399,7 @@ class DriverHourlyPay extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ hourlyPay: state.main.payScale.hourlyPay });
+const mapStateToProps = state => ({ hourlyPay: state.main.payScale.hourlyPay , VehicleList: state.main.payScale.VehicleList});
 
 const mapDispatchToProps = { driverGetHourlyPay, saveDriverHourlyInfo };
 

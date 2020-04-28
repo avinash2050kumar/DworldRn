@@ -18,7 +18,7 @@ import {
 	SET_OWNER_DASHBOARD,
 	SAVE_LEASE_FIRM_VEHICLE_DETAILS,
 	SAVE_LEASE_CONTRACT_DETAILS,
-	SAVE_LEASE_PAY_SCALE,SAVE_DRIVER_EXPERIENCE
+	SAVE_LEASE_PAY_SCALE, SAVE_DRIVER_EXPERIENCE, RESET_MAIN_REDUCER
 } from "../actions/type";
 
 import Store from "../store";
@@ -154,6 +154,9 @@ const initialState = {
 
 const intro = (state = initialState, action) => {
 	switch (action.type) {
+		case RESET_MAIN_REDUCER:
+			return initialState
+
 		case SET_MAIN_SCREEN_PERSONAL_DETAILS:
 			return { ...state, personalDetails: action.payload };
 
@@ -161,16 +164,24 @@ const intro = (state = initialState, action) => {
 			return { ...state, vehiclePreferences: action.payload };
 
 		case SET_MAIN_SCREEN_WORK_SCHEDULE:
+		{const data = Object.assign({},action.payload,{
+			JobType:action.payload.JobType?action.payload.JobType:action.payload.JobTypeData[0],
+			ShitType:action.payload.ShitType?action.payload.ShitType:action.payload.ShitTypeData[0],
+		})
 			return {
 				...state,
-				workSchedules: action.payload
+				workSchedules: data
 			};
+		}
 
-		case SET_MAIN_SCREEN_EXPERIENCE:
+
+		case SET_MAIN_SCREEN_EXPERIENCE:{
+			const data = Object.assign({}, action.payload,{license: {...action.payload.license,LicenseType:action.payload.license.LicenseType?
+						action.payload.license.LicenseType:action.payload.licenseType[0]}})
 			return {
 				...state,
-				experiences: action.payload
-			};
+				experiences: data
+			}}
 
 		case SAVE_DRIVER_EXPERIENCE:
 			return {

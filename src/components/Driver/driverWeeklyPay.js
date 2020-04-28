@@ -26,13 +26,13 @@ import Store from "../../store";
 import Selector from "react-native-easy-select";
 
 const validationSchema = yup.object().shape({
-	HourlyPay: yup.array().of(
+	WeeklyPay: yup.array().of(
 		yup.object().shape({
-			HourlyPrice: yup.string().required("Hourly Pricing is required"),
+			WeeklyPrice: yup.string().required("WeeklyPrice is required"),
 			ExtraHours: yup.string().required("Extra Hours Time is required"),
-			NightHours: yup
+			/*NightHours: yup
 				.string()
-				.required("Night Charges (Hour) is required"),
+				.required("Night Charges (Hour) is required"),*/
 			NightExtraHours: yup
 				.string()
 				.required("Night Charges (Extra Hour) is required")
@@ -62,10 +62,7 @@ class DriverWeeklyPay extends Component {
 		dummy: {
 			ClientId: Store().store.getState().auth.ClientId,
 			WeeklyPayId: 0,
-			VehicleType: {
-				Id: 0,
-				Name: "Choose"
-			},
+			VehicleType: {Id: 1, Name: "HatchBack"},
 			WeeklyPrice: 0,
 			Holiday: 1,
 			ExtraHours: 0,
@@ -214,7 +211,23 @@ class DriverWeeklyPay extends Component {
 							validationSchema={validationSchema}
 						>
 							{props => (
-								<Form>
+								<Form>{this.state.isCardVisible&&props.values.WeeklyPay.length===0&&props.setFieldValue(
+									"WeeklyPay",
+									[
+										...props
+											.values
+											.WeeklyPay,
+										Object.assign(
+											{},
+											this
+												.state
+												.dummy,
+											{
+												WeeklyPayId: 0
+											}
+										)
+									]
+								)}
 									{props.values.WeeklyPay.map(
 										(weekly, index) => (
 											<View
@@ -266,7 +279,7 @@ class DriverWeeklyPay extends Component {
 															.VehicleList[i]
 													)
 												}}
-											/>{console.log('va',props.values)}
+											/>
 											<FormikTextInput
 													label="Weekly Pricing"
 													name={`WeeklyPay[${index}].WeeklyPrice`}

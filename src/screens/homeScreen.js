@@ -200,7 +200,7 @@ class HomeScreen extends Component {
 							</Text>
 						</View>
 					</View>
-					<View>
+					{/*<View>
 						<Image
 							source={require("../assets/images/Notification.png")}
 							style={{
@@ -209,7 +209,7 @@ class HomeScreen extends Component {
 								resizeMode: "contain"
 							}}
 						/>
-					</View>
+					</View>*/}
 				</NavigationBar>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					<Screen style={{ backgroundColor: "#fff" }}>

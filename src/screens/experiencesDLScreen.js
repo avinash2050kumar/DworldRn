@@ -23,6 +23,7 @@ import { getExperience ,SaveExperience,saveExperienceAndDl} from "../actions";
 import ImageView from "react-native-image-viewing";
 import Selector from "react-native-easy-select";
 import NavigationService from "../config/NavigationService";
+import Store from "../store";
 const Form = withNextInputAutoFocusForm(View);
 
 
@@ -56,10 +57,10 @@ class ExperiencesDLScreen extends Component {
 	};
 
 	_Submit = async (values, actions) => {
-		console.log('yaha mein aaya na',values)
+		const { ClientId } = Store().store.getState().auth;
 		setTimeout(() => actions.setSubmitting(false), 3000);
 		this.props.SaveExperience(values.license)
-		const res = await this.props.saveExperienceAndDl(values.license)
+		const res = await this.props.saveExperienceAndDl(Object.assign({},values.license,{ClientId}))
 		if(res.status ===200)
         NavigationService.navigate('WorkScheduleScreen')
 	};

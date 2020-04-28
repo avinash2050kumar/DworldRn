@@ -131,7 +131,8 @@ const Client = () => {
 			},
 
 			driverSaveVechiclePreference(value) {
-				return instance.post(`/api/Driver/SaveVehicleCategory`, value);
+				const { ClientId } = Store().store.getState().auth;
+				return instance.post(`/api/Driver/SaveVehicleCategory`, Object.assign({}, value,{vehicleCategory:{...value.vehicleCategory,ClientId}}));
 			},
 
 			saveProfile(value) {
