@@ -96,7 +96,7 @@ class DriverHourlyPay extends Component {
 		const res = await this.props.saveDriverHourlyInfo({ Hourly: values.HourlyPay });
 		if(res.status==200)
 		{this.props.driverGetHourlyPay();
-		NavigationService.navigate('VehiclePreferenceScreen')}
+		this.props.setSelectedIndex(1)}
 	};
 
 	renderDriverHourlyPay = (item, index) => {

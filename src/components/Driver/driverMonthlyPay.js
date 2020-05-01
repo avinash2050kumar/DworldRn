@@ -96,7 +96,7 @@ class DriverMonthlyPay extends Component {
 
 		const res = await this.props.saveDriverMonthlyInfo({ monthly: values.MonthlyPay });
 		if(res.status==200)
-			NavigationService.navigate('VehiclePreferenceScreen')
+			this.props.setSelectedIndex(3)
 	};
 
 	renderDriverMonthlyPay = (item, index) => {

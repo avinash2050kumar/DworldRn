@@ -93,7 +93,7 @@ class DriverKMPay extends Component {
 		const res = await this.props.saveDriverKMInfo({ KM: values.KMPay });
 		console.warn(res.status)
 		if(res.status==200)
-			NavigationService.navigate('VehiclePreferenceScreen')
+			this.props.setSelectedIndex(4)
 	};
 
 	renderDriverKMPay = (item, index) => {

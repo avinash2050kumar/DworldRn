@@ -98,7 +98,7 @@ class DriverWeeklyPay extends Component {
 		const res = await this.props.saveDriverWeeklyInfo({ weekly: values.WeeklyPay });
 
 		if(res.status==200)
-			NavigationService.navigate('VehiclePreferenceScreen')
+			this.props.setSelectedIndex(2)
 	};
 
 	renderDriverWeeklyPay = (item, index) => {

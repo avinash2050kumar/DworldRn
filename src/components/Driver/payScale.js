@@ -35,7 +35,7 @@ class PayScaleScreen extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { selectedIndex: 4 };
+		this.state = { selectedIndex: 0 };
 		this.action = [
 			{ name: "HOURLY" },
 			{ name: "WEEKLY" },
@@ -73,6 +73,10 @@ class PayScaleScreen extends Component {
 		);
 	};
 
+	setSelectedIndex=(index)=>{
+		this.setState({ selectedIndex: index })
+	}
+
 	render() {
 		return (
 			<ScrollView
@@ -99,10 +103,10 @@ class PayScaleScreen extends Component {
 						)}
 					</View>
 
-					{this.state.selectedIndex === 0 && <DriverHourlyPay />}
-					{this.state.selectedIndex === 1 && <DriverWeeklyPay />}
-					{this.state.selectedIndex === 2 && <DriverMonthlyPay />}
-					{this.state.selectedIndex === 3 && <DriverKMPay />}
+					{this.state.selectedIndex === 0 && <DriverHourlyPay setSelectedIndex={this.setSelectedIndex}/>}
+					{this.state.selectedIndex === 1 && <DriverWeeklyPay setSelectedIndex={this.setSelectedIndex}/>}
+					{this.state.selectedIndex === 2 && <DriverMonthlyPay setSelectedIndex={this.setSelectedIndex}/>}
+					{this.state.selectedIndex === 3 && <DriverKMPay setSelectedIndex={this.setSelectedIndex}/>}
 					{this.state.selectedIndex === 4 && <DriverTripPay />}
 				</Screen>
 			</ScrollView>
