@@ -51,8 +51,8 @@ class CreatePasswordScreen extends Component {
 		);
 
 		let navigate = "UserStack";
-		/*if (this.props.auth.ClientTypeId === 1) navigate = "DriverStack";
-		else if (this.props.auth.ClientTypeId === 2) navigate = "OwnerStack";
+		if (this.props.auth.ClientTypeId === 1) navigate = "MainScreen";
+		/*else if (this.props.auth.ClientTypeId === 2) navigate = "OwnerStack";
 		else if (this.props.auth.ClientTypeId === 3) navigate = "LeaseFirm";*/
 
 		if (res === 200) {

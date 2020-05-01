@@ -22,7 +22,7 @@ import {
 import {
 	setHomeScreenVisibility,
 	setHomeScreenNoOfWork,
-	setDeviceLocation
+	setDeviceLocation, checkSubscription, setAppMessage
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -109,30 +109,6 @@ class OwnerHomeScreen extends Component {
 			"success"
 		);
 	};
-
-	/*_getLocationAsync = async () => {
-		let { status } = await Permissions.askAsync(Permissions.LOCATION);
-		if (status !== "granted") {
-			this.setState({
-				errorMessage: "Permission to access location was denied"
-			});
-		}
-
-		let location = await Location.getCurrentPositionAsync({});
-
-		await axios
-			.get(
-				`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`
-			)
-			.then(response => {
-				this.props.setDeviceLocation(
-					location,
-					response.data.results[0]
-				);
-			});
-
-		this.setState({ location });
-	};*/
 
 	color = index => {
 		const colors = [
@@ -253,9 +229,10 @@ class OwnerHomeScreen extends Component {
 						<StatusBar barStyle="dark-content" />
 						<HomeCarousel />
 						<AddPostButton
-							onPress={() =>
-								this.setState({ modalVisible: true })
-							}
+							onPress={async () =>
+							{   const res=await  this.props.checkSubscription()
+								res.data?this.setState({ modalVisible: true }):this.handleBuySubscription()
+							}}
 						>
 							<Text style={{ color: theme.buttonColor }}>
 								+Post New Ad
@@ -381,6 +358,11 @@ class OwnerHomeScreen extends Component {
 			</View>
 		);
 	}
+
+	handleBuySubscription() {
+		this.props.setAppMessage('Error','You Don\'t have enough ads left',"danger")
+		NavigationService.navigate('BuySubscription')
+	}
 }
 
 const mapStateToProps = state => ({
@@ -391,7 +373,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	setHomeScreenVisibility,
 	setDeviceLocation,
-	setHomeScreenNoOfWork
+	setHomeScreenNoOfWork,checkSubscription,setAppMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OwnerHomeScreen);

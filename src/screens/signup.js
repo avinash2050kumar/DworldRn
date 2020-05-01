@@ -75,15 +75,20 @@ class SignUpScreen extends Component {
 			const userInfo = await GoogleSignin.signIn();
 			console.log(userInfo,'userInfo')
 			const { type, accessToken, user } = userInfo;
+			console.log('user', user)
 			const googleInfo = Object.assign(
 				{},
 				{
-					loginId: user.email,
+					FirstName: user.givenName,
+					LastName: user.familyName,
+					Email: user.email,
+					ClientTypeId: 1,
+					Mobile: "0000000000",
+					IsLoginBySocialMedia: true,
 					password: null,
-					IsLoginBySocialMedia: true
 				}
 			);
-			this._handleSubmit(googleInfo, props);
+			this._handleSocialMedia(googleInfo, props);
 		} catch (error) {
 			if (error.code === statusCodes.SIGN_IN_CANCELLED) {
 				// user cancelled the login flow
@@ -110,25 +115,35 @@ class SignUpScreen extends Component {
 			});
 	};
 
-	sendFacebook=(err,success,payload,props)=>{
-		console.log(err,success,payload,props)
-	}
+	_handleSocialMedia = async (payload, actions) => {
+		setTimeout(() => actions.setSubmitting(false), 5000);
+		const res = await this.props.postSignUp(payload);
+		this.props.setLoginSuccessFul(res, false);
+
+		if (res)
+			this.props.navigation.navigate("CreatePasswordScreen", {
+				Email: payload.Email,
+				Mobile: payload.Mobile
+			});
+	};
+
 
 
 	handleFacebookLogin (props) {
 		const handleFacebookResponse=(err,success)=>{
+			console.log('err', 'success',err,success)
 			const facebookInfo = Object.assign(
 				{},
 				{
-					FirstName: "New",
-					LastName: "User",
-					Email: "avinash2050kumar@gmail.com",
+					FirstName: success.first_name,
+					LastName: success.last_name,
+					Email: success.email,
 					ClientTypeId: 1,
-					Mobile: "7903735386",
+					Mobile: "0000000000",
 					IsLoginBySocialMedia: true
 				}
 			);
-			this._handleSubmit(facebookInfo, props);
+			this._handleSocialMedia(facebookInfo, props);
 		}
 		LoginManager.logInWithPermissions(['public_profile', 'email', ]).then(
 			function (result) {
@@ -142,7 +157,7 @@ class SignUpScreen extends Component {
 							accessToken: accessToken,
 							parameters: {
 								fields: {
-									string: 'id, email,name, picture.type(large)'
+									string: 'id, email,name,first_name,last_name,picture.type(large)'
 								}
 							}
 						},handleFacebookResponse);

@@ -26,6 +26,14 @@ import NavigationService from "../config/NavigationService";
 import Store from "../store";
 const Form = withNextInputAutoFocusForm(View);
 
+const validationSchema = yup.object().shape({
+	license:
+		yup.object().shape({
+			LicenseNumber: yup.string().required("License Number is required"),
+			ExpYear: yup.string().required("Exp. Year is required"),
+		})
+
+});
 
 class ExperiencesDLScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -73,10 +81,6 @@ class ExperiencesDLScreen extends Component {
 	};
 
 	render() {
-		const initialState = {
-			DrivingLicenceNumber: "BR00121",
-			DrivingLicenceType: "4 Wheeler"
-		};
 
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
@@ -98,6 +102,7 @@ class ExperiencesDLScreen extends Component {
 									console.log('deakh')
 									this._Submit(values, actions);
 								}}
+								validationSchema={validationSchema}
 							>
 								{props => (
 									<View style={[styles.flex_col_btwn]}>
@@ -109,6 +114,12 @@ class ExperiencesDLScreen extends Component {
 												name="license.LicenseNumber"
 												type="name"
 												formikprops={props}
+											/>
+											<FormikTextInput
+												label="Experience Year"
+												name="license.ExpYear"
+												formikprops={props}
+												keyboardType={"number-pad"}
 											/>
 											<Selector
 												theme="dropdown" // Default: 'simple'

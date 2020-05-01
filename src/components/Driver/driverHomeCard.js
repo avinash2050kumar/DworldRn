@@ -94,12 +94,14 @@ export default class DriverHomeCard extends React.PureComponent {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApplied?0.65:1
 							}}
 							onPress={() => driverApplyJob(item.JobId)}
+							disabled={item.IsApplied}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Apply Job
+								{item.IsApplied?'Applied':'Apply Job'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>

@@ -33,6 +33,27 @@ export const requestedLeaseFirmDetailById = firmId => async dispatch => {
 	}
 };
 
+export const applyFirmJob = (JobId) => async dispatch => {
+	try {
+		const res = await client.main.applyFirmJob(JobId);
+		res.status===200 && dispatch(
+			setAppMessage(
+				"Success",
+				"Successfully Requested",
+				"success"
+			)
+		);
+		res.status===200 && dispatch(
+			getLeaseFirmDetailById(JobId)
+		);
+		res.status===204 &&
+			dispatch(setAppMessage("Error", "it's look internal server error", "danger"));
+
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
+	}
+};
+
 export const getLeaseFirmPostedAds = () => async dispatch => {
 	try {
 		const res = await client.main.getPostedLeaseFirm();

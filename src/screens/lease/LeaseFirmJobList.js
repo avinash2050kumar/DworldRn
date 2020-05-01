@@ -26,7 +26,7 @@ import {
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
 	requestedLeaseFirmDetailById,
-	getOwnerJobDetailById
+	getOwnerJobDetailById, applyFirmJob
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -85,18 +85,14 @@ class LeaseFirmJobList extends Component {
 					>
 						<View>
 							<StyledPropText>Vehicle Type</StyledPropText>
-							<StyledPropText>Experience</StyledPropText>
 							<StyledPropText>Salary</StyledPropText>
 						</View>
 						<View style={{ alignItems: "flex-end" }}>
 							<StyledPropText>
-								{item.MonthlyPay[0].VehicleType.Name}
+								{item.vhicle.VehicleType.Name}
 							</StyledPropText>
 							<StyledPropText>
-								{item.license.ExpYear} years
-							</StyledPropText>
-							<StyledPropText>
-								₹ {item.MonthlyPay[0].MonthlyCharge}
+								₹ {item.pay.Price}
 							</StyledPropText>
 						</View>
 					</View>
@@ -111,7 +107,7 @@ class LeaseFirmJobList extends Component {
 							}}
 							onPress={() =>
 								NavigationService.navigate(
-									"OwnerRequestJobDetails",
+									"LeaseFirmJobDetails",
 									{
 										item,
 										buttonTitle: "Approve"
@@ -129,11 +125,14 @@ class LeaseFirmJobList extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApproved?0.65:1
 							}}
+							disabled={item.IsApproved}
+							onPress={()=>console.log('abhi nhi ban hai')}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -164,7 +163,7 @@ class LeaseFirmJobList extends Component {
 						/>
 					</View>
 					<FlatList
-						data={this.props.job ? this.props.job : []}
+						data={this.props.job ? this.props.job.FirmList : []}
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}
@@ -188,7 +187,7 @@ const mapDispatchToProps = {
 	requestedLeaseFirmDetailById,
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,applyFirmJob
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaseFirmJobList);

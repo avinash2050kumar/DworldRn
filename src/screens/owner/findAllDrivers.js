@@ -52,6 +52,7 @@ class FindAllDrivers extends Component {
 	}
 
 	renderCard = (item, index) => {
+		console.log('items', item)
 		return (
 			<View style={{ marginLeft: 5, marginRight: 5 }}>
 				<Card
@@ -130,13 +131,14 @@ class FindAllDrivers extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsRequested?0.65:1
 							}}
-
+							disabled={item.IsRequested}
 							onPress={()=>this.props.getApplyOwnerFindDriver(item.ClientId,this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Request
+								{item.IsRequested?'Requested':'Request'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>

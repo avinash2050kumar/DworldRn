@@ -120,7 +120,7 @@ const Client = () => {
 				);
 			},
 
-			driverSaveTripPay() {
+			driverSaveTripPay(value) {
 				return instance.post(`/api/Driver/SaveTripPay`, value);
 			},
 
@@ -129,6 +129,20 @@ const Client = () => {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetVehicleCategory?ClientId=${ClientId}`
+				);
+			},
+			driverApproveOfferJob(toClientOffer,jobId) {
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Driver/ApproveDriverOfferJob?OfferByClientId=${ClientId}&OfferToClientId=${toClientOffer}&JobId=${jobId}`
+				);
+			},
+
+			applyFirmJob(JobId){
+				const { ClientId } = Store().store.getState().auth;
+				console.log('client id',ClientId)
+				return instance.get(
+					`/api/LeasingFirm/ApplyFirmJob?ClientId=${ClientId}&JobId=${JobId}`
 				);
 			},
 
@@ -248,7 +262,7 @@ const Client = () => {
 			requestedLeaseFirmDetail(firmId) {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.get(
-					`/api/LeasingFirm/GetLeaseFirmDetails?FirmId=${firmId}`
+					`/api/LeasingFirm/GetLeaseFirmDetails?ClientId=${ClientId}&FirmId=${firmId}`
 				);
 			},
 
@@ -277,6 +291,28 @@ const Client = () => {
 					`/api/Owner/RequestFirm?OfferByClientId=${ClientId}&OfferToClientId=${offerToClientId}&JobId=${JobId}`
 				);
 			},
+			saveSubscription(payload){
+				const { ClientId } = Store().store.getState().auth;
+				return instance.post(
+					`/api/Login/SaveSuscription`,
+					payload
+				);
+			},
+
+			getUserSubscription(){
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Login/GetSuscription?ClientId=${ClientId}`
+				);
+			},
+
+			checkSubscription(){
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Login/CheckSuscription?ClientId=${ClientId}`
+				);
+			},
+
 			saveLeaseFirmRequirement(value) {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.post(

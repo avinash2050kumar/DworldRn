@@ -264,6 +264,20 @@ export const driverGetVehiclePreferences = () => async dispatch => {
 	}
 };
 
+export const driverApproveJobOffer = (toClientOffer,jobId) => async dispatch => {
+	try {
+		const res = await client.main.driverApproveOfferJob(toClientOffer,jobId);
+		/*dispatch({
+			type: SET_MAIN_SCREEN_DRIVER_VEHICLE_PREFERENCE,
+			payload: res.data
+		});*/
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
+	}
+};
+
+
+
 export const driverSaveVehiclePreferences = values => async dispatch => {
 	try {
 		const res = await client.main.driverSaveVechiclePreference(values);

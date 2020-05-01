@@ -94,12 +94,14 @@ export default class DriverJobOfferCard extends React.PureComponent {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApproved?0.65:1
 							}}
 							onPress={() => driverApplyJob(item.JobId)}
+							disabled={item.IsApproved}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve Job
+								{item.IsApproved?'Approved':'Approve Job'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>

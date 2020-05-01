@@ -24,6 +24,7 @@ export default {
 	profileScreenOwnerOption6: "Change Password",
 	profileScreenLeaseOption1: "Personal Details",
 	profileScreenLeaseOption2: "Subscription Plan",
+	buyAPlan:'Buy A Plan',
 	profileScreenLeaseOption3: "Polices",
 	profileScreenLeaseOption4: "Partner with us",
 	profileScreenLeaseOption5: "Customer Support",

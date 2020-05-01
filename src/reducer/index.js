@@ -10,6 +10,7 @@ import language from "./languageReducer";
 import main from "./mainReducer";
 import owner from "./ownerReducer";
 import lease from "./leaseReducer";
+import subscription from "./subscriptionReducer";
 
 export default combineReducers({
 	intro,
@@ -21,5 +22,5 @@ export default combineReducers({
 	language,
 	main,
 	owner,
-	lease
+	lease,subscription
 });

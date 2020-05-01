@@ -15,6 +15,7 @@ export const postSignUp = payload => async dispatch => {
 		const res = await client.auth.signUpNewUser(payload);
 		if (res.data || !res.data) {
 			dispatch(setClientId(res.data.ClientTypeId, res.data.ClientId));
+
 			return res.data;
 		}
 	} catch (e) {

@@ -27,7 +27,7 @@ import {
 	setDeviceLocation,
 	getOwnerAllDriverById,
 	getOwnerJobDetailById,
-	getLeaseFirmDetailById
+	getLeaseFirmDetailById, applyFirmJob
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -127,11 +127,14 @@ class FindAllLeaseFirmOwner extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsRequested?0.65:1
 							}}
+							disabled={item.IsRequested}
+							onPress={()=>this.props.applyFirmJob(this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Request
+								{item.IsRequested?'Requested':'Request'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -141,6 +144,7 @@ class FindAllLeaseFirmOwner extends Component {
 	};
 
 	render() {
+		console.log('item',this.props)
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -192,7 +196,7 @@ const mapDispatchToProps = {
 	setHomeScreenNoOfWork,
 	getLeaseFirmDetailById,
 	getOwnerJobDetailById,
-	getOwnerAllDriverById
+	getOwnerAllDriverById,applyFirmJob
 };
 
 export default connect(

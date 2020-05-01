@@ -29,6 +29,10 @@ export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch 
 				"success"
 			)
 		);
+		res.status===200 &&
+		dispatch(
+			getOwnerAllDriverById(JobId)
+		);
 		res.status===204 &&dispatch(setAppMessage("Error", "Doesn't Look good", "danger"));
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Check Network Connection", "danger"));
