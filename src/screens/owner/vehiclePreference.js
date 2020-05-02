@@ -125,6 +125,7 @@ class OwnerVehiclePreference extends Component {
 	};
 
 	render() {
+		console.log('Owner Vehicle preference')
 		return (
 			<ScrollView>
 				<Screen style={{ backgroundColor: theme.white }}>
@@ -163,7 +164,7 @@ class OwnerVehiclePreference extends Component {
 													valueKey="value" // Default: 'value'
 													labelKey="value" // Default: 'label'
 
-													defaultValue={`${	props.values.vehicle
+													defaultValue={`${props.values.vehicle
 														.vehicleCategory
 														.VehicleCategoryName}`} // Set default value
 													placeholder="Vehicle Category"
@@ -204,15 +205,24 @@ class OwnerVehiclePreference extends Component {
 														marginTop: 10
 													}}
 												>
-													{props.values.vehicle.vehicleCategory.VehicleType.map(
+													{this.props.vehicleCategories.filter(dropdown=>
+													dropdown.VehicleCategoryId===props.values.vehicle.vehicleCategory.VehicleCategoryId)[0].VehicleType.map(
 														(vehicle, i) => (
 															<CheckBox
 																onPress={() =>
-																	console.log(
-																		"Check bax"
-																	)
+																	props.values.vehicle.vehicleCategory.VehicleType.filter(type=>
+																		type.Id===vehicle.Id).length>0?
+																		props.setFieldValue(
+																			`vehicle.vehicleCategory.VehicleType`,
+																			props.values.vehicle.vehicleCategory.VehicleType.filter(type=>
+																				type.Id!==vehicle.Id)
+																		):props.setFieldValue(
+																		`vehicle.vehicleCategory.VehicleType`,
+																		[...props.values.vehicle.vehicleCategory.VehicleType,vehicle]
+																		)
+
 																}
-															>
+															>{props.values.vehicle.vehicleCategory.VehicleType.filter(vehicl=> vehicl.Id===vehicle.Id).length>0?
 																<Ionicons
 																	name={
 																		"ios-checkbox"
@@ -221,7 +231,15 @@ class OwnerVehiclePreference extends Component {
 																	color={
 																		theme.primary
 																	}
-																/>
+																/>:<Ionicons
+																	name={
+																		"ios-checkbox-outline"
+																	}
+																	size={24}
+																	color={
+																		theme.primary
+																	}
+																/>}
 																<Text
 																	style={{
 																		marginLeft: 10

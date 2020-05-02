@@ -121,7 +121,7 @@ const initialState = {
 				},
 				JobType: {
 					Id: 1,
-					Name: "FullTime"
+					Name: "Full Time"
 				},
 				PreferDays: "SUN,MON",
 				IsSun: false,
@@ -317,7 +317,28 @@ const intro = (state = initialState, action) => {
 		case SET_MAIN_SCREEN_OWNER_VEHICLE_PREFERENCE:
 			return {
 				...state,
-				owner: { ...state.owner, postAdsDriverDummy: action.payload },
+				owner: { ...state.owner,
+					postAdsDriver:{...state.owner.postAdsDriver,
+						vehicle:{...state.owner.postAdsDriver.vehicle,
+							vehicleCategory: Object.assign(
+								{},
+								{
+									VehicleCategoryId:
+									action.payload.vehicleCategories[0]
+										.VehicleCategoryId,
+									VehicleCategoryName:
+									action.payload.vehicleCategories[0]
+										.VehicleCategoryName,
+									VehicleType:
+									action.payload.vehicleCategories[0]
+										.VehicleType
+								}
+							)},
+							price:{...state.owner.postAdsDriver.price,
+								VehicleType:action.payload
+									.VehicleType[0]
+							}
+							},postAdsDriverDummy: action.payload },
 				lease: {
 					...state.lease,
 					postLeaseDummy: action.payload,

@@ -19,7 +19,7 @@ import { Formik } from "formik";
 import theme from "../../theme/lightTheme";
 // import { Dropdown } from "react-native-material-dropdown";
 import FormikTextInput from "../../components/common/FormikTextInput";
-import { Card, Screen, StyledText } from "../../theme/styledComponent";
+import {Card, Screen, StyledText, StyledTitle} from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
 import { saveOwnerWorkSchedule } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
@@ -48,7 +48,7 @@ const RowArea = styled.View`
 class OwnerDriverWorkSchedule extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			title: "Work Schedule"
+			title: "Work Shifts"
 		};
 	};
 
@@ -82,7 +82,7 @@ class OwnerDriverWorkSchedule extends Component {
 		return (
 			<CheckBox
 				onPress={() =>
-					props.setFieldValue(input, !props.values[first][second])
+				props.setFieldValue(input, !props.values[first][second])
 				}
 			>
 				{props.values[first][second] && (
@@ -147,12 +147,11 @@ class OwnerDriverWorkSchedule extends Component {
 													// Specify key
 													valueKey="value" // Default: 'value'
 													labelKey="value" // Default: 'label'
-
 													defaultValue={props.values.work
-														.ShitType.Name.toString()} // Set default value
+														.ShitType.Name.toString()}
 													placeholder="Shifts"
 
-													placeholderContainerStyle={{ paddingVertical:15}}
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:15}}
 													iconStyle={{ tintColor: 'black' }}
 													onChange={(value) =>{
 														let i = 0
@@ -165,8 +164,11 @@ class OwnerDriverWorkSchedule extends Component {
 														)
 													}}
 												/>
-												{console.log('value', props.values,this.props.JobType)}
 											</View>
+											{props.values.work.PreferDays !=this.getDaysString(props) ?
+											props.setFieldValue('work.PreferDays',this.getDaysString(props)):
+											console.log('Propdfsgafgs',props.values.work
+												.JobType.Name.toString(),props.values)}
 											<View>
 												<Selector
 													theme="dropdown" // Default: 'simple'
@@ -187,10 +189,10 @@ class OwnerDriverWorkSchedule extends Component {
 													labelKey="value" // Default: 'label'
 
 													defaultValue={props.values.work
-														.JobType.Name.toString()} // Set default value
+														.JobType.Name.toString()}
 													placeholder="Job Type"
 
-													placeholderContainerStyle={{ paddingVertical:15}}
+													placeholderContainerStyle={{ paddingVertical:15,marginTop:15}}
 													iconStyle={{ tintColor: 'black' }}
 													onChange={(value) =>{
 														let i = 0
@@ -203,14 +205,10 @@ class OwnerDriverWorkSchedule extends Component {
 														)
 													}}
 												/>
-												<Text
-													style={{
-														marginTop: 10,
-														fontSize: 16
-													}}
-												>
-													Custom Day
-												</Text>
+												<View>
+													<StyledTitle style={{ marginTop: 20,marginBottom:10, }}>
+														Custom Days
+													</StyledTitle>
 												{this.renderCheckBox(
 													"work.IsSun",
 													props,
@@ -259,7 +257,7 @@ class OwnerDriverWorkSchedule extends Component {
 													"Saturday",
 													"work",
 													"IsSat"
-												)}
+												)}</View>
 											</View>
 											{props.isSubmitting ? (
 												<Button
@@ -286,6 +284,22 @@ class OwnerDriverWorkSchedule extends Component {
 				</Screen>
 			</ScrollView>
 		);
+	}
+
+	getDaysString(props) {
+		const {IsFri,IsMon,IsSat,IsSun,IsThu,IsTue,	ISWed} = props.values.work
+		let day ='';
+
+		day= IsMon? day+'Mon,':day
+		day= IsTue? day+'Tues,':day
+		day= ISWed? day+'Wed,':day
+		day= IsThu? day+'Thu,':day
+		day= IsFri? day+'Fri,':day
+		day= IsSat? day+'Sat,,':day
+		day= IsSun? day+'Sun':day
+
+		console.log('day',day,IsFri,IsMon,IsSat,IsSun,IsThu,IsTue,	ISWed)
+		return day
 	}
 }
 

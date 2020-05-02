@@ -105,7 +105,7 @@ class VehiclePreference extends Component {
 							>
 								{props => (
 									<Form>
-										{console.log('value',props)}
+										{console.log('value',props.values)}
 										<View>
 											<Selector
 												theme="dropdown" // Default: 'simple'
@@ -148,16 +148,24 @@ class VehiclePreference extends Component {
 
 												}}
 											/>
-											{props.values.vehicleCategory.VehicleType.map(
+											{props.values.vehicleCategoryDropdown.filter(dropdown=>dropdown.VehicleCategoryId===props.values.vehicleCategory.VehicleCategoryId)[0].VehicleType.map(
 												(vehicle, i) => (
 													<CheckBox
 														onPress={() =>
-															console.log(
-																"Check bax"
-															)
+															props.values.vehicleCategory.VehicleType.filter(type=>
+																type.Id===vehicle.Id).length>0?
+																props.setFieldValue(
+																	`vehicleCategory.VehicleType`,
+																	props.values.vehicleCategory.VehicleType.filter(type=>
+																		type.Id!==vehicle.Id)
+																):props.setFieldValue(
+																	`vehicleCategory.VehicleType`,
+																	[...props.values.vehicleCategory.VehicleType,vehicle]
+																)
+
 														}
-													>
-														<Ionicons
+													>{props.values.vehicleCategory.VehicleType.filter(type=>
+														type.Id===vehicle.Id).length>0?<Ionicons
 															name={
 																"ios-checkbox"
 															}
@@ -165,7 +173,16 @@ class VehiclePreference extends Component {
 															color={
 																theme.primary
 															}
+														/>:<Ionicons
+															name={
+																"ios-checkbox-outline"
+															}
+															size={24}
+															color={
+																theme.primary
+															}
 														/>
+														}
 														<Text
 															style={{
 																marginLeft: 10

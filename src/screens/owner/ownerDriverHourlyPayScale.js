@@ -134,8 +134,52 @@ class OwnerDriverHourlyPayScale extends Component {
 								{props => (
 									<Form>
 										<View>
-											{console.log("value", props.values)}
 											<Selector
+												theme="dropdown" // Default: 'simple'
+												items={	this.props.VehicleType
+													? this.props.VehicleType.map(
+														vehicle => {
+															return {
+																...vehicle,
+																value:
+																vehicle.Name
+															};
+														}
+													)
+													: []}
+
+												// Specify key
+												valueKey="value" // Default: 'value'
+												labelKey="value" // Default: 'label'
+
+												defaultValue={`${	props.values.price
+													.VehicleType.Name}`} // Set default value
+												placeholder="Driver Description"
+
+												placeholderContainerStyle={{ paddingVertical:15,marginTop:10}}
+												iconStyle={{ tintColor: 'black' }}
+												onChange={(value) =>{
+													let i = 0
+													this.props
+														.VehicleType.map((val,index)=> {if(val.Name===value)i=index})
+													props.setFieldValue(
+														`price.VehicleType`,
+														Object.assign({
+															Id: this.props
+																.VehicleType[
+																i
+																].Id,
+															Name: this.props
+																.VehicleType[
+																i
+																]
+																.Name
+														})
+													)
+
+												}}
+											/>
+											{/*<Selector
 												theme="dropdown" // Default: 'simple'
 												items={	this.props.vehicleCategories
 													? this.props.vehicleCategories.map(
@@ -179,8 +223,7 @@ class OwnerDriverHourlyPayScale extends Component {
 													)
 
 												}}
-											/>
-											{console.log('weel',props.values)}
+											/>*/}
 											<FormikTextInput
 												label="Hourly Pricing"
 												name="price.price"
@@ -245,6 +288,7 @@ const mapStateToProps = state => ({
 	postAdsDriver: state.main.owner.postAdsDriver,
 	postAdsDriverDummy: state.main.owner.postAdsDriverDummy,
 	vehicleCategories: state.main.owner.postAdsDriverDummy.vehicleCategories,
+	VehicleType: state.main.owner.postAdsDriverDummy.VehicleType,
 	ShiftType: state.main.owner.postAdsDriverDummy.ShiftType,
 	JobType: state.main.owner.postAdsDriverDummy.JobType,
 	adsIndex: state.main.owner.adsIndex
