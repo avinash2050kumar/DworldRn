@@ -24,20 +24,10 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import * as yup from "yup";
 import Store from "../../store";
 import Selector from "react-native-easy-select";
+import NavigationService from "../../config/NavigationService";
 
 const validationSchema = yup.object().shape({
-	HourlyPay: yup.array().of(
-		yup.object().shape({
-			HourlyPrice: yup.string().required("Hourly Pricing is required"),
-			ExtraHours: yup.string().required("Extra Hours Time is required"),
-			NightHours: yup
-				.string()
-				.required("Night Charges (Hour) is required"),
-			NightExtraHours: yup
-				.string()
-				.required("Night Charges (Extra Hour) is required")
-		})
-	)
+	Price:yup.string().required("Price is required")
 });
 
 const Card = styled.View`
@@ -80,7 +70,9 @@ class LeaseKmPayScale extends Component {
 		setTimeout(() => actions.setSubmitting(false), 3000);
 
 		this.props.saveLeasePayScale(values);
-		await this.props.saveLeaseFirmPost();
+		const res = await this.props.saveLeaseFirmPost();
+		if(res.status===200)
+			NavigationService.popToTop()
 	};
 
 	render() {

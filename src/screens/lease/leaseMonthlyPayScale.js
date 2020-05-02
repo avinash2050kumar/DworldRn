@@ -26,20 +26,10 @@ import Store from "../../store";
 import { saveLeasePayScale } from "../../actions";
 import { saveLeaseFirmPost } from "../../actions";
 import Selector from "react-native-easy-select";
+import NavigationService from "../../config/NavigationService";
 
 const validationSchema = yup.object().shape({
-	HourlyPay: yup.array().of(
-		yup.object().shape({
-			HourlyPrice: yup.string().required("Hourly Pricing is required"),
-			ExtraHours: yup.string().required("Extra Hours Time is required"),
-			NightHours: yup
-				.string()
-				.required("Night Charges (Hour) is required"),
-			NightExtraHours: yup
-				.string()
-				.required("Night Charges (Extra Hour) is required")
-		})
-	)
+	Price:yup.string().required("Price is required")
 });
 
 const Card = styled.View`
@@ -80,12 +70,14 @@ class LeaseMonthlyPayScale extends Component {
 
 	_Submit = async (values, actions) => {
 		setTimeout(() => actions.setSubmitting(false), 3000);
-
 		this.props.saveLeasePayScale(values);
-		await this.props.saveLeaseFirmPost();
+		const res = await this.props.saveLeaseFirmPost();
+		if(res.status===200)
+			NavigationService.popToTop()
 	};
 
 	render() {
+		console.log('navigation ser',this.props)
 		return (
 			<View>
 				{!this.isEmpty(this.state.FirmPay) && (
@@ -99,7 +91,6 @@ class LeaseMonthlyPayScale extends Component {
 						>
 							{props => (
 								<Form>
-									{console.log("asdfasdf", props.values)}
 									<View
 										style={{
 											marginBottom: 15,

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { ownerGetVehiclePreferences } from "../actions";
+import {checkSubscription, getLeaseDashBoard, ownerGetVehiclePreferences, setAppMessage} from "../actions";
 import {
 	Card,
 	Screen,
@@ -26,6 +26,7 @@ import Button from "../components/common/Buttons";
 import styles from "../theme/styles";
 import theme from "../theme/lightTheme";
 import i18n from "i18n-js";
+import NavigationService from "../config/NavigationService";
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -83,13 +84,15 @@ class MainScreen extends Component {
 						Name: i18n.t("mainScreenAdsDriverDetails"),
 						icon: require("../assets/images/requirement.png"),
 						route: "PostAdsByOwner",
-						param: { title: "Post a Ads for drivers", index: 0 }
+						param: { title: "Post a Ads for drivers", index: 0 },
+						isSubscriptionCheck:true
 					},
 					{
 						Name: i18n.t("mainScreenAdsVehicleDetails"),
 						icon: require("../assets/images/requirement.png"),
 						route: "PostAdsByOwner",
-						param: { title: "Post a Ads for Vehicle", index: 1 }
+						param: { title: "Post a Ads for Vehicle", index: 1 },
+						isSubscriptionCheck:true
 					}
 				]
 			},
@@ -104,7 +107,8 @@ class MainScreen extends Component {
 					{
 						Name: i18n.t("mainScreenPostRequirementDetails"),
 						icon: require("../assets/images/requirement.png"),
-						route: "PostRequirementsFirm"
+						route: "PostRequirementsFirm",
+						isSubscriptionCheck:true
 					}
 				]
 			}
@@ -120,6 +124,17 @@ class MainScreen extends Component {
 		console.log("data", data);
 	};
 
+	handlePlanCheck=async (item)=>{
+		const res=await  this.props.checkSubscription()
+		res.data?NavigationService.navigate(item.route):this.handleBuySubscription()
+
+	}
+
+	handleBuySubscription() {
+		this.props.setAppMessage('Error','You Don\'t have enough ads left',"danger")
+		NavigationService.navigate('BuySubscription')
+	}
+
 	_renderItem = (item, index) => (
 		<TouchableOpacity
 			key={index}
@@ -128,7 +143,7 @@ class MainScreen extends Component {
 			}}
 			activeOpacity={1.0}
 			onPress={() =>
-				this.props.navigation.navigate(item.route, item.param)
+				item.isSubscriptionCheck?this.handlePlanCheck(item):this.props.navigation.navigate(item.route, item.param)
 			}
 		>
 			<Card
@@ -180,6 +195,6 @@ const mapStateToProps = state => ({
 	ClientTypeId: state.auth.ClientTypeId
 });
 
-const mapDispatchToProps = { ownerGetVehiclePreferences };
+const mapDispatchToProps = { ownerGetVehiclePreferences,checkSubscription,setAppMessage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

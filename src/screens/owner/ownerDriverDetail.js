@@ -25,7 +25,7 @@ import {
 	setHomeScreenVisibility,
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,approveDriverApplyJob
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -52,6 +52,7 @@ class OwnerDriverJobList extends Component {
 	renderCard = (item, index) => {
 		return (
 			<View style={{ marginLeft: 5, marginRight: 5 }}>
+				{console.log('item',item)}
 				<Card
 					style={{
 						paddingTop: 0,
@@ -128,11 +129,14 @@ class OwnerDriverJobList extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity: item.IsApproved? 0.6 : 1.0,
 							}}
+							disabled={item.IsApproved}
+							onPress={()=>this.props.approveDriverApplyJob(item.ClientId,this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -142,7 +146,6 @@ class OwnerDriverJobList extends Component {
 	};
 
 	render() {
-		console.log('hgjbkn',this.props.job)
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -188,7 +191,7 @@ const mapDispatchToProps = {
 	setHomeScreenVisibility,
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,approveDriverApplyJob
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OwnerDriverJobList);

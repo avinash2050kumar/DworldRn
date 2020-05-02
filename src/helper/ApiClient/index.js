@@ -313,12 +313,28 @@ const Client = () => {
 				);
 			},
 
+			approveDriverApplyjob(toClientId,JobId){
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Owner/ApproveDriverApplyJob?ClientId=${ClientId}&JobId=${JobId}`
+				);
+			},
+			approveFirmApplyJob(toClientId,JobId){
+				const { ClientId } = Store().store.getState().auth;
+				return instance.get(
+					`/api/Owner/ApproveFirmApplyJob?ClientId=${ClientId}&JobId=${JobId}`
+				);
+			},
+
+
+
 			saveLeaseFirmRequirement(value) {
 				const { ClientId } = Store().store.getState().auth;
 				return instance.post(
 					`/api/LeasingFirm/SaveLeasingFirmRequirement`,
 					Object.assign({}, value, {
 						FirmVehicle: {
+							...value.FirmVehicle,
 							ClientId: ClientId
 						}
 					})

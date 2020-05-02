@@ -26,7 +26,7 @@ import {
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
 	getOwnerJobDetailById,
-	getOwnerLeaseFirmById
+	getOwnerLeaseFirmById, approveFirmApplyJob
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -51,6 +51,7 @@ class OwnerLeaseFirmList extends Component {
 	}
 
 	renderCard = (item, index) => {
+		console.log('item', item)
 		return (
 			<View style={{ marginLeft: 5, marginRight: 5 }}>
 				<Card
@@ -123,11 +124,14 @@ class OwnerLeaseFirmList extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApproved?0.6:1
 							}}
+							disabled={item.IsApproved}
+							onPress={()=> this.props.approveFirmApplyJob(item.ClientId,this.props.route.item.JobAddId)}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -183,7 +187,7 @@ const mapDispatchToProps = {
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
 	getOwnerLeaseFirmById,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,approveFirmApplyJob
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OwnerLeaseFirmList);

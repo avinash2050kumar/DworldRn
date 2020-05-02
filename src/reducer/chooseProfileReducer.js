@@ -1,11 +1,13 @@
-import { SET_CHOOSE_PROFILE_VISIBILITY } from "../actions/type";
+import { SET_CHOOSE_PROFILE_VISIBILITY,RESET_PROFILE_VISIBILITY } from "../actions/type";
+
+const initialState={
+	isChooseProfileVisible: true,
+	clientTypeId: 0,
+	ClientId: null
+}
 
 const chooseProfileVisibility = (
-	state = {
-		isChooseProfileVisible: true,
-		clientTypeId: 0,
-		ClientId: null
-	},
+	state =initialState ,
 	action
 ) => {
 	switch (action.type) {
@@ -18,6 +20,12 @@ const chooseProfileVisibility = (
 				clientTypeId: clientTypeId ? clientTypeId : state.clientTypeId,
 				ClientId: ClientId ? ClientId : state.ClientId
 			};
+
+		case RESET_PROFILE_VISIBILITY:
+			return {
+				...state,
+				clientTypeId:initialState.clientTypeId
+			}
 
 		default:
 			return state;

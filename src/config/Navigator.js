@@ -118,20 +118,6 @@ const UserStack = createStackNavigator(
 	}
 );
 
-/*const LeaseFirm = createStackNavigator(
-	{
-		MainScreen,
-		PersonalDetailScreen
-	},
-	{
-		initialRouteName: "MainScreen",
-		defaultNavigationOptions: {
-			headerTitleStyle: { fontWeight: "bold" },
-			gesturesEnabled: false
-		}
-	}
-);*/
-
 const Authentication = createStackNavigator(
 	{
 		LoginScreen,

@@ -23,7 +23,7 @@ import {
 	setHomeScreenVisibility,
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
-	getLeaseDashBoard
+	getLeaseDashBoard, checkSubscription, setAppMessage
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -256,9 +256,10 @@ class LeaseHomeScreen extends Component {
 						<StatusBar barStyle="dark-content" />
 						<HomeCarousel />
 						<AddPostButton
-							onPress={() =>
-								this.setState({ modalVisible: true })
-							}
+							onPress={async () =>
+							{   const res=await  this.props.checkSubscription()
+								res.data?NavigationService.navigate('PostRequirementsFirm'):this.handleBuySubscription()
+							}}
 						>
 							<Text style={{ color: theme.buttonColor }}>
 								+Post New Ad
@@ -327,6 +328,10 @@ class LeaseHomeScreen extends Component {
 			</View>
 		);
 	}
+	handleBuySubscription() {
+		this.props.setAppMessage('Error','You Don\'t have enough ads left',"danger")
+		NavigationService.navigate('BuySubscription')
+	}
 }
 
 const mapStateToProps = state => ({
@@ -338,7 +343,7 @@ const mapDispatchToProps = {
 	setHomeScreenVisibility,
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
-	getLeaseDashBoard
+	getLeaseDashBoard,checkSubscription,setAppMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaseHomeScreen);

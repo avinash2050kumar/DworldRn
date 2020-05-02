@@ -74,9 +74,9 @@ export const saveLeaseFirmPost = () => async dispatch => {
 		const res = await client.main.saveLeaseFirmRequirement(
 			Store().store.getState().main.lease.postLeaseFirmRequirement
 		);
-		console.log("save", res);
 		if (res.status === 200)
-			dispatch(setAppMessage("Success", "Successfully Saved", "success"));
+			dispatch(setAppMessage("Success", "Successfully Posted", "success"));
+		return res
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Unable to save", "danger"));
 	}
