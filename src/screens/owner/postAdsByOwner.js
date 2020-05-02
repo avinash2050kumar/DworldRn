@@ -185,6 +185,8 @@ class PostAdsByOwner extends Component {
 	);
 
 	render() {
+		console.log('data',this.props.navigation,this.action,this.props.navigation.getParam("index"),this.action[this.props.navigation.getParam("index")]
+			)
 		return (
 			<Screen style={{ backgroundColor: "#fff" }}>
 				<FlatList

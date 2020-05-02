@@ -30,6 +30,7 @@ import {
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import NavigationService from "../../config/NavigationService";
 import Selector from "react-native-easy-select";
+import * as yup from "yup";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -46,6 +47,14 @@ const RowArea = styled.View`
 	align-items: center;
 	padding: 7px;
 `;
+
+const validationSchema = yup.object().shape({
+	price:yup.object().shape({
+		price: yup.string().required("Per Day Price is required"),
+			Night: yup.string().required("Per Night Price is required"),
+		})
+
+});
 
 class OwnerDriverTripPayScale extends Component {
 	state = {
@@ -120,9 +129,11 @@ class OwnerDriverTripPayScale extends Component {
 								onSubmit={(values, actions) => {
 									this._Submit(values, actions);
 								}}
+								validationSchema={validationSchema}
 							>
 								{props => (
 									<Form>
+										{console.log('yhi',props.values)}
 										<View>
 											<Selector
 												theme="dropdown" // Default: 'simple'

@@ -126,7 +126,7 @@ class MainScreen extends Component {
 
 	handlePlanCheck=async (item)=>{
 		const res=await  this.props.checkSubscription()
-		res.data?NavigationService.navigate(item.route):this.handleBuySubscription()
+		res.data?NavigationService.navigate(item.route, item.param):this.handleBuySubscription()
 
 	}
 

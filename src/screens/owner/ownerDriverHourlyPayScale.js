@@ -30,6 +30,7 @@ import {
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import NavigationService from "../../config/NavigationService";
 import Selector from "react-native-easy-select";
+import * as yup from "yup";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -46,6 +47,16 @@ const RowArea = styled.View`
 	align-items: center;
 	padding: 7px;
 `;
+
+const validationSchema = yup.object().shape({
+	price:yup.object().shape({
+		price: yup.string().required("Hourly Price is required"),
+		Night: yup.string().required("Night Price is required"),
+		Extra: yup.string().required("Extra Price is required"),
+		NightExtra: yup.string().required("Night Extra Price is required"),
+	})
+
+});
 
 class OwnerDriverHourlyPayScale extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -130,6 +141,7 @@ class OwnerDriverHourlyPayScale extends Component {
 										this.props.adsIndex
 									);
 								}}
+								validationSchema={validationSchema}
 							>
 								{props => (
 									<Form>
