@@ -50,15 +50,16 @@ const DataContainer = styled.View`
 class LeaseFirmJobDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: navigation.getParam("item")
-                ? navigation.getParam("item").vhicle.Company
+            title:navigation.getParam("item")
+                ? navigation.getParam("item").vhicle?navigation.getParam("item").vhicle.Company:
+                    navigation.getParam("item").Company
                 : ''
         };
     };
 
+
     render() {
         const item = this.props.navigation.getParam("item");
-        console.log('data mather chod yhi hi', item)
         return (
             <View style={{ flex: 1 }}>
                 <View
@@ -123,26 +124,26 @@ class LeaseFirmJobDetails extends React.Component {
                                     ]}
                                 >
                                     <View>
-                                        {item.vhicle&&<StyledPropText>
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
                                             Vehicle Type
                                         </StyledPropText>}
-                                       <StyledPropText>
+                                        {item.Name&& <StyledPropText>
                                            Contact PersonOwner Name
-                                        </StyledPropText>
-                                        <StyledPropText>
+                                        </StyledPropText>}
+                                        {item.Mobile&&<StyledPropText>
                                             Contact Person Number
-                                        </StyledPropText>
+                                        </StyledPropText>}
                                     </View>
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {item.vhicle&&<StyledPropText>
-                                            {item.vhicle.VehicleType.Name}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
+                                            {item.vhicle?item.vhicle.VehicleType.Name:item.VehicleType.Name}
                                         </StyledPropText>}
-                                        <StyledPropText>
+                                        {item.Name&&<StyledPropText>
                                             {item.Name}
-                                        </StyledPropText>
-                                        <StyledPropText>
+                                        </StyledPropText>}
+                                        {item.Mobile&&<StyledPropText>
                                             {item.Mobile}
-                                        </StyledPropText>
+                                        </StyledPropText>}
                                     </View>
                                 </View>
                             </Card>
@@ -185,11 +186,11 @@ class LeaseFirmJobDetails extends React.Component {
                                     ]}
                                 >
                                     <View>
-                                        {item.vhicle&&<StyledPropText>Vehicle Category</StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>Vehicle Category</StyledPropText>}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
                                            Company
                                         </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
                                            Model
                                         </StyledPropText>}
                                         {/*{item.vhicle&&<StyledPropText>
@@ -203,12 +204,14 @@ class LeaseFirmJobDetails extends React.Component {
                                         </StyledPropText>}*/}
                                     </View>
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {item.vhicle&&<StyledPropText>{item.vhicle.VehicleCategory.Name}</StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                            {item.vhicle.Company}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
+                                            {item.vhicle?item.vhicle.VehicleCategory.Name:item.VehicleCategory.Name}
                                         </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                            {item.vhicle.Company}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
+                                            {item.vhicle?item.vhicle.Company:item.Company}
+                                        </StyledPropText>}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
+                                            {item.vhicle?item.vhicle.Company:item.Company}
                                         </StyledPropText>}
                                         {/*{item.vhicle&&<StyledPropText>
                                             From
@@ -274,11 +277,11 @@ class LeaseFirmJobDetails extends React.Component {
                                         </StyledPropText>
                                     </View>
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {item.vhicle&&<StyledPropText>
-                                            {item.vhicle.VehicleType.Name}
+                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
+                                            {item.vhicle?item.vhicle.VehicleType.Name:item.VehicleType.Name}
                                         </StyledPropText>}
-                                        {item.pay&&<StyledPropText>
-                                            {item.pay.PayType.Name}
+                                        {(item.pay||item.PaymentType)&&<StyledPropText>
+                                            {item.pay?item.pay.PayType.Name: item.PaymentType.Name}
                                         </StyledPropText>}
                                         {item.pay&&<StyledPropText>
                                             {item.pay.Price}

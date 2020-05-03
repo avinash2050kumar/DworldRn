@@ -125,7 +125,7 @@ class OwnerVehiclePreference extends Component {
 	};
 
 	render() {
-		console.log('Owner Vehicle preference')
+		console.log('Owner Vehicle preference',this.props)
 		return (
 			<ScrollView>
 				<Screen style={{ backgroundColor: theme.white }}>
@@ -311,7 +311,18 @@ class OwnerVehiclePreference extends Component {
 														marginTop: 10
 													}}
 												>
-													{this.props.PayScale.map(
+													{this.props.adsIndex==0&&this.props.PayScale.map(
+														(pay, i2) =>
+															this.renderRadioButton(
+																pay,
+																i2,
+																props.values
+																	.vehicle
+																	.PaymentType,
+																props
+															)
+													)}
+													{this.props.adsIndex==1&&this.props.PayScale.filter(data=>data.Name!=="Hourly"&&data.Name!=="Weekly").map(
 														(pay, i2) =>
 															this.renderRadioButton(
 																pay,

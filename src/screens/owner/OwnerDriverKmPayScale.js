@@ -100,7 +100,6 @@ class OwnerDriverKmPayScale extends Component {
 		} else if (adsIndex === 1) {
 			if (isVehicleDetailFilled && isPayScaleFilled) shouldPost = true;
 		}
-
 		if (shouldPost === false) {
 			this.props.setAppMessage(
 				"Error",
@@ -120,6 +119,7 @@ class OwnerDriverKmPayScale extends Component {
 	};
 
 	render() {
+		const {adsIndex}=this.props
 		return (
 			<ScrollView>
 				<View>
@@ -128,7 +128,7 @@ class OwnerDriverKmPayScale extends Component {
 							<Formik
 								initialValues={this.state.postAdsDriver}
 								onSubmit={(values, actions) => {
-									this._Submit(values, actions);
+									this._Submit(values, actions,adsIndex);
 								}}
 								validationSchema={validationSchema}
 							>

@@ -159,14 +159,13 @@ console.log('value', await fetch(
 				IsLoginBySocialMedia: true
 			}
 		);
-		console.log("faceboo", facebookInfo);
 		this._handleSubmit(facebookInfo, props);
 	}
 
 	render() {
 		const initialState = {
-			loginId: "ankit@rajupoot.com",
-			password: "raju@123",
+			loginId: "",
+			password: "",
 			IsLoginBySocialMedia: false
 		};
 

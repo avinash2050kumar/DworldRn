@@ -27,7 +27,7 @@ import {
 	setDriverEarning,
 	driverApplyJob,
 	driverGetJobOffer,
-	filtersAndSortingDriverData,driverApproveJobOffer
+	filtersAndSortingDriverData, driverApproveJobOffer, approveDriverOffer
 } from "../actions";
 import theme from "../theme/lightTheme";
 import styles from "../theme/styles";
@@ -68,8 +68,7 @@ class DriverJOBOfferScreen extends Component {
 	}
 
 	handleApply=(item)=>{
-		//this.props.driverApproveJobOffer()
-		console.log(item,this.props)
+		this.props.approveDriverOffer(item.JobId)
 	}
 	render() {
 		return (
@@ -164,7 +163,7 @@ const mapDispatchToProps = {
 	setHomeScreenNoOfWork,
 	filtersAndSortingDriverData,
 	driverApplyJob,
-	driverGetJobOffer,driverApproveJobOffer
+	driverGetJobOffer,approveDriverOffer
 };
 
 export default connect(

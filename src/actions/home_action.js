@@ -9,6 +9,7 @@ import {
 } from "./type";
 import client from "../helper/ApiClient";
 import { setAppMessage } from "./message_action";
+import {requestedLeaseFirmDetailById} from "./lease_action";
 
 export const setHomeScreenVisibility = value => dispatch => {
 	dispatch({
@@ -72,6 +73,46 @@ export const driverGetJobOffer = () => async dispatch => {
 	try {
 		const res = await client.main.driverGetJobOffer();
 		dispatch({ type: SET_DRIVER_JOB_OFFERS_FOR_DRIVER, payload: res.data });
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Something went wrong.", "danger"));
+	}
+};
+
+export const approveDriverOffer = (jobId) => async dispatch => {
+	try {
+		const res = await client.main.approveDriverOffer(jobId);
+		if (res.status === 200) {
+			dispatch(
+				setAppMessage(
+					"Success",
+					"Successfully Approved",
+					"success"
+				)
+			);
+			dispatch(driverGetJobOffer());
+		}
+		res.status === 204 &&
+		dispatch(setAppMessage("Error", "Unable to Approve", "danger"));
+	} catch (e) {
+		dispatch(setAppMessage("Error", "Something went wrong.", "danger"));
+	}
+};
+
+export const approveFirmOffer = (firmId) => async dispatch => {
+	try {
+		const res = await client.main.approveFirmOffer(firmId);
+		if (res.status === 200) {
+			dispatch(
+				setAppMessage(
+					"Success",
+					"Successfully Approved",
+					"success"
+				)
+			);
+			dispatch(requestedLeaseFirmDetailById(firmId));
+		}
+		res.status === 204 &&
+		dispatch(setAppMessage("Error", "Unable to Approve", "danger"));
 	} catch (e) {
 		dispatch(setAppMessage("Error", "Something went wrong.", "danger"));
 	}

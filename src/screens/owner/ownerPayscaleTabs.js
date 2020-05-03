@@ -21,7 +21,7 @@ import OwnerDriverKmPayScale from "./OwnerDriverKmPayScale";
 import OwnerDriverTripPayScale from "./ownerDriverTripPayScale";
 
 const TabCard = styled.View`
-	padding: 7px 10px;
+	padding: 7px 15px;
 	border-radius: 5px;
 `;
 
@@ -35,14 +35,16 @@ class OwnerDriverPayScaleTabs extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { selectedIndex: 0 };
-		this.action = props.PayScale;
+		this.action = [];
 	}
 
 	componentDidMount() {
 		this.props.PayScale.map((pay, i) => {
 			if (pay.Name === this.props.postAdsDriver.vehicle.PaymentType.Name)
-				this.setState({ selectedIndex: i });
+				this.setState({ selectedIndex: pay.Id });
 		});
+		this.props.adsIndex===0?this.action=this.props.PayScale:
+			this.action=this.props.PayScale.filter(data=>data.Name!=="Hourly"&&data.Name!=="Weekly")
 	}
 
 	_renderTab = (item, index) => {
@@ -50,7 +52,7 @@ class OwnerDriverPayScaleTabs extends Component {
 			<TabCard
 				style={{
 					backgroundColor:
-						this.state.selectedIndex == index
+						this.state.selectedIndex == item.Id
 							? theme.primary
 							: "#efefef"
 				}}
@@ -58,7 +60,7 @@ class OwnerDriverPayScaleTabs extends Component {
 				<Text
 					style={{
 						color:
-							this.state.selectedIndex == index ? "white" : "#888"
+							this.state.selectedIndex == item.Id ? "white" : "#888"
 					}}
 				>
 					{item.Name}
@@ -68,6 +70,7 @@ class OwnerDriverPayScaleTabs extends Component {
 	};
 
 	render() {
+		console.log('this.',this.props,this.action,this.state)
 		return (
 			<ScrollView
 				showsVerticalScrollIndicator={false}
@@ -92,21 +95,20 @@ class OwnerDriverPayScaleTabs extends Component {
 							this._renderTab(tab, index)
 						)}
 					</View>
-
-					{this.state.selectedIndex === 0 && (
-						<OwnerDriverHourlyPayScale />
-					)}
-					{this.state.selectedIndex === 1 && (
-						<OwnerDriverWeeklyPayScale />
-					)}
-					{this.state.selectedIndex === 2 && (
+					{this.state.selectedIndex === 3 && (
 						<OwnerDriverMonthlyPayScale />
 					)}
-					{this.state.selectedIndex === 3 && (
+					{this.state.selectedIndex === 4 && (
 						<OwnerDriverKmPayScale />
 					)}
-					{this.state.selectedIndex === 4 && (
+					{this.state.selectedIndex === 5 && (
 						<OwnerDriverTripPayScale />
+					)}
+					{this.state.selectedIndex === 1 && (
+					<OwnerDriverHourlyPayScale />
+					)}
+					{this.state.selectedIndex === 2 && (
+						<OwnerDriverWeeklyPayScale />
 					)}
 				</Screen>
 			</ScrollView>
@@ -116,7 +118,8 @@ class OwnerDriverPayScaleTabs extends Component {
 
 const mapStateToProps = state => ({
 	postAdsDriver: state.main.owner.postAdsDriver,
-	PayScale: state.main.owner.postAdsDriverDummy.PayScale
+	PayScale: state.main.owner.postAdsDriverDummy.PayScale,
+	adsIndex:state.main.owner.adsIndex
 });
 
 const mapDispatchToProps = {};

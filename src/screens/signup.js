@@ -73,16 +73,14 @@ class SignUpScreen extends Component {
 		try {
 			await GoogleSignin.hasPlayServices();
 			const userInfo = await GoogleSignin.signIn();
-			console.log(userInfo,'userInfo')
 			const { type, accessToken, user } = userInfo;
-			console.log('user', user)
 			const googleInfo = Object.assign(
 				{},
 				{
 					FirstName: user.givenName,
 					LastName: user.familyName,
 					Email: user.email,
-					ClientTypeId: 1,
+					ClientTypeId: this.props.clientTypeId,
 					Mobile: "0000000000",
 					IsLoginBySocialMedia: true,
 					password: null,
@@ -138,7 +136,7 @@ class SignUpScreen extends Component {
 					FirstName: success.first_name,
 					LastName: success.last_name,
 					Email: success.email,
-					ClientTypeId: 1,
+					ClientTypeId: this.props.clientTypeId,
 					Mobile: "0000000000",
 					IsLoginBySocialMedia: true
 				}
@@ -216,11 +214,11 @@ class SignUpScreen extends Component {
 
 	render() {
 		const initialState = {
-			FirstName: "New",
-			LastName: "User",
-			Email: "avinash2050kumar@gmail.com",
-			ClientTypeId: 1,
-			Mobile: "7903735386"
+			FirstName: "",
+			LastName: "",
+			Email: "",
+			ClientTypeId: this.props.clientTypeId,
+			Mobile: ""
 		};
 		return (
 			<ScrollView
@@ -378,7 +376,7 @@ class SignUpScreen extends Component {
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({clientTypeId:state.profileVisibility.clientTypeId});
 
 const mapDispatchToProps = {
 	postSignUp,

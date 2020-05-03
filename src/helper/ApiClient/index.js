@@ -40,33 +40,33 @@ const Client = () => {
 		},
 		main: {
 			getPersonalDetails() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetPersonalDetail?ClientId=${ClientId}`
 				);
 			},
 
 			getExperience() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetLicense?ClientId=${ClientId}`
 				);
 			},
 			/*  =================================================================  */
 			getWorkSchedule() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetWorkShedule?ClientId=${ClientId}`
 				);
 			},
 			postWorkSchedule(value) {
-				const { ClientId } = Store().store.getState().auth;
-				const FinalValue = Object.assign({},value,{ClientId})
+				const {ClientId} = Store().store.getState().auth;
+				const FinalValue = Object.assign({}, value, {ClientId})
 				return instance.post(`/api/Driver/SaveWorkSchedule`, FinalValue);
 			},
 			/*===========================================*/
 			driverGetHourlyPay() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetHourlyPay?ClientId=${ClientId}`
 				);
@@ -77,7 +77,7 @@ const Client = () => {
 			},
 			/*===========================================*/
 			driverGetWeeklyPay() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetWeeklyPay?ClientId=${ClientId}`
 				);
@@ -92,7 +92,7 @@ const Client = () => {
 			/*===========================================*/
 
 			driverGetMonthlyPay() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetMonthlyPay?ClientId=${ClientId}`
 				);
@@ -103,7 +103,7 @@ const Client = () => {
 			},
 			/*===========================================*/
 			driverGetKMPay() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetKMPay?ClientId=${ClientId}`
 				);
@@ -114,7 +114,7 @@ const Client = () => {
 			/*===========================================*/
 
 			driverGetTripPay() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetTripPay?ClientId=${ClientId}`
 				);
@@ -126,33 +126,38 @@ const Client = () => {
 
 			/*===========================================*/
 			driverGetVechiclePreference() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetVehicleCategory?ClientId=${ClientId}`
 				);
 			},
-			driverApproveOfferJob(toClientOffer,jobId) {
-				const { ClientId } = Store().store.getState().auth;
+			driverApproveOfferJob(toClientOffer, jobId) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/ApproveDriverOfferJob?OfferByClientId=${ClientId}&OfferToClientId=${toClientOffer}&JobId=${jobId}`
 				);
 			},
 
-			applyFirmJob(JobId){
-				const { ClientId } = Store().store.getState().auth;
-				console.log('client id',ClientId)
+			applyFirmJob(JobId) {
+				const {ClientId} = Store().store.getState().auth;
+				console.log('client id', ClientId)
 				return instance.get(
 					`/api/LeasingFirm/ApplyFirmJob?ClientId=${ClientId}&JobId=${JobId}`
 				);
 			},
 
 			driverSaveVechiclePreference(value) {
-				const { ClientId } = Store().store.getState().auth;
-				return instance.post(`/api/Driver/SaveVehicleCategory`, Object.assign({}, value,{vehicleCategory:{...value.vehicleCategory,ClientId}}));
+				const {ClientId} = Store().store.getState().auth;
+				return instance.post(`/api/Driver/SaveVehicleCategory`, Object.assign({}, value, {
+					vehicleCategory: {
+						...value.vehicleCategory,
+						ClientId
+					}
+				}));
 			},
 
 			saveProfile(value) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				const profileValue = Object.assign({}, value, {
 					ClientId: ClientId
 				});
@@ -162,7 +167,7 @@ const Client = () => {
 
 			/*===========================================*/
 			ownerGetVechiclePreference() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(`/api/Owner/GetAllOwnerDropDown`);
 			},
 
@@ -172,95 +177,95 @@ const Client = () => {
 
 			/*===========================================*/
 			getAllDriverJobs() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(`/api/Driver/GetJob?ClientId=${ClientId}`);
 			},
 
 			SaveOwnerJob(value) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				const OwnerJob = Object.assign(
 					{},
 					Store().store.getState().main.owner.postAdsDriver,
-					{ ClientId }
+					{ClientId}
 				);
 
 				return instance.post(`/api/Owner/SaveOwnerJob`, OwnerJob);
 			},
 
-			saveExperienceAndDl(payload){
-				 return instance.post(`/api/Driver/SaveLicense`,payload);
+			saveExperienceAndDl(payload) {
+				return instance.post(`/api/Driver/SaveLicense`, payload);
 			},
 
 			SaveOwnerFirm(value) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.post(`/api/Owner/SaveLeasingFirmJob`, value);
 			},
 
 			getJobId(jobId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetDriverDetails?JobId=${jobId}`
 				);
 			},
 
 			getLeaseFirmById(jobId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetFirmDetails?FirmId=${jobId}`
 				);
 			},
 
 			getAllLeaseFirm(jobId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetAllFirmDetails?FirmId=${jobId}`
 				);
 			},
 
 			getAllDriverOwner(jobId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetAllDriverDetails?JobId=${jobId}`
 				);
 			},
 
 			getOwnerPost() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetPostedJob?ClientId=${ClientId}`
 				);
 			},
 
 			driverApplyJob(jobId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/ApplyJob?ClientId=${ClientId}&JobId=${jobId}`
 				);
 			},
 
 			driverGetJobOffer() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Driver/GetOfferJob?ClientId=${ClientId}`
 				);
 			},
 
 			getLeaseDashBoard() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/LeasingFirm/LeasingFirmDashBord?ClientId=${ClientId}`
 				);
 			},
 
 			FindOwnerFirm(firmId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/LeasingFirm/FindOwnerFirm?FirmId=${firmId}`
 				);
 			},
 
 			requestedLeaseFirmDetail(firmId) {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/LeasingFirm/GetLeaseFirmDetails?ClientId=${ClientId}&FirmId=${firmId}`
 				);
@@ -268,65 +273,77 @@ const Client = () => {
 
 			/*===============================================*/
 			getOwnerDashBoard() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/GetOwnerDashBoard?ClientId=${ClientId}`
 				);
 			},
 			getPostedLeaseFirm() {
-				const { ClientId } = Store().store.getState().auth;
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/LeasingFirm/PostedRequirement?ClientId=${ClientId}`
 				);
 			},
-			applyOwnerFindDriver(offerToClientId,JobId) {
-				const { ClientId } = Store().store.getState().auth;
+			applyOwnerFindDriver(offerToClientId, JobId) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/OfferJob?OfferByClientId=${ClientId}&OfferToClientId=${offerToClientId}&JobId=${JobId}`
 				);
 			},
-			applyOwnerFindFirm(offerToClientId,JobId) {
-				const { ClientId } = Store().store.getState().auth;
+			applyOwnerFindFirm(offerToClientId, JobId) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Owner/RequestFirm?OfferByClientId=${ClientId}&OfferToClientId=${offerToClientId}&JobId=${JobId}`
 				);
 			},
-			saveSubscription(payload){
-				const { ClientId } = Store().store.getState().auth;
+			saveSubscription(payload) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.post(
 					`/api/Login/SaveSuscription`,
 					payload
 				);
 			},
 
-			getUserSubscription(){
-				const { ClientId } = Store().store.getState().auth;
+			getUserSubscription() {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Login/GetSuscription?ClientId=${ClientId}`
 				);
 			},
 
-			checkSubscription(){
-				const { ClientId } = Store().store.getState().auth;
+			checkSubscription() {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
 					`/api/Login/CheckSuscription?ClientId=${ClientId}`
 				);
 			},
 
-			approveDriverApplyjob(toClientId,JobId){
-				const { ClientId } = Store().store.getState().auth;
+			approveDriverApplyjob(toClientId, JobId) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
-					`/api/Owner/ApproveDriverApplyJob?ClientId=${ClientId}&JobId=${JobId}`
+					`/api/Owner/ApproveDriverApplyJob?ClientId=${toClientId}&JobId=${JobId}`
 				);
 			},
-			approveFirmApplyJob(toClientId,JobId){
-				const { ClientId } = Store().store.getState().auth;
+			approveFirmApplyJob(toClientId, JobId) {
+				const {ClientId} = Store().store.getState().auth;
 				return instance.get(
-					`/api/Owner/ApproveFirmApplyJob?ClientId=${ClientId}&JobId=${JobId}`
+					`/api/Owner/ApproveFirmApplyJob?ClientId=${toClientId}&JobId=${JobId}`
 				);
 			},
 
+			approveDriverOffer(jobId){
+			const {ClientId} = Store().store.getState().auth;
+			return instance.get(
+				`/api/Driver/ApproveDriverOfferJob?ClientId=${ClientId}&JobId=${jobId}`
+				);
+			},
 
+			approveFirmOffer(jobId){
+			const {ClientId} = Store().store.getState().auth;
+			return instance.get(
+				`/api/LeasingFirm/ApproveFirmRequestedJob?ClientId=${ClientId}&JobId=${jobId}`
+				);
+			},
 
 			saveLeaseFirmRequirement(value) {
 				const { ClientId } = Store().store.getState().auth;

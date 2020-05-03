@@ -111,15 +111,16 @@ class PostedLeaseFirm extends Component {
 								padding: 14,
 								borderBottomRightRadius: 20
 							}}
-							onPress={() =>
+							onPress={() =>{
+								console.log('item',item)
 								NavigationService.navigate(
-									"OwnerRequestJobDetails",
+									"LeaseFirmJobDetails",
 									{
 										item,
 										buttonTitle: "Approve"
 									}
 								)
-							}
+							}}
 						>
 							<StyledTitle style={{ color: theme.orange }}>
 								Details

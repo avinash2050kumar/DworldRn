@@ -107,7 +107,7 @@ class PayScaleScreen extends Component {
 					{this.state.selectedIndex === 1 && <DriverWeeklyPay setSelectedIndex={this.setSelectedIndex}/>}
 					{this.state.selectedIndex === 2 && <DriverMonthlyPay setSelectedIndex={this.setSelectedIndex}/>}
 					{this.state.selectedIndex === 3 && <DriverKMPay setSelectedIndex={this.setSelectedIndex}/>}
-					{this.state.selectedIndex === 4 && <DriverTripPay />}
+					{this.state.selectedIndex === 4 && <DriverTripPay setSelectedIndex={this.setSelectedIndex}/>}
 				</Screen>
 			</ScrollView>
 		);

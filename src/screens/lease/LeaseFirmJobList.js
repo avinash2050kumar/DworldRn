@@ -26,7 +26,7 @@ import {
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
 	requestedLeaseFirmDetailById,
-	getOwnerJobDetailById, applyFirmJob
+	getOwnerJobDetailById, applyFirmJob, approveFirmOffer
 } from "../../actions";
 import axios from "axios";
 import HomeCarousel from "../../components/Home/Crousel";
@@ -129,8 +129,7 @@ class LeaseFirmJobList extends Component {
 								opacity:item.IsApproved?0.65:1
 							}}
 							disabled={item.IsApproved}
-							onPress={()=>console.log('abhi nhi ban hai')}
-						>
+							onPress={()=>this.props.approveFirmOffer(this.props.route.item.JobAddId)}>
 							<StyledTitle style={{ color: theme.white }}>
 								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
@@ -142,6 +141,7 @@ class LeaseFirmJobList extends Component {
 	};
 
 	render() {
+		console.log('prp',this.props)
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -187,7 +187,9 @@ const mapDispatchToProps = {
 	requestedLeaseFirmDetailById,
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
-	getOwnerJobDetailById,applyFirmJob
+	getOwnerJobDetailById,
+	applyFirmJob,
+	approveFirmOffer
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaseFirmJobList);

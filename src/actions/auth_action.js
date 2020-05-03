@@ -134,7 +134,6 @@ export const resetPassword = payload => async dispatch => {
 		const { ClientId } = Store().store.getState().auth;
 		const resetPassword = Object.assign({}, payload, { ClientId });
 		const res = await client.auth.resetPassword(resetPassword);
-		console.log("from action ", res);
 		if (res.data === "WRONG PASSWORD")
 			dispatch(
 				setAppMessage("Error", "Entered wrong password", "danger")
@@ -158,6 +157,6 @@ export const resetPassword = payload => async dispatch => {
 			);
 		}
 	} catch (e) {
-		dispatch(setAppMessage("Error", "Unable to change password", "danger"));
+		dispatch(setAppMessage("Error", "Network issue", "danger"));
 	}
 };

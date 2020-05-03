@@ -129,7 +129,7 @@ class OwnerDriverWeeklyPayScale extends Component {
 							<Formik
 								initialValues={this.state.postAdsDriver}
 								onSubmit={(values, actions) => {
-									this._Submit(values, actions);
+									this._Submit(values, actions,this.props.adsIndex);
 								}}
 								validationSchema={validationSchema}
 							>

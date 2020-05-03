@@ -62,7 +62,8 @@ class VehiclePreference extends Component {
 		const isEmpty = Object.keys(state.vehiclePreferences).length === 0;
 		if (isEmpty) {
 			return {
-				vehiclePreferences: props.vehiclePreferences
+				vehiclePreferences: Object.assign({},props.vehiclePreferences,
+					{vehicleCategory:props.vehiclePreferences.vehicleCategoryDropdown[0]})
 			};
 		}
 
@@ -92,7 +93,7 @@ class VehiclePreference extends Component {
 	render() {
 		return (
 			<Screen style={{ backgroundColor: theme.white }}>
-				{console.log('vehicle Pref',this.state)}
+
 				<View>
 					{!this.isEmpty(this.state.vehiclePreferences) && (
 						<KeyboardAvoidingView behavior="padding" enabled>
@@ -148,6 +149,7 @@ class VehiclePreference extends Component {
 
 												}}
 											/>
+											{console.log('ptops',props.values)}
 											{props.values.vehicleCategoryDropdown.filter(dropdown=>dropdown.VehicleCategoryId===props.values.vehicleCategory.VehicleCategoryId)[0].VehicleType.map(
 												(vehicle, i) => (
 													<CheckBox

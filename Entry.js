@@ -79,7 +79,7 @@ class Entry extends Component {
     return (
         <View style={{ flex: 1 }}>
           {!this.state.isConnected &&<View style={{flex:1,alignItems:'center', justifyContent:'center'}}>
-          <Text style={{fontSize:22}}>Matherchod online aa </Text>
+          <Text style={{fontSize:22}}>App offline hai</Text>
          </View>}
           {this.state.isConnected &&<NavigationRoot
               ref={navigatorRef => {
