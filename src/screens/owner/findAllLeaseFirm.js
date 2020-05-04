@@ -166,8 +166,12 @@ class FindAllLeaseFirm extends Component {
 								? this.props.findAllLeaseFirm
 								: []
 						}
-						ListFooterComponent={()=>this.props.findAllLeaseFirm
-							? null:<Card style={{
+						ListFooterComponent={()=>
+						{const res =this.props.findAllLeaseFirm
+							? this.props.findAllLeaseFirm
+							: []
+
+							return res.length==0?<Card style={{
 								paddingTop: 30,
 								marginLeft:10,
 								marginRight:10,
@@ -177,7 +181,7 @@ class FindAllLeaseFirm extends Component {
 								borderRadius: 20,
 								justifyContent:'center',
 								alignItems:'center'
-							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>}
+							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}

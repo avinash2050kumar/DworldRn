@@ -48,8 +48,10 @@ class ExperiencesDLScreen extends Component {
 		const isEmpty = Object.keys(state.experiences).length === 0;
 		if (isEmpty) {
 			return {
-				experiences: props.experiences
-			};
+				experiences: {
+					...props.experiences,
+					LicenseNumber: props.experiences.LicenseNumber ? props.experiences.LicenseNumber : ''
+				}};
 		}
 
 		// Return null if the state hasn't changed
@@ -106,8 +108,7 @@ class ExperiencesDLScreen extends Component {
 							>
 								{props => (
 									<View style={[styles.flex_col_btwn]}>
-										{console.log('experience dl screen',!this.isEmpty(this.state.experiences),this.state.experiences,props.values.license
-											.LicenseType)}
+										{console.log('experience dl screen',props.values)}
 										<Form>
 											<FormikTextInput
 												label="Driving Licence Number"

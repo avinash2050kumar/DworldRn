@@ -209,8 +209,12 @@ class PostedLeaseFirm extends Component {
 							renderItem={({ item, index }) =>
 								this.renderCard(item, index)
 							}
-							ListFooterComponent={()=>this.props.leaseFirmPostedAds
-								? null:<Card style={{
+							ListFooterComponent={()=>
+							{const res =this.props.leaseFirmPostedAds
+								? this.props.leaseFirmPostedAds
+								: []
+
+								return res.length==0?<Card style={{
 									paddingTop: 30,
 									marginLeft:10,
 									marginRight:10,
@@ -220,7 +224,7 @@ class PostedLeaseFirm extends Component {
 									borderRadius: 20,
 									justifyContent:'center',
 									alignItems:'center'
-								}}><Text style={{fontSize:16}}>No Data Found</Text></Card>}
+								}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
 							keyExtractor={(item, index) => index}
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}

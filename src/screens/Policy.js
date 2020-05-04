@@ -21,9 +21,9 @@ export default class Policy extends React.Component {
 			<ScrollView
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
-				contentContainerStyle={{ flex: 1 }}
+				//contentContainerStyle={{ flex: 1 }}
 			>
-				<Screen>
+				<Screen style={{backgroundColor:'#fff'}}>
 					<View style={{ width: "100%", alignItems: "center" }}>
 						<Text
 							style={{

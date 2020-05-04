@@ -174,18 +174,22 @@ class DriverApplicants extends Component {
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}
-						ListFooterComponent={()=>this.props.OwnerJob[index]
-							? null:<Card style={{
-							paddingTop: 30,
-							marginLeft:10,
-							marginRight:10,
-							paddingRight: 20,
-							paddingLeft: 20,
-							paddingBottom: 30,
-							borderRadius: 20,
-							justifyContent:'center',
-							alignItems:'center'
-						}}><Text style={{fontSize:16}}>No Data Found</Text></Card>}
+						ListFooterComponent={()=>
+						{const res =this.props.OwnerJob[index]
+							? this.props.OwnerJob[index].DriverList
+							: []
+
+							return res.length==0?<Card style={{
+								paddingTop: 30,
+								marginLeft:10,
+								marginRight:10,
+								paddingRight: 20,
+								paddingLeft: 20,
+								paddingBottom: 30,
+								borderRadius: 20,
+								justifyContent:'center',
+								alignItems:'center'
+							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
 						keyExtractor={(item, index) => index}
 						showsHorizontalScrollIndicator={false}
 						showsVerticalScrollIndicator={false}

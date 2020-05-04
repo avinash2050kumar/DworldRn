@@ -20,6 +20,7 @@ import ChangePasswordScreen from "./changePassword";
 import NavigationService from "../config/NavigationService";
 import i18n from "i18n-js";
 import theme from "../theme/lightTheme";
+import EvilIcons from "react-native-vector-icons/dist/EvilIcons";
 
 class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -231,7 +232,13 @@ class ProfileScreen extends Component {
 										borderRadius: 40
 									}}
 								>
-									<Image
+									<EvilIcons
+										name="user"
+										color="#444"
+										size={80}
+										style={{ backgroundColor: "transparent" }}
+									/>
+									{/*<Image
 										source={{
 											uri:
 												"https://2.bp.blogspot.com/-k1HziBxBYuE/Tg0EwSo5B6I/AAAAAAAABwk/pHENBUKyr-s/s565/SBX701_HKL_Fist_of_Fury_DVD%255B1%255D.jpg"
@@ -242,7 +249,7 @@ class ProfileScreen extends Component {
 											resizeMode: "cover",
 											borderRadius: 40
 										}}
-									/>
+									/>*/}
 								</View>
 								<View>
 									<StyledTitle>
