@@ -466,7 +466,18 @@ export default class FilterAndSorting extends React.Component {
 						{ justifyContent: "space-around", padding: 8 }
 					]}
 				>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={()=>{this.props.filtersAndSortingDriverData(
+						{
+							sortBy: "Recent Posted",
+							/*jobByTypes: [],*/
+							vehicleTypes: [],
+							payScale: {}
+						},
+						this.props.dataIndex
+					)
+						this.props.toggleModal();}
+
+					}>
 						<Text
 							style={{
 								color: theme.secondary,

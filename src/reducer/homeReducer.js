@@ -79,11 +79,13 @@ const homeReducerInitialState = (
 			const { filterObj, dataIndex } = action.payload;
 			let filteredData = state.work.data[dataIndex].dataList;
 			//vehicleTypes
-			filteredData = filteredData.filter(work =>
+
+			if(filterObj.vehicleTypes.length>0)
+			{filteredData = filteredData.filter(work =>
 				filterObj.vehicleTypes.filter(
 					vehicleType =>work.vehicleType === vehicleType
 				).length>0
-			);
+			);}
 			const updateFilter= update(state.work,{data:
 					{[dataIndex]:{filteredData:{$set:filteredData}}}})
 			return { ...state,work: updateFilter};

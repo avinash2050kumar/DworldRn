@@ -26,7 +26,7 @@ import {
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
 	getOwnerJobDetailById,
-	getOwnerLeaseFirmById
+	getOwnerLeaseFirmById, getOwnerJobPost, approveFirmApplyJob
 } from "../../../actions";
 import theme from "../../../theme/lightTheme";
 import styles from "../../../theme/styles";
@@ -117,17 +117,24 @@ class LeaseFirmApplicant extends Component {
 								Details
 							</StyledTitle>
 						</TouchableOpacity>
+						{console.log('lkog',item)}
 						<TouchableOpacity
 							style={{
 								width: "50%",
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApproved?0.6:1
+							}}
+							disabled={item.IsApproved}
+							onPress={async ()=>{await this.props.approveFirmApplyJob(item.ClientId,
+								this.props.FirmJob[ this.props.navigation.getParam("index")].FirmId)
+								await this.props.getOwnerJobPost();
 							}}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -138,6 +145,7 @@ class LeaseFirmApplicant extends Component {
 
 	render() {
 		const index = this.props.navigation.getParam("index");
+		console.log('log(),',this.props.FirmJob[index])
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -204,7 +212,7 @@ const mapDispatchToProps = {
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
 	getOwnerLeaseFirmById,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,getOwnerJobPost,approveFirmApplyJob
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaseFirmApplicant);

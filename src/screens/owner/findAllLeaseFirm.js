@@ -52,7 +52,7 @@ class FindAllLeaseFirm extends Component {
 	}
 
 	renderCard = (item, index) => {
-		console.log("item", item);
+		console.log('item',item)
 		return (
 			<View style={{ marginLeft: 5, marginRight: 5 }}>
 				<Card
@@ -125,12 +125,15 @@ class FindAllLeaseFirm extends Component {
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsRequested?0.6:1
 							}}
-							onPress={()=>this.props.getApplyOwnerFindFirm(item.ClientId,this.props.route.item.JobAddId)}
+							disabled={item.IsRequested}
+							onPress={async ()=>{await this.props.getApplyOwnerFindFirm(item.ClientId,this.props.route.item.JobAddId);
+							this.props.getOwnerAllLeaseById(this.props.route.item.JobAddId);}}
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Request
+								{item.IsRequested?'Requested':'Request'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>

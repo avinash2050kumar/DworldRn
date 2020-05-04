@@ -14,7 +14,9 @@ import ta from "./src/helper/Language/tamil";
 import te from "./src/helper/Language/telugu";
 import kn from "./src/helper/Language/Kannada";
 import NetInfo from "@react-native-community/netinfo";
+import Feather from "react-native-vector-icons/dist/Feather";
 import NetworkManager from "./src/helper/internetInfo";
+import Ionicons from "react-native-vector-icons/dist/Ionicons";
 
 class Entry extends Component {
   constructor(props) {
@@ -79,7 +81,12 @@ class Entry extends Component {
     return (
         <View style={{ flex: 1 }}>
           {!this.state.isConnected &&<View style={{flex:1,alignItems:'center', justifyContent:'center'}}>
-          <Text style={{fontSize:22}}>App offline hai</Text>
+            <Ionicons
+                name={"wifi-off"}
+                size={100}
+                color={theme.secondary}
+            />
+          <Text style={{fontSize:22,marginTop:10}}>No Internet</Text>
          </View>}
           {this.state.isConnected &&<NavigationRoot
               ref={navigatorRef => {

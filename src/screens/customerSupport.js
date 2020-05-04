@@ -11,10 +11,6 @@ import {
 import { connect } from "react-redux";
 import styled from "styled-components";
 import {
-	postSignUp,
-	createPassword,
-	setLoginSuccessFul,
-	setAppMessage
 } from "../actions";
 import { Screen, StyledHeading, StyledText } from "../theme/styledComponent";
 
@@ -25,14 +21,12 @@ import * as yup from "yup";
 import styles from "../theme/styles";
 import theme from "../theme/lightTheme";
 
-export default class CustomerSupportScreen extends Component {
+ class CustomerSupportScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: "Customer Support"
 		};
 	};
-
-	state = { name: "Avinash" };
 
 	render() {
 		const initialState = {
@@ -50,7 +44,8 @@ export default class CustomerSupportScreen extends Component {
 					<KeyboardAvoidingView behavior="padding" enabled>
 						<StatusBar barStyle="dark-content" />
 						<StyledText style={{ marginBottom: 45 }}>
-							Hi {this.state.name}
+							Hi {this.props.personalDetails.FirstName} {this.props.personalDetails.LastName}
+
 						</StyledText>
 
 						<View
@@ -94,3 +89,10 @@ export default class CustomerSupportScreen extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	personalDetails:state.main.personalDetails
+});
+
+
+export default connect(mapStateToProps,{})(CustomerSupportScreen);

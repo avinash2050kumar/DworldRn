@@ -268,8 +268,7 @@ class OwnerHomeScreen extends Component {
 											"OwnerJobTabs"
 										)
 									}
-									ListFooterComponent={() =>
-										ownerDashBoard.DriverJob.length>6?<TouchableOpacity
+									ListFooterComponent={() =>ownerDashBoard.DriverJob.length>6?<TouchableOpacity
 											style={{ alignSelf: "flex-end" }}
 											onPress={() =>
 												this.setState({
@@ -322,7 +321,7 @@ class OwnerHomeScreen extends Component {
 										)
 									}
 									ListFooterComponent={() =>
-										ownerDashBoard.LeasingJob.length>6?<TouchableOpacity
+									ownerDashBoard.LeasingJob.length>6?<TouchableOpacity
 											style={{ alignSelf: "flex-end" }}
 											onPress={() =>
 												this.setState({

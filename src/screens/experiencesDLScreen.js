@@ -48,11 +48,8 @@ class ExperiencesDLScreen extends Component {
 		const isEmpty = Object.keys(state.experiences).length === 0;
 		if (isEmpty) {
 			return {
-				experiences: {
-					...props.experiences,
-					LicenseNumber: props.experiences.LicenseNumber ? props.experiences.LicenseNumber : ''
-				}};
-		}
+				experiences:props.experiences
+		}}
 
 		// Return null if the state hasn't changed
 		return null;

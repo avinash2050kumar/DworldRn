@@ -141,7 +141,7 @@ class LeaseFirmJobList extends Component {
 	};
 
 	render() {
-		console.log('prp',this.props)
+		console.log('prp',this.props,this.props.job ? this.props.job.FirmList : [])
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -167,10 +167,7 @@ class LeaseFirmJobList extends Component {
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}
-						ListFooterComponent={()=>
-						{const res =this.props.job ? this.props.job.FirmList : []
-
-							return res.length==0?<Card style={{
+						ListFooterComponent={()=> <Card style={{
 								paddingTop: 30,
 								marginLeft:10,
 								marginRight:10,
@@ -180,7 +177,7 @@ class LeaseFirmJobList extends Component {
 								borderRadius: 20,
 								justifyContent:'center',
 								alignItems:'center'
-							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
+							}}><Text style={{fontSize:16}}>No More Data</Text></Card>}
 						keyExtractor={(item, index) => index}
 						showsHorizontalScrollIndicator={false}
 						showsVerticalScrollIndicator={false}

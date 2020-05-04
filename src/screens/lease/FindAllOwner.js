@@ -175,11 +175,7 @@ class FindAllLeaseFirmOwner extends Component {
 							this.renderCard(item, index)
 						}
 						ListFooterComponent={()=>
-						{const res = this.props.findLeaseOwnerFirm
-							? this.props.findLeaseOwnerFirm
-							: []
-
-							return res.length==0?<Card style={{
+					<Card style={{
 								paddingTop: 30,
 								marginLeft:10,
 								marginRight:10,
@@ -189,7 +185,7 @@ class FindAllLeaseFirmOwner extends Component {
 								borderRadius: 20,
 								justifyContent:'center',
 								alignItems:'center'
-							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
+							}}><Text style={{fontSize:16}}>No More Data</Text></Card>}
 						keyExtractor={(item, index) => index}
 						showsHorizontalScrollIndicator={false}
 						showsVerticalScrollIndicator={false}

@@ -25,7 +25,7 @@ import {
 	setHomeScreenVisibility,
 	setHomeScreenNoOfWork,
 	setDeviceLocation,
-	getOwnerJobDetailById
+	getOwnerJobDetailById, approveDriverApplyJob, getOwnerJobPost
 } from "../../../actions";
 import theme from "../../../theme/lightTheme";
 import styles from "../../../theme/styles";
@@ -124,17 +124,25 @@ class DriverApplicants extends Component {
 								Details
 							</StyledTitle>
 						</TouchableOpacity>
+						{console.log('log', item)}
 						<TouchableOpacity
 							style={{
 								width: "50%",
 								alignItems: "center",
 								padding: 14,
 								backgroundColor: theme.secondary,
-								borderBottomRightRadius: 20
+								borderBottomRightRadius: 20,
+								opacity:item.IsApproved?0.6:1
 							}}
+							disabled={item.IsApproved}
+							onPress={async ()=>{await this.props.approveDriverApplyJob(item.ClientId,
+								this.props.OwnerJob[this.props.navigation.getParam("index")].AddId)
+								await this.props.getOwnerJobPost();
+							}}
+
 						>
 							<StyledTitle style={{ color: theme.white }}>
-								Approve
+								{item.IsApproved?'Approved':'Approve'}
 							</StyledTitle>
 						</TouchableOpacity>
 					</View>
@@ -145,6 +153,7 @@ class DriverApplicants extends Component {
 
 	render() {
 		const index = this.props.navigation.getParam("index");
+		console.log('this.props.OwnerJob[index]',this.props.OwnerJob[index])
 		return (
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{ padding: 16 }}>
@@ -208,7 +217,7 @@ const mapDispatchToProps = {
 	setHomeScreenVisibility,
 	setDeviceLocation,
 	setHomeScreenNoOfWork,
-	getOwnerJobDetailById
+	getOwnerJobDetailById,approveDriverApplyJob,getOwnerJobPost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DriverApplicants);
