@@ -32,7 +32,7 @@ export default class FilterAndSorting extends React.Component {
 		this.state = {
 			filterObj: {
 				sortBy: "Recent Posted",
-				jobByTypes: [],
+				/*jobByTypes: [],*/
 				vehicleTypes: [],
 				payScale: {}
 			},
@@ -64,7 +64,7 @@ export default class FilterAndSorting extends React.Component {
 						}
 					]
 				},
-				{
+				/*{
 					name: i18n.t("jobByTypes"),
 					isSelected: false,
 					value: "Job By Types",
@@ -83,7 +83,7 @@ export default class FilterAndSorting extends React.Component {
 									};
 								})
 						: []
-				},
+				},*/
 				{
 					name: i18n.t("vehicleTypes"),
 					isSelected: false,
@@ -350,16 +350,16 @@ export default class FilterAndSorting extends React.Component {
 	applyFilter = async () => {
 		let jobByTypes = [],
 			vehicleType = [];
-		this.state.filterOptions[1].options.map(job => {
+		/*this.state.filterOptions[1].options.map(job => {
 			if (job.isSelected) jobByTypes.push(job.value);
-		});
-		this.state.filterOptions[2].options.map(vehicle => {
+		});*/
+		this.state.filterOptions[1].options.map(vehicle => {
 			if (vehicle.isSelected) vehicleType.push(vehicle.name);
 		});
 
 		const filterObj = {
 			...this.state.filterObj,
-			jobByTypes: jobByTypes,
+			/*jobByTypes: jobByTypes,*/
 			vehicleTypes: vehicleType
 		};
 		await this.setState({ filterObj: filterObj });

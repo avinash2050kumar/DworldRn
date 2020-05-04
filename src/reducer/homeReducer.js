@@ -7,6 +7,7 @@ import {
 	SET_DRIVER_JOB_OFFERS_FOR_DRIVER,
 	SET_LEASE_DASHBOARD,RESET_HOME
 } from "../actions/type";
+import update from "immutability-helper";
 
 const initialState={
 	isHomeScreenVisible: false,
@@ -74,15 +75,18 @@ const homeReducerInitialState = (
 			};
 
 		case SET_FILTERED_HOME_WORK_DATA:
+			console.log('state', state)
 			const { filterObj, dataIndex } = action.payload;
 			let filteredData = state.work.data[dataIndex].dataList;
 			//vehicleTypes
 			filteredData = filteredData.filter(work =>
 				filterObj.vehicleTypes.filter(
-					vehicleType => work.vehicleType === vehicleType
-				)
+					vehicleType =>work.vehicleType === vehicleType
+				).length>0
 			);
-			return { ...state };
+			const updateFilter= update(state.work,{data:
+					{[dataIndex]:{filteredData:{$set:filteredData}}}})
+			return { ...state,work: updateFilter};
 
 		case SET_DEVICE_LOCATION:
 			const { location, formattedAddress } = action.payload;
