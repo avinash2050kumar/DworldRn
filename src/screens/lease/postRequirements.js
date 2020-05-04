@@ -27,7 +27,6 @@ import {
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
-import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
 import * as yup from "yup";
 import Selector from "react-native-easy-select";
 
@@ -140,6 +139,7 @@ class PostRequirementsFirm extends Component {
 	};
 
 	render() {
+		console.log('vehicle preference',this.props)
 		return (
 			<ScrollView>
 				<Screen style={{ backgroundColor: theme.white }}>

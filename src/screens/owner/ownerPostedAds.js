@@ -111,7 +111,7 @@ class OwnerJobPostList extends Component {
 							}}
 							onPress={() =>
 								NavigationService.navigate(
-									"OwnerRequestJobDetails",
+									"OwnerPostedDetails",
 									{
 										item,
 										buttonTitle: "Approve"
@@ -173,6 +173,17 @@ class OwnerJobPostList extends Component {
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}
+						ListFooterComponent={()=>this.props.job?null:<Card style={{
+							paddingTop: 30,
+							marginLeft:10,
+							marginRight:10,
+							paddingRight: 20,
+							paddingLeft: 20,
+							paddingBottom: 30,
+							borderRadius: 20,
+							justifyContent:'center',
+							alignItems:'center'
+						}}><Text style={{fontSize:16}}>No Data Found</Text></Card>}
 						keyExtractor={(item, index) => index}
 						showsHorizontalScrollIndicator={false}
 						showsVerticalScrollIndicator={false}

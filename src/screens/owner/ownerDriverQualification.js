@@ -24,7 +24,6 @@ import { saveOwnerDriverQualification } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
-import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
 import Selector from "react-native-easy-select";
 
 const Form = withNextInputAutoFocusForm(View);

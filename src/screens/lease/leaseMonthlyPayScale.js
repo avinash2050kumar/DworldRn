@@ -27,6 +27,7 @@ import { saveLeasePayScale } from "../../actions";
 import { saveLeaseFirmPost } from "../../actions";
 import Selector from "react-native-easy-select";
 import NavigationService from "../../config/NavigationService";
+import {getLeaseDashBoard} from "../../actions";
 
 const validationSchema = yup.object().shape({
 	Price:yup.string().required("Price is required")
@@ -73,7 +74,9 @@ class LeaseMonthlyPayScale extends Component {
 		this.props.saveLeasePayScale(values);
 		const res = await this.props.saveLeaseFirmPost();
 		if(res.status===200)
-			NavigationService.popToTop()
+		{
+			this.props.getLeaseDashBoard()
+			NavigationService.popToTop()}
 	};
 
 	render() {
@@ -190,7 +193,7 @@ const mapStateToProps = state => ({
 	vehicleCategories: state.main.lease.postLeaseDummy.vehicleCategories
 });
 
-const mapDispatchToProps = { saveLeasePayScale, saveLeaseFirmPost };
+const mapDispatchToProps = { saveLeasePayScale, saveLeaseFirmPost ,getLeaseDashBoard};
 
 export default connect(
 	mapStateToProps,

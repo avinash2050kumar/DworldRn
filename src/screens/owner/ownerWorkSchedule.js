@@ -25,7 +25,6 @@ import { saveOwnerWorkSchedule } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import update from "immutability-helper";
 import RadioButton from "../../components/common/RadioButtons";
-import StyledDateAndTimePicker from "../../components/common/StyledDateAndTimePicker";
 import TextInput from "react-native-web/src/exports/TextInput";
 import Selector from "react-native-easy-select";
 

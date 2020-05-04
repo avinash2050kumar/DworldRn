@@ -21,6 +21,7 @@ import FormikTextInput from "../../components/common/FormikTextInput";
 import { Card, Screen, StyledText } from "../../theme/styledComponent";
 import Button from "../../components/common/Buttons";
 import {
+	getOwnerDashboard,
 	postOwnerDriverJob,
 	postOwnerVehicleFirm,
 	resetOwner,
@@ -120,6 +121,7 @@ class OwnerDriverMonthlyPayScale extends Component {
 				adsIndex === 0
 					? await this.props.postOwnerDriverJob()
 					: await this.props.postOwnerVehicleFirm();
+			this.props.getOwnerDashboard()
 			this.props.resetOwner();
 			if (res === 200) NavigationService.navigate("Home");
 		}
@@ -308,7 +310,7 @@ const mapDispatchToProps = {
 	setAppMessage,
 	resetOwner,
 	postOwnerDriverJob,
-	postOwnerVehicleFirm
+	postOwnerVehicleFirm,getOwnerDashboard
 };
 
 export default connect(

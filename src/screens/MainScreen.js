@@ -12,7 +12,13 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import {checkSubscription, getLeaseDashBoard, ownerGetVehiclePreferences, setAppMessage} from "../actions";
+import {
+	checkSubscription,
+	driverGetVehiclePreferences,
+	getLeaseDashBoard,
+	ownerGetVehiclePreferences,
+	setAppMessage
+} from "../actions";
 import {
 	Card,
 	Screen,
@@ -37,6 +43,7 @@ class MainScreen extends Component {
 
 	componentDidMount() {
 		this.props.ownerGetVehiclePreferences();
+		this.props.driverGetVehiclePreferences();
 	}
 
 	constructor(props) {
@@ -195,6 +202,6 @@ const mapStateToProps = state => ({
 	ClientTypeId: state.auth.ClientTypeId
 });
 
-const mapDispatchToProps = { ownerGetVehiclePreferences,checkSubscription,setAppMessage };
+const mapDispatchToProps = { driverGetVehiclePreferences,ownerGetVehiclePreferences,checkSubscription,setAppMessage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

@@ -99,7 +99,7 @@ class JobOfferDescriptionScreen extends React.Component {
 					<View
 						style={{
 							position: "absolute",
-							top: 80
+							top: 59
 						}}
 					>
 						<View

@@ -16,7 +16,7 @@ import { Screen, StyledText, StyledTitle } from "../../theme/styledComponent";
 // import { Dropdown } from "react-native-material-dropdown";
 import update from "immutability-helper";
 import Button from "../../components/common/Buttons";
-import { saveLeasePayScale, saveLeaseFirmPost } from "../../actions";
+import {saveLeasePayScale, saveLeaseFirmPost, getLeaseDashBoard} from "../../actions";
 import { Formik } from "formik";
 import FormikTextInput from "../../components/common/FormikTextInput";
 import styles from "../../theme/styles";
@@ -72,7 +72,9 @@ class LeaseTripPayScale extends Component {
 		this.props.saveLeasePayScale(values);
 		const res = await this.props.saveLeaseFirmPost();
 		if(res.status===200)
-			NavigationService.popToTop()
+		{
+			this.props.getLeaseDashBoard()
+			NavigationService.popToTop()}
 	};
 
 	render() {
@@ -202,6 +204,6 @@ const mapStateToProps = state => ({
 	vehicleCategories: state.main.lease.postLeaseDummy.vehicleCategories
 });
 
-const mapDispatchToProps = { saveLeasePayScale, saveLeaseFirmPost };
+const mapDispatchToProps = { saveLeasePayScale, saveLeaseFirmPost,getLeaseDashBoard };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaseTripPayScale);

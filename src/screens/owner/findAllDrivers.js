@@ -174,6 +174,18 @@ class FindAllDrivers extends Component {
 								? this.props.findAllDrivers
 								: []
 						}
+						ListFooterComponent={()=>this.props.findAllDrivers
+							? null:<Card style={{
+								paddingTop: 30,
+								marginLeft:10,
+								marginRight:10,
+								paddingRight: 20,
+								paddingLeft: 20,
+								paddingBottom: 30,
+								borderRadius: 20,
+								justifyContent:'center',
+								alignItems:'center'
+							}}><Text style={{fontSize:16}}>No Data Found</Text></Card>}
 						renderItem={({ item, index }) =>
 							this.renderCard(item, index)
 						}

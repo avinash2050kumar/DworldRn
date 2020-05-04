@@ -25,7 +25,7 @@ import {
 	setAppMessage,
 	resetOwner,
 	postOwnerDriverJob,
-	postOwnerVehicleFirm
+	postOwnerVehicleFirm, getOwnerDashboard
 } from "../../actions";
 import { withNextInputAutoFocusForm } from "react-native-formik";
 import NavigationService from "../../config/NavigationService";
@@ -113,6 +113,7 @@ class OwnerDriverKmPayScale extends Component {
 				adsIndex === 0
 					? await this.props.postOwnerDriverJob()
 					: await this.props.postOwnerVehicleFirm();
+			this.props.getOwnerDashboard()
 			this.props.resetOwner();
 			if (res === 200) NavigationService.navigate("Home");
 		}
@@ -288,7 +289,7 @@ const mapDispatchToProps = {
 	setAppMessage,
 	resetOwner,
 	postOwnerDriverJob,
-	postOwnerVehicleFirm
+	postOwnerVehicleFirm,getOwnerDashboard
 };
 
 export default connect(

@@ -2,7 +2,7 @@ import React from "react";
 import styled, { withTheme } from "styled-components";
 import { View, Text, Button } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/dist/FontAwesome5";
-import DateTimePicker from "react-native-modal-datetime-picker/src/index";
+import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment/moment";
 import { dateFormat } from "../../config/api_url";
 // react vector icons goes here

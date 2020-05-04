@@ -360,7 +360,8 @@ class OwnerVehiclePreference extends Component {
 													</View>
 													<View
 														style={{ width: "49%" }}
-													>
+													>{console.log('this', props.values
+														.vehicle)}
 														<StyledDateAndTimePicker
 															style={{
 																width: "49%"

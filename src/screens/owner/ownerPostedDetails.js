@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 import { NavigationBar, Screen } from "../../theme/styledComponent";
 import RBSheet from "react-native-raw-bottom-sheet";
 import ImageView from "react-native-image-viewing";
-import FullScreenImage from "../owner/fullScreenImage";
+import FullScreenImage from "./fullScreenImage";
 import Button from "../../components/common/Buttons";
 
 const windowWidth = Dimensions.get("window").width;
@@ -47,20 +47,16 @@ const DataContainer = styled.View`
 	justify-content: space-between;
 `;
 
-class LeaseFirmJobDetails extends React.Component {
+class OwnerPostedDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title:navigation.getParam("item")
-                ? navigation.getParam("item").vhicle?navigation.getParam("item").vhicle.Company:
-                    navigation.getParam("item").Company
-                : ''
+            title: 'Leasing Details'
         };
     };
 
-
     render() {
         const item = this.props.navigation.getParam("item");
-        console.log('item',item)
+        {console.log('data', item)}
         return (
             <View style={{ flex: 1 }}>
                 <View
@@ -90,28 +86,14 @@ class LeaseFirmJobDetails extends React.Component {
                         <View style={{ marginLeft: 5, marginRight: 5 }}>
                             <Card
                                 style={{
-                                    paddingTop: 0,
-                                    paddingRight: 0,
-                                    paddingLeft: 0,
-                                    paddingBottom: 0,
+                                    paddingTop: 10,
+                                    paddingRight: 10,
+                                    paddingLeft: 10,
+                                    paddingBottom: 10,
                                     borderRadius: 20,
                                     marginBottom: 15
                                 }}
                             >
-                                <View
-                                    style={[
-                                        styles.flex_row,
-                                        {
-                                            justifyContent: "space-between",
-                                            padding: 14,
-                                            borderTopLeftRadius: 10,
-                                            borderTopRightRadius: 10
-                                        }
-                                    ]}
-                                >
-                                    <StyledTitle>{"Information"}</StyledTitle>
-                                </View>
-                                <HorizontalLine />
                                 <View
                                     style={[
                                         styles.flex_row,
@@ -125,26 +107,31 @@ class LeaseFirmJobDetails extends React.Component {
                                     ]}
                                 >
                                     <View>
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            Vehicle Type
+                                        {item.vehicleCompany&&<StyledPropText>
+                                           Vehicle Company
                                         </StyledPropText>}
-                                        {item.Name&& <StyledPropText>
-                                           Contact PersonOwner Name
-                                        </StyledPropText>}
-                                        {item.Mobile&&<StyledPropText>
+                                      <StyledPropText>
+                                            Contact Person Name
+                                        </StyledPropText>
+                                       <StyledPropText>
                                             Contact Person Number
-                                        </StyledPropText>}
+                                        </StyledPropText>
                                     </View>
+                                    {console.log(
+                                        "this isdaf",
+                                        this.state,
+                                        item
+                                    )}
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            {item.vhicle?item.vhicle.VehicleType.Name:item.VehicleType.Name}
+                                        {item.vehicleCompany&&<StyledPropText>
+                                            {item.vehicleCompany}
                                         </StyledPropText>}
-                                        {item.Name&&<StyledPropText>
-                                            {item.Name}
-                                        </StyledPropText>}
-                                        {item.Mobile&&<StyledPropText>
-                                            {item.Mobile}
-                                        </StyledPropText>}
+                                       <StyledPropText>
+                                           {this.props.personalDetails.FirstName} {this.props.personalDetails.LastName}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {this.props.personalDetails.Mobile}
+                                        </StyledPropText>
                                     </View>
                                 </View>
                             </Card>
@@ -171,9 +158,11 @@ class LeaseFirmJobDetails extends React.Component {
                                         }
                                     ]}
                                 >
-                                    <StyledTitle>{"Vehicle Details"}</StyledTitle>
+                                    <StyledTitle>
+                                        {"Vehicle Details"}
+                                    </StyledTitle>
                                 </View>
-                                <HorizontalLine />
+                                {/*<HorizontalLine />*/}
                                 <View
                                     style={[
                                         styles.flex_row,
@@ -187,42 +176,45 @@ class LeaseFirmJobDetails extends React.Component {
                                     ]}
                                 >
                                     <View>
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>Vehicle Category</StyledPropText>}
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                           Company
-                                        </StyledPropText>}
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                           Model
-                                        </StyledPropText>}
-                                        {/*{item.vhicle&&<StyledPropText>
-                                           From
-                                        </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                          To
-                                        </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                           Status
-                                        </StyledPropText>}*/}
+                                        <StyledPropText>
+                                            Vehicle Category
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            Company
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            Model
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            From
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            To
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            Status
+                                        </StyledPropText>
                                     </View>
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            {item.vhicle?item.vhicle.VehicleCategory.Name:item.VehicleCategory.Name}
-                                        </StyledPropText>}
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            {item.vhicle?item.vhicle.Company:item.Company}
-                                        </StyledPropText>}
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            {item.vhicle?item.vhicle.Company:item.Company}
-                                        </StyledPropText>}
-                                        {/*{item.vhicle&&<StyledPropText>
-                                            From
-                                        </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                        To
-                                        </StyledPropText>}
-                                        {item.vhicle&&<StyledPropText>
-                                        Status
-                                        </StyledPropText>}*/}
+                                        <StyledPropText>
+                                            {item.vehicleCategory?item.vehicleCategory:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.vehicleCompany?item.vehicleCompany:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.Model?item.Model:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.FromDate?item.FromDate.split(" ")[0]:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.Todate?item.Todate.split(" ")[0]:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.Status!=null?item.Status?'Available':'Unavailable':'-'}
+                                        </StyledPropText>
+
                                     </View>
                                 </View>
                             </Card>
@@ -253,7 +245,7 @@ class LeaseFirmJobDetails extends React.Component {
                                         {"Pay Scale"}
                                     </StyledTitle>
                                 </View>
-                                <HorizontalLine />
+                                {/*<HorizontalLine />*/}
                                 <View
                                     style={[
                                         styles.flex_row,
@@ -271,36 +263,19 @@ class LeaseFirmJobDetails extends React.Component {
                                             Car Type
                                         </StyledPropText>
                                         <StyledPropText>
-                                          Payment Type
-                                        </StyledPropText>
-                                        <StyledPropText>
-                                          Pricing
+                                            Monthly Pricing
                                         </StyledPropText>
                                     </View>
                                     <View style={{ alignItems: "flex-end" }}>
-                                        {(item.vhicle||item.VehicleType)&&<StyledPropText>
-                                            {item.vhicle?item.vhicle.VehicleType.Name:item.VehicleType.Name}
-                                        </StyledPropText>}
-                                        {(item.pay||item.PaymentType)&&<StyledPropText>
-                                            {item.pay?item.pay.PayType?item.pay.PayType.Name:'': item.PaymentType?item.PaymentType.Name:''}
-                                        </StyledPropText>}
-                                        {item.pay&&<StyledPropText>
-                                            {item.pay.Price}
-                                        </StyledPropText>}
+                                        <StyledPropText>
+                                            {item.vehicleCategory?item.vehicleCategory:'-'}
+                                        </StyledPropText>
+                                        <StyledPropText>
+                                            {item.Pricing?item.Pricing.price:'-'}
+                                        </StyledPropText>
                                     </View>
                                 </View>
                             </Card>
-                           {/* <Button
-                                label={
-                                    this.props.navigation.getParam(
-                                        "buttonTitle"
-                                    )
-                                        ? this.props.navigation.getParam(
-                                        "buttonTitle"
-                                        )
-                                        : "No title"
-                                }
-                            />*/}
                         </View>
                     </Screen>
                 </ScrollView>
@@ -313,7 +288,8 @@ const mapStateToProps = state => ({
     home: state.home,
     earning: state.driver.earning,
     ClientTypeId: state.auth.ClientTypeId,
-    data: state.home.work.data
+    data: state.home.work.data,
+    personalDetails:state.main.personalDetails
 });
 
 const mapDispatchToProps = {};
@@ -321,4 +297,4 @@ const mapDispatchToProps = {};
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LeaseFirmJobDetails);
+)(OwnerPostedDetails);

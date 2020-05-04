@@ -317,7 +317,6 @@ const intro = (state = initialState, action) => {
 		case SET_MAIN_SCREEN_OWNER_VEHICLE_PREFERENCE:
 			return {
 				...state,
-				vehiclePreferences:action.payload,
 				owner: { ...state.owner,
 					postAdsDriver:{...state.owner.postAdsDriver,
 						vehicle:{...state.owner.postAdsDriver.vehicle,

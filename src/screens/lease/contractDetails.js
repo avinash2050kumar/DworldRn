@@ -64,7 +64,11 @@ class LeaseContractDetails extends Component {
 			Object.keys(state.postLeaseFirmRequirement).length === 0;
 		if (isEmpty) {
 			return {
-				postLeaseFirmRequirement: props.postLeaseFirmRequirement
+				postLeaseFirmRequirement: {...props.postLeaseFirmRequirement,
+					FirmVehicle:{...props.postLeaseFirmRequirement.FirmVehicle,
+						ToDate:'2020-05-09',
+						FromDate:'1999-01-01'
+				}}
 			};
 		}
 
@@ -151,6 +155,7 @@ class LeaseContractDetails extends Component {
 								>
 									{props => (
 										<Form>
+											{console.log('item',props)}
 											<View>
 												<RowArea>
 													<View
@@ -169,9 +174,7 @@ class LeaseContractDetails extends Component {
 															format={
 																"YYYY-MM-DD"
 															}
-															defaultValue={moment().format(
-																"L"
-															)}
+															defaultValue={props.values.FirmVehicle.FromDate}
 														/>
 													</View>
 													<View
@@ -190,9 +193,7 @@ class LeaseContractDetails extends Component {
 															format={
 																"YYYY-MM-DD"
 															}
-															defaultValue={moment().format(
-																"L"
-															)}
+															defaultValue={props.values.FirmVehicle.ToDate}
 														/>
 													</View>
 												</RowArea>
