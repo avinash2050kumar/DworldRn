@@ -65,6 +65,9 @@ class FormikTextInput extends React.Component {
 		let currentErrorPath = "formikprops.errors";
 		let currentError = formikprops.errors;
 
+		let currentTouched = formikprops.touched;
+		let currentTouchedPath = "formikprops.touched";
+
 		path.map((loc, index) => {
 			const reg = loc.split(/\[(.*?)\]/g);
 			if (
@@ -93,9 +96,27 @@ class FormikTextInput extends React.Component {
 				currentErrorPath = `${currentErrorPath}[${reg[1]}]`;
 			}
 		});
+
+		path.map(loc => {
+			const reg = loc.split(/\[(.*?)\]/g);
+			if (loc !== "." && currentTouched[loc]) {
+				currentTouched = currentTouched[loc];
+				currentTouchedPath = `${currentTouchedPath}.${loc}`;
+			} else if (
+				loc !== "." &&
+				loc.includes("[") &&
+				currentTouched[reg[1]]
+			) {
+				currentTouched = currentTouched[reg[1]];
+				currentTouchedPath = `${currentTouchedPath}[${reg[1]}]`;
+			}
+		});
+
+
 		if (
 			currentValuePath === `formikprops.values.${input}` &&
-			currentErrorPath === `formikprops.errors.${input}`
+			currentErrorPath === `formikprops.errors.${input}` &&
+			currentTouchedPath === `formikprops.touched.${input}`
 		)
 			return { isInvalid: true, error: currentError };
 		return { isInvalid: false, error: currentError };
@@ -177,8 +198,8 @@ class FormikTextInput extends React.Component {
 						<StyledTextInput
 							returnKeyType={"next"}
 							placeholder={label}
-							{...this.props}
 							style={{ width: "100%" }}
+							{...this.props}
 						/>
 					</RowContainer>
 				)}

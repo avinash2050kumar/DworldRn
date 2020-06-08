@@ -176,8 +176,13 @@ const intro = (state = initialState, action) => {
 
 
 		case SET_MAIN_SCREEN_EXPERIENCE:{
-			const data = Object.assign({}, action.payload,{license: {...action.payload.license,LicenseType:action.payload.license.LicenseType?
-						action.payload.license.LicenseType:action.payload.licenseType[0]}})
+			const data = Object.assign({}, action.payload,{license:
+					{...action.payload.license,
+						LicenseNumber:action.payload.license.LicenseNumber?
+							action.payload.license.LicenseNumber:'',
+						LicenseType:action.payload.license.LicenseType?
+						action.payload.license.LicenseType:
+							action.payload.licenseType[0]}})
 			return {
 				...state,
 				experiences: data

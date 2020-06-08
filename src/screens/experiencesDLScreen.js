@@ -91,8 +91,7 @@ class ExperiencesDLScreen extends Component {
 						>
 							<StatusBar barStyle="dark-content" />
 							<StyledText style={{ marginBottom: 15 }}>
-								Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. ,
+								Tell us about your Driving History
 							</StyledText>
 
 							<Formik
@@ -176,7 +175,7 @@ class ExperiencesDLScreen extends Component {
 												]}
 												image={require("../assets/images/license.png")}
 												description={
-													"Upload the front side which has your photo."
+													"Upload  the front side of your Driving License"
 												}
 											/>
 											<UploadDL
@@ -199,7 +198,7 @@ class ExperiencesDLScreen extends Component {
 													)
 												]}
 												description={
-													"Upload the back side which has your photo."
+													"Upload  the backside of your Driving License"
 												}
 											/>
 										</Form>

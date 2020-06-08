@@ -86,8 +86,7 @@ class PersonalDetailScreen extends Component {
 					>
 						<StatusBar barStyle="dark-content" />
 						<StyledText style={{ marginBottom: 15 }}>
-							Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. ,
+							Enter you details. these details are visible to everyone who are viewing your  profile
 						</StyledText>
 						{!this.isEmpty(this.props.personalDetails) && (
 							<Formik
@@ -136,7 +135,7 @@ class PersonalDetailScreen extends Component {
 												formikprops={props}
 											/>
 											<FormikTextInput
-												label="Landmark"
+												label="Landmark(Optional)"
 												name="Landmark"
 												type="name"
 												formikprops={props}
@@ -155,7 +154,8 @@ class PersonalDetailScreen extends Component {
 												formikprops={props}
 											/>
 											<FormikTextInput
-												label="Instruction"
+												label="Any other special message(s) that you want to add(optional)
+"
 												name="Instruction"
 												type="name"
 												multiline={true}

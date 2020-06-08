@@ -125,14 +125,12 @@ class OwnerVehiclePreference extends Component {
 	};
 
 	render() {
-		console.log('Owner Vehicle preference',this.props)
 		return (
 			<ScrollView>
 				<Screen style={{ backgroundColor: theme.white }}>
 					<View>
 						<Text>
-							Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry.
+							Select the default vehicle, location and number of vehicles required.
 						</Text>
 						{!this.isEmpty(this.props.postAdsDriverDummy) && (
 							<KeyboardAvoidingView behavior="padding" enabled>
@@ -334,6 +332,7 @@ class OwnerVehiclePreference extends Component {
 															)
 													)}
 												</View>
+												<Text style={{marginTop:20}}>Duration of contract</Text>
 												<RowArea>
 													<View
 														style={{ width: "49%" }}
@@ -360,8 +359,7 @@ class OwnerVehiclePreference extends Component {
 													</View>
 													<View
 														style={{ width: "49%" }}
-													>{console.log('this', props.values
-														.vehicle)}
+													>
 														<StyledDateAndTimePicker
 															style={{
 																width: "49%"

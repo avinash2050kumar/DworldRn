@@ -32,10 +32,10 @@ export const resetHome=()=>dispatch=>{
 	dispatch({type:RESET_HOME})
 }
 
-export const setDeviceLocation = (location, formattedAddress) => dispatch => {
+export const setDeviceLocation = (location, formattedAddress,isManualAddress) => dispatch => {
 	dispatch({
 		type: SET_DEVICE_LOCATION,
-		payload: { location, formattedAddress }
+		payload: { location, formattedAddress ,isManualAddress}
 	});
 };
 

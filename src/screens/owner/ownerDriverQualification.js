@@ -81,8 +81,7 @@ class OwnerDriverQualification extends Component {
 				<Screen style={{ backgroundColor: theme.white }}>
 					<View>
 						<Text>
-							Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry.
+							Enter your preferred experience for your driver
 						</Text>
 						{!this.isEmpty(this.props.postAdsDriverDummy) && (
 							<KeyboardAvoidingView behavior="padding" enabled>
@@ -132,7 +131,7 @@ class OwnerDriverQualification extends Component {
 													}}
 												/>
 												<FormikTextInput
-													label="Experience Year"
+													label="Enter preferred driving experience."
 													name="DL.ExperienceYear"
 													type="name"
 													formikprops={props}

@@ -25,7 +25,7 @@ import EvilIcons from "react-native-vector-icons/dist/EvilIcons";
 class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			title: i18n.t("profile")
+			title: i18n.t("myDetail")
 		};
 	};
 

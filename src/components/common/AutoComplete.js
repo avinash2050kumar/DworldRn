@@ -77,7 +77,7 @@ export default class AutoComplete extends React.PureComponent {
 		});
 	};
 
-	_isInValid = (formikprops, input) => {
+/*	_isInValid = (formikprops, input) => {
 		let path = input.split(/(\.)/g);
 		let currentValue = formikprops.values;
 		let currentValuePath = "formikprops.values";
@@ -106,7 +106,7 @@ export default class AutoComplete extends React.PureComponent {
 		)
 			return { isInvalid: true, error: currentError };
 		return { isInvalid: false, error: currentError };
-	};
+	};*/
 
 	render() {
 		const {
@@ -124,7 +124,7 @@ export default class AutoComplete extends React.PureComponent {
 			defaultValue
 		} = this.props;
 
-		const isValid = this._isInValid(formikprops, input);
+		//const isValid = this._isInValid(formikprops, input);
 
 		return (
 			<Area
@@ -138,7 +138,7 @@ export default class AutoComplete extends React.PureComponent {
 					<PlaceholderContainer>
 						<Text
 							style={{
-								color: isValid.isInvalid ? "red" : "#777",
+								color: /*isValid.isInvalid ? "red" : */"#777",
 								marginBottom: 2
 							}}
 						>
@@ -149,8 +149,8 @@ export default class AutoComplete extends React.PureComponent {
 				)}
 				<RowContainer
 					style={{
-						borderWidth: isValid.isInvalid ? 1 : 0,
-						borderColor: isValid.isInvalid ? "red" : "black",
+						/*borderWidth: /!*isValid.isInvalid ?*!/ 1/!* : 0*!/,
+						borderColor:/!* isValid.isInvalid ? "red" : *!/"black",*/
 						backgroundColor: "white"
 					}}
 				>
@@ -174,12 +174,11 @@ export default class AutoComplete extends React.PureComponent {
 						{...this.props}
 					/>
 				</RowContainer>
-				{isValid.isInvalid && (
+			{/*	{isValid.isInvalid && (
 					<Text type="small" style={{ marginTop: 4, color: "red" }}>
 						{isValid.error}
 					</Text>
-				)}
-
+				)}*/}
 				{this.state.dropdownVisible && (
 					<View
 						elevation={7}

@@ -12,7 +12,7 @@ export default {
 	ownerHomeTabName3: "Applicant",
 	ownerHomeTabName4: "Profile",
 	profileScreenDriverOption1: "Personal Details",
-	profileScreenDriverOption2: "Polices",
+	profileScreenDriverOption2: "Our Polices",
 	profileScreenDriverOption3: "Partner with us",
 	profileScreenDriverOption4: "Customer Support",
 	profileScreenDriverOption5: "Change Password",
@@ -63,5 +63,6 @@ export default {
 	vehicleTypes: "Vehicle Types",
 	payScale: "Pay Scale",
 	logout: "Logout",
-	jobOffer: "Job Offer"
+	jobOffer: "Job Offer",
+	myDetail:'My Details'
 };

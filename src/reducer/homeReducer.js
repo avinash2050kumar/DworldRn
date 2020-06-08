@@ -8,6 +8,7 @@ import {
 	SET_LEASE_DASHBOARD,RESET_HOME
 } from "../actions/type";
 import update from "immutability-helper";
+import temporalRef from "@babel/runtime/helpers/esm/temporalRef";
 
 const initialState={
 	isHomeScreenVisible: false,
@@ -23,11 +24,13 @@ const initialState={
 			{ type: "", number: 0 }
 		],
 		location: {},
-		address: {}
+		address: {
+			formatted_address:''
+		}
 	},
 	ownerDashBoard: {},
 	driverJobOffer: [],
-	leaseDashBoard: []
+	leaseDashBoard: [],isManualAddress:undefined
 }
 
 const homeReducerInitialState = (
@@ -75,7 +78,6 @@ const homeReducerInitialState = (
 			};
 
 		case SET_FILTERED_HOME_WORK_DATA:
-			console.log('state', state)
 			const { filterObj, dataIndex } = action.payload;
 			let filteredData = state.work.data[dataIndex].dataList;
 			//vehicleTypes
@@ -91,9 +93,17 @@ const homeReducerInitialState = (
 			return { ...state,work: updateFilter};
 
 		case SET_DEVICE_LOCATION:
-			const { location, formattedAddress } = action.payload;
+			const { location, formattedAddress ,isManualAddress} = action.payload;
+			if(isManualAddress===false||isManualAddress===undefined)
 			return {
 				...state,
+				location: location,
+				address: formattedAddress
+			};
+			if(isManualAddress )
+			return {
+				...state,
+				isManualAddress:true,
 				location: location,
 				address: formattedAddress
 			};

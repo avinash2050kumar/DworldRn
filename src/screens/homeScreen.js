@@ -61,7 +61,7 @@ class HomeScreen extends Component {
 							.then(response => {
 								this.props.setDeviceLocation(
 									location,
-									response.data.results[0]
+									response.data.results[0],false
 								);
 							});
 
@@ -76,7 +76,7 @@ class HomeScreen extends Component {
 							.then(response => {
 								this.props.setDeviceLocation(
 									location,
-									response.data.results[0]
+									response.data.results[0],false
 								);
 							});
 
@@ -179,7 +179,8 @@ class HomeScreen extends Component {
 						}
 					]}
 				>
-					<View style={[styles.flex_row, { alignItems: "center" }]}>
+					<TouchableOpacity onPress={()=>NavigationService.navigate('ManualLocationScreen')}>
+						<View style={[styles.flex_row, { alignItems: "center" }]}>
 						<Image
 							source={require("../assets/images/Location.png")}
 							style={{
@@ -200,6 +201,7 @@ class HomeScreen extends Component {
 							</Text>
 						</View>
 					</View>
+					</TouchableOpacity>
 
 				</NavigationBar>
 				<ScrollView showsVerticalScrollIndicator={false}>

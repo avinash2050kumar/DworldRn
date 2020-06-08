@@ -158,7 +158,7 @@ class ProfileFormScreen extends Component {
 												formikprops={props}
 											/>
 											<FormikTextInput
-												label="Landmark"
+												label="Landmark(optional)"
 												name="Landmark"
 												type="name"
 												formikprops={props}
@@ -177,8 +177,8 @@ class ProfileFormScreen extends Component {
 												formikprops={props}
 											/>
 											<FormikTextInput
-												label="Instruction"
-												name="Instruction"
+												label="Any other special message(s) that you want to add(optional)
+"												name="Instruction"
 												type="name"
 												multiline={true}
 												numberOfLines={3}

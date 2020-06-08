@@ -35,21 +35,21 @@ class ChooseYourProfile extends Component {
 			{
 				title: "Driver",
 				text:
-					"If you are a driver and looking for a job and extra income.",
+					"Earn money by driving for us",
 				image: require("../assets/images/carDriver.png"),
 				onClick: () => this.setState({ selectedIndex: 0 })
 			},
 			{
 				title: "Car Owner",
 				text:
-					"If you have a car and want to earn extra hire a drive or rent your car.",
+					"Lease your vehicle to earn or hire a driver",
 				image: require("../assets/images/carOwner.png"),
 				onClick: () => this.setState({ selectedIndex: 1 })
 			},
 			{
 				title: "Leasing Firm",
 				text:
-					"If you are a driver and looking for a job and extra income.",
+					"Lease any vehicle or hire a driver",
 				image: require("../assets/images/carLease.png"),
 				onClick: () => this.setState({ selectedIndex: 2 })
 			}
@@ -126,8 +126,8 @@ class ChooseYourProfile extends Component {
 							Choose Your Profile
 						</StyledHeading>
 						<StyledText style={{ color: "#fff", marginBottom: 45 }}>
-							Lorem Ispum Although we try to do everything, there
-							are some things we cannot do!
+							select the category(s) applicable to you
+
 						</StyledText>
 						{this.renderCard()}
 					</View>

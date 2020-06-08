@@ -115,8 +115,7 @@ class OwnerDriverWorkSchedule extends Component {
 				<Screen style={{ backgroundColor: theme.white }}>
 					<View>
 						<Text>
-							Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry.s
+							Enter  the work shift you want the driver to drive.
 						</Text>
 						{!this.isEmpty(this.props.postAdsDriverDummy) && (
 							<KeyboardAvoidingView behavior="padding" enabled>
@@ -129,6 +128,7 @@ class OwnerDriverWorkSchedule extends Component {
 									{props => (
 										<Form>
 											<View>
+												<Text style={{marginTop:20}}>Work Shifts</Text>
 												<Selector
 													theme="dropdown" // Default: 'simple'
 													items={this.props.ShiftType
@@ -169,6 +169,7 @@ class OwnerDriverWorkSchedule extends Component {
 											console.log('Propdfsgafgs',props.values.work
 												.JobType.Name.toString(),props.values)}
 											<View>
+												<Text style={{marginTop:20}}>Job Type</Text>
 												<Selector
 													theme="dropdown" // Default: 'simple'
 													items={this.props.JobType

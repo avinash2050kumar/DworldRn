@@ -178,8 +178,8 @@ console.log('value', await fetch(
 					<StatusBar barStyle="dark-content" />
 					<KeyboardAvoidingView behavior="padding" enabled>
 						<StyledText style={{ marginBottom: 45 }}>
-							Find the job on Djobs. You are only few steps away
-							from bunch of jobs
+							Please enter your email/mobile number and password to sign
+							in
 						</StyledText>
 						<Formik
 							initialValues={initialState}

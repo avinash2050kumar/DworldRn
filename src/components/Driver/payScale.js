@@ -37,11 +37,11 @@ class PayScaleScreen extends Component {
 		super(props);
 		this.state = { selectedIndex: 0 };
 		this.action = [
-			{ name: "HOURLY" },
-			{ name: "WEEKLY" },
-			{ name: "MONTHLY" },
-			{ name: "KM" },
-			{ name: "TRIP" }
+			{ name: "Hourly" },
+			{ name: "Day-wise" },
+			{ name: "Monthly" },
+			{ name: "Km" },
+			{ name: "Trip" }
 		];
 	}
 
@@ -86,8 +86,7 @@ class PayScaleScreen extends Component {
 				<Screen style={{ backgroundColor: theme.white }}>
 					<StatusBar barStyle="dark-content" />
 					<StyledText style={{ marginBottom: 15 }}>
-						Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry.
+						Enter your salary/fees for driving.
 					</StyledText>
 					<View
 						style={[
