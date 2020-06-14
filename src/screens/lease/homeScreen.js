@@ -75,7 +75,6 @@ class LeaseHomeScreen extends Component {
 
   componentDidMount() {
     this.props.setHomeScreenNoOfWork();
-    this.props.getLeaseDashBoard();
     requestMultiple([
       PERMISSIONS.IOS.LOCATION_ALWAYS,
       PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
@@ -84,29 +83,30 @@ class LeaseHomeScreen extends Component {
       if (statuses[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION] == 'granted')
         Geolocation.getCurrentPosition(location => {
           axios
-            .get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
-            )
-            .then(response => {
-              this.props.setDeviceLocation(location, response.data.results[0]);
-            });
+              .get(
+                  `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
+              )
+              .then(response => {
+                this.props.setDeviceLocation(location, response.data.results[0]);
+              });
 
           this.setState({location});
         });
       if (statuses[PERMISSIONS.IOS.LOCATION_ALWAYS] == 'granted')
         Geolocation.getCurrentPosition(location => {
           axios
-            .get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
-            )
-            .then(response => {
-              this.props.setDeviceLocation(location, response.data.results[0]);
-            });
+              .get(
+                  `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
+              )
+              .then(response => {
+                this.props.setDeviceLocation(location, response.data.results[0]);
+              });
 
           this.setState({location});
         });
     });
   }
+
 
   _handleSubmit = payload => {
     this.props.setAppMessage('Sending', 'Try to send Successfully', 'success');
@@ -213,7 +213,7 @@ class LeaseHomeScreen extends Component {
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
     }
-
+    const {address} = this.props;
     return (
       <View>
         <NavigationBar
@@ -237,9 +237,11 @@ class LeaseHomeScreen extends Component {
               <View style={{marginLeft: 10, width: '70%'}}>
                 <Text style={{color: theme.textLightColor}}>You are here</Text>
                 <Text numberOfLines={1}>
-                  {this.props.address
-                    ? this.props.address.formatted_address
-                    : 'unable to get Location'}
+                  {this.props.home.isManualAddress
+                      ? `${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},${address.location?address.location:''}`
+                      : address
+                          ? address.formatted_address
+                          : 'unable to get Location'}
                 </Text>
               </View>
             </View>
@@ -326,7 +328,7 @@ class LeaseHomeScreen extends Component {
 
 const mapStateToProps = state => ({
   leaseDashBoard: state.home.leaseDashBoard,
-  address: state.home.address,
+  address: state.home.address, home:state.home
 });
 
 const mapDispatchToProps = {

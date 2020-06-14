@@ -180,7 +180,7 @@ class OwnerHomeScreen extends Component {
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
     }
-
+    const {address} = this.props;
     return (
       <View>
         <NavigationBar
@@ -204,8 +204,10 @@ class OwnerHomeScreen extends Component {
               <View style={{marginLeft: 10, width: '75%'}}>
                 <Text style={{color: theme.textLightColor}}>You are here</Text>
                 <Text numberOfLines={1}>
-                  {this.props.address
-                    ? this.props.address.formatted_address
+                  {this.props.home.isManualAddress
+                    ? `${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},${address.location?address.location:''}`
+                    : address
+                    ? address.formatted_address
                     : 'unable to get Location'}
                 </Text>
               </View>
@@ -337,6 +339,7 @@ class OwnerHomeScreen extends Component {
 const mapStateToProps = state => ({
   ownerDashBoard: state.home.ownerDashBoard,
   address: state.home.address,
+  home: state.home,
 });
 
 const mapDispatchToProps = {

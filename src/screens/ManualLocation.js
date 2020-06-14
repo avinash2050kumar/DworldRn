@@ -50,6 +50,7 @@ class ManualLocationScreen extends Component {
   state = {
     isDisabled: true,
     isResendVisible: false,
+    isDropDownVisible: false,
     timer: 90,
     searchText: '',
     data: [
@@ -57,15 +58,59 @@ class ManualLocationScreen extends Component {
       {Name: 'Guwahati,India', Id: 10498},
     ],
     otp: '',
+    location: '',
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const {address} = nextProps;
+    this.setState({location: address.location ? address.location : ''});
+  }
+
+  componentDidMount() {
+    requestMultiple([
+      PERMISSIONS.IOS.LOCATION_ALWAYS,
+      PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+    ]).then(statuses => {
+      if (statuses[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION] == 'granted')
+        Geolocation.getCurrentPosition(location => {
+          axios
+            .get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
+            )
+            .then(response => {
+              this.props.setDeviceLocation(location, response.data.results[0]);
+            });
+
+          // this.setState({location});
+        });
+      if (statuses[PERMISSIONS.IOS.LOCATION_ALWAYS] == 'granted')
+        Geolocation.getCurrentPosition(location => {
+          axios
+            .get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
+            )
+            .then(response => {
+              this.props.setDeviceLocation(location, response.data.results[0]);
+            });
+
+          // this.setState({location});
+        });
+    });
+  }
 
   _onChangeText = async searchText => {
     const res = await axios.get(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchText}&key=AIzaSyDVo9Zmn86bAlIMz4pxCqUeDdn0Gm2I4pw`,
     );
-    console.log(res.data?res.data.predictions:[]);
-    await this.setState({searchText,data:res.data?res.data.predictions:[]});
-    this.props.onChange(this.state.searchText);
+    await this.setState({
+      searchText,
+      isDropDownVisible: true,
+      data: res.data ? res.data.predictions : [],
+    });
+  };
+
+  onSelect = item => {
+    this.setState({isDropDownVisible: false, location: item.description});
   };
 
   _handleSubmit = async (payload, actions) => {
@@ -84,7 +129,8 @@ class ManualLocationScreen extends Component {
       },
       {
         ...payload,
-        formatted_address: `${payload.Address1},${payload.Address2},${payload.city},${payload.State},${payload.ZipCode}`,
+        location: this.state.location,
+        //formatted_address: `${payload.Address1},${payload.Address2},${this.state.location}`,
       },
       true,
     );
@@ -96,9 +142,7 @@ class ManualLocationScreen extends Component {
     const initialState = {
       Address1: address.Address1 ? address.Address1 : '',
       Address2: address.Address2 ? address.Address2 : '',
-      State: address.State ? address.State : '',
-      city: address.city ? address.city : '',
-      ZipCode: address.ZipCode ? address.ZipCode : '',
+      location: address.location ? address.location : '',
     };
     return (
       <ScrollView
@@ -139,7 +183,6 @@ class ManualLocationScreen extends Component {
               validationSchema={validationSchema}>
               {props => (
                 <Card style={{marginTop: 30}}>
-                  {console.log('state', props)}
                   <Form>
                     <FormikTextInput
                       label="Address 1"
@@ -165,10 +208,13 @@ class ManualLocationScreen extends Component {
                         zIndex: 0,
                       }}
                       data={this.state.data}
-                      defaultValue={this.state.query}
+                      defaultValue={props.values.location}
                       onChangeText={searchText =>
                         this._onChangeText(searchText)
                       }
+                      searchText={this.state.searchText}
+                      isDropdownVisible={this.state.isDropDownVisible}
+                      onSelect={item => this.onSelect(item)}
                       hint={'eg. Kormangala'}
                       placeholder="Location"
                       inputContainerStyle={{borderWidth: 0, padding: 10}}
@@ -178,7 +224,7 @@ class ManualLocationScreen extends Component {
                             this.setState({query: item.Name});
                             this._onSelect(item);
                           }}>
-                          <Text style={styles.itemText}>
+                          <Text style={{fontSize: 15}}>
                             {JSON.stringify(item.description)}
                           </Text>
                         </TouchableOpacity>
@@ -205,7 +251,6 @@ class ManualLocationScreen extends Component {
   }
 
   fixAddress = () => {
-    console.log('vlaue');
     requestMultiple([
       PERMISSIONS.IOS.LOCATION_ALWAYS,
       PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
@@ -219,7 +264,7 @@ class ManualLocationScreen extends Component {
             .then(response => {
               this.props.setDeviceLocation(
                 location,
-                response.data.results[0],
+                {...response.data.results[0], location: ''},
                 false,
               );
             });
@@ -235,7 +280,7 @@ class ManualLocationScreen extends Component {
             .then(response => {
               this.props.setDeviceLocation(
                 location,
-                response.data.results[0],
+                {...response.data.results[0], location: ''},
                 false,
               );
             });

@@ -1,96 +1,96 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
-	StatusBar,
-	View,
-	ScrollView,
-	KeyboardAvoidingView,
-	Text,
-	FlatList,
-	TouchableOpacity,
-	Image,
-	Dimensions
-} from "react-native";
-import { connect } from "react-redux";
-import Constants from "expo-constants";
+  StatusBar,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from 'react-native';
+import {connect} from 'react-redux';
+import Constants from 'expo-constants';
 import {
-	Button,
-	Card,
-	HorizontalLine,
-	NavigationBar,
-	Screen,
-	ShadowLessCard,
-	StyledText,
-	StyledTitle
-} from "../theme/styledComponent";
+  Button,
+  Card,
+  HorizontalLine,
+  NavigationBar,
+  Screen,
+  ShadowLessCard,
+  StyledText,
+  StyledTitle,
+} from '../theme/styledComponent';
 import {
-	setHomeScreenNoOfWork,
-	setDriverEarning,
-	driverApplyJob,
-	driverGetJobOffer,
-	filtersAndSortingDriverData, driverApproveJobOffer, approveDriverOffer
-} from "../actions";
-import theme from "../theme/lightTheme";
-import styles from "../theme/styles";
-import styled from "styled-components";
-import i18n from "i18n-js";
-import Modal from "react-native-modal";
-import FilterAndSorting from "../components/Driver/filterAndSorting";
-import DriverJobOfferCard from "../components/Driver/jobOfferCard";
+  setHomeScreenNoOfWork,
+  setDriverEarning,
+  driverApplyJob,
+  driverGetJobOffer,
+  filtersAndSortingDriverData,
+  driverApproveJobOffer,
+  approveDriverOffer,
+} from '../actions';
+import theme from '../theme/lightTheme';
+import styles from '../theme/styles';
+import styled from 'styled-components';
+import i18n from 'i18n-js';
+import Modal from 'react-native-modal';
+import FilterAndSorting from '../components/Driver/filterAndSorting';
+import DriverJobOfferCard from '../components/Driver/jobOfferCard';
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const StyledPropText = styled.Text`
-	color: ${props => props.theme.textLightColor};
-	margin: 5px 0px;
+  color: ${props => props.theme.textLightColor};
+  margin: 5px 0px;
 `;
 
 const StyledValueText = styled.Text`
-	color: ${props => props.theme.themeText};
-	margin: 5px 0px;
+  color: ${props => props.theme.themeText};
+  margin: 5px 0px;
 `;
 
 class DriverJOBOfferScreen extends Component {
-	static navigationOptions = {
-		header: null
-	};
+  static navigationOptions = {
+    header: null,
+  };
 
-	state = {
-		isModalVisible: false
-	};
+  state = {
+    isModalVisible: false,
+  };
 
-	toggleModal = () => {
-		this.setState({ isModalVisible: !this.state.isModalVisible });
-	};
+  toggleModal = () => {
+    this.setState({isModalVisible: !this.state.isModalVisible});
+  };
 
-	componentDidMount() {
-		this.props.driverGetJobOffer();
-	}
+  componentDidMount() {
+    this.props.driverGetJobOffer();
+  }
 
-	handleApply=(item)=>{
-		this.props.approveDriverOffer(item.JobId)
-	}
-	render() {
-		return (
-			<View style={{ flex: 1 }}>
-				<View
-					style={{
-						//paddingTop: 22,
-						backgroundColor: theme.secondThemeColor
-					}}
-				>
-					<NavigationBar
-						style={[
-							styles.flex_row,
-							{
-								justifyContent: "space-between",
-								backgroundColor: theme.secondThemeColor,
-								height: 60
-							}
-						]}
-					>
-						<View style={[styles.flex_row]}>
-							{/*	<TouchableOpacity
+  handleApply = item => {
+    this.props.approveDriverOffer(item.JobId);
+  };
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <View
+          style={{
+            //paddingTop: 22,
+            backgroundColor: theme.secondThemeColor,
+          }}>
+          <NavigationBar
+            style={[
+              styles.flex_row,
+              {
+                justifyContent: 'space-between',
+                backgroundColor: theme.secondThemeColor,
+                height: 60,
+              },
+            ]}>
+            <View style={[styles.flex_row]}>
+              {/*	<TouchableOpacity
 								onPress={() => this.props.navigation.pop()}
 							>
 								<Ionicons
@@ -99,88 +99,96 @@ class DriverJOBOfferScreen extends Component {
 									color={theme.white}
 								/>
 							</TouchableOpacity>*/}
-							<StyledTitle
-								style={{
-									color: "#fff",
-									fontSize: 20,
-									marginLeft: 15
-								}}
-							>
-								{i18n.t("jobOffer")}
-							</StyledTitle>
-						</View>
-					</NavigationBar>
-					<View
-						style={{
-							position: "absolute",
-							top: 58
-						}}
-					>
-						<View
-							style={{
-								paddingTop: 200,
-								borderStyle: "solid",
-								borderRightWidth: windowWidth,
-								borderTopWidth: 100,
-								borderRightColor: "transparent",
-								borderTopColor: theme.secondThemeColor
-							}}
-						/>
-					</View>
-				</View>
-				<ScrollView
-					showsVerticalScrollIndicator={false}
-					contentContainerStyle={{ flexGrow: 1 }}
-				>
-					<Screen style={{ backgroundColor: "transparent" }}>
-						<StatusBar barStyle="light-content" />
+              <StyledTitle
+                style={{
+                  color: '#fff',
+                  fontSize: 20,
+                  marginLeft: 15,
+                }}>
+                {i18n.t('jobOffer')}
+              </StyledTitle>
+            </View>
+          </NavigationBar>
+          <View
+            style={{
+              position: 'absolute',
+              top: 58,
+            }}>
+            <View
+              style={{
+                paddingTop: 200,
+                borderStyle: 'solid',
+                borderRightWidth: windowWidth,
+                borderTopWidth: 100,
+                borderRightColor: 'transparent',
+                borderTopColor: theme.secondThemeColor,
+              }}
+            />
+          </View>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{flexGrow: 1}}>
+          <Screen style={{backgroundColor: 'transparent'}}>
+            <StatusBar barStyle="light-content" />
+			  {console.log('point of error',this.props.driverJobOffer)}
+            <FlatList
+              data={this.props.driverJobOffer}
+              renderItem={({item, index}) => (
+                <DriverJobOfferCard
+                  item={item}
+                  index={index}
+                  driverApplyJob={e => this.handleApply(item)}
+                />
+              )}
+              ListFooterComponent={() => {
+                const res = this.props.driverJobOffer;
 
-						<FlatList
-							data={this.props.driverJobOffer}
-							renderItem={({ item, index }) => (
-								<DriverJobOfferCard item={item} index={index} driverApplyJob={(e)=>this.handleApply(item)} />
-							)}
-							ListFooterComponent={()=>
-							{const res = this.props.driverJobOffer
-
-								return res.length==0?<Card style={{
-									paddingTop: 30,
-									marginLeft:10,
-									marginRight:10,
-									paddingRight: 20,
-									paddingLeft: 20,
-									paddingBottom: 30,
-									borderRadius: 20,
-									justifyContent:'center',
-									alignItems:'center'
-								}}><Text style={{fontSize:16}}>No Data Found</Text></Card>:null}}
-							keyExtractor={(item, index) => index}
-							showsHorizontalScrollIndicator={false}
-							showsVerticalScrollIndicator={false}
-						/>
-					</Screen>
-				</ScrollView>
-			</View>
-		);
-	}
+                return res.length == 0 ? (
+                  <Card
+                    style={{
+                      paddingTop: 30,
+                      marginLeft: 10,
+                      marginRight: 10,
+                      paddingRight: 20,
+                      paddingLeft: 20,
+                      paddingBottom: 30,
+                      borderRadius: 20,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{fontSize: 16}}>No Data Found</Text>
+                  </Card>
+                ) : null;
+              }}
+              keyExtractor={(item, index) => index}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+            />
+          </Screen>
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-	home: state.home,
-	earning: state.driver.earning,
-	ClientTypeId: state.auth.ClientTypeId,
-	driverJobOffer: state.home.driverJobOffer
+  home: state.home,
+  earning: state.driver.earning,
+  ClientTypeId: state.auth.ClientTypeId,
+  driverJobOffer: state.home.driverJobOffer,
 });
 
 const mapDispatchToProps = {
-	setDriverEarning,
-	setHomeScreenNoOfWork,
-	filtersAndSortingDriverData,
-	driverApplyJob,
-	driverGetJobOffer,approveDriverOffer
+  setDriverEarning,
+  setHomeScreenNoOfWork,
+  filtersAndSortingDriverData,
+  driverApplyJob,
+  driverGetJobOffer,
+  approveDriverOffer,
 };
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(DriverJOBOfferScreen);
