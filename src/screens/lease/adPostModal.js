@@ -68,14 +68,14 @@ class AdPostModal extends React.PureComponent {
 				name: "Driver",
 				title: "Find Driver",
 				route: "PostAdsByOwner",
-				param: { title: "Post a Ads for drivers", index: 0 },
+				param: { title: "Driver preference", index: 0 },
 				icons: require("../../assets/images/Group11.png")
 			},
 			{
 				name: "Vehicle",
 				title: "Find leasing firm",
 				route: "PostAdsByOwner",
-				param: { title: "Post a Ads for Vehicle", index: 1 },
+				param: { title: "Leasing firm preferences", index: 1 },
 				icons: require("../../assets/images/Group16.png")
 			}
 		],

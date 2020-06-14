@@ -276,9 +276,9 @@ class ProfileScreen extends Component {
 							>
 								<View style={{ alignItems: "flex-end" }}>
 									<Image
-										source={require("../assets/images/edit.png")}
+										source={require("../assets/images/eye.png")}
 										style={{
-											width: 30,
+											width:40,
 											height: 30,
 											resizeMode: "contain"
 										}}

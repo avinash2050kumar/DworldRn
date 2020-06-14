@@ -91,14 +91,14 @@ class MainScreen extends Component {
 						Name: i18n.t("mainScreenAdsDriverDetails"),
 						icon: require("../assets/images/requirement.png"),
 						route: "PostAdsByOwner",
-						param: { title: "Post a Ads for drivers", index: 0 },
+						param: { title: "Driver preference", index: 0 },
 						isSubscriptionCheck:true
 					},
 					{
 						Name: i18n.t("mainScreenAdsVehicleDetails"),
 						icon: require("../assets/images/requirement.png"),
 						route: "PostAdsByOwner",
-						param: { title: "Post a Ads for Vehicle", index: 1 },
+						param: { title: "Leasing firm preferences", index: 1 },
 						isSubscriptionCheck:true
 					}
 				]
