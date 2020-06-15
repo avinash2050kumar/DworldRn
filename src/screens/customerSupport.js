@@ -64,7 +64,7 @@ class CustomerSupportScreen extends Component {
                   color: theme.secondThemeColor,
                   fontWeight: 'bold',
                 }}>
-                +91
+                {/*+91 */}{`We are working on getting a \nnumber for our business`}
               </Text>
               <Image
                 source={require('../assets/images/Picture1.png')}
@@ -103,9 +103,9 @@ class CustomerSupportScreen extends Component {
                 }}
               />
             </View>
-            <StyledText style={{marginTop: 30}}>
+           {/* <StyledText style={{marginTop: 30}}>
               {`We are working on getting a number for our business”`}
-            </StyledText>
+            </StyledText>*/}
           </KeyboardAvoidingView>
         </Screen>
       </ScrollView>

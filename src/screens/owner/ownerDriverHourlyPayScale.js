@@ -147,7 +147,7 @@ class OwnerDriverHourlyPayScale extends Component {
 								{props => (
 									<Form>
 										<View>
-											<Selector
+											{/*<Selector
 												theme="dropdown" // Default: 'simple'
 												items={	this.props.VehicleType
 													? this.props.VehicleType.map(
@@ -191,7 +191,7 @@ class OwnerDriverHourlyPayScale extends Component {
 													)
 
 												}}
-											/>
+											/>*/}
 											{/*<Selector
 												theme="dropdown" // Default: 'simple'
 												items={	this.props.vehicleCategories

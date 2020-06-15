@@ -131,7 +131,7 @@ class OwnerDriverQualification extends Component {
 													}}
 												/>
 												<FormikTextInput
-													label="Enter preferred driving experience."
+													label="Total desired experiences"
 													name="DL.ExperienceYear"
 													type="name"
 													formikprops={props}

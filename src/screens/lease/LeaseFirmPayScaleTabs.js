@@ -80,8 +80,7 @@ class LeaseFirmPayScaleTabs extends Component {
 				<Screen style={{ backgroundColor: theme.white }}>
 					<StatusBar barStyle="dark-content" />
 					<StyledText style={{ marginBottom: 15 }}>
-						Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry.
+						Enter the amount that you would like to pay
 					</StyledText>
 					<View
 						style={[

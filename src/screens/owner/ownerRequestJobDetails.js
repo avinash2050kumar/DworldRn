@@ -145,9 +145,6 @@ class OwnerRequestJobDetails extends React.Component {
 										{item.license&&<StyledPropText>
 											Driving Licence No.
 										</StyledPropText>}
-										<StyledPropText>
-											Contact Number
-										</StyledPropText>
 										{item.MonthlyPay&&<StyledPropText>
 											Salary(Per Month)
 										</StyledPropText>}
@@ -164,9 +161,6 @@ class OwnerRequestJobDetails extends React.Component {
 										{item.license&&<StyledPropText>
 											{item.license.LicenseNumber}
 										</StyledPropText>}
-										<StyledPropText>
-											{item.MobileNumber}
-										</StyledPropText>
 										{item.MonthlyPay&&<StyledPropText>
 											{item.MonthlyPay[0].MonthlyCharge}
 										</StyledPropText>}

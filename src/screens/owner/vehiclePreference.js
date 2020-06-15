@@ -322,7 +322,50 @@ class OwnerVehiclePreference extends Component {
                         <Text style={{marginTop: 20}}>
                           Duration of contract
                         </Text>
-                        <RowArea>
+                        {console.log('vehicle preference', props.values)}
+                        <View style={{paddingTop: 15}}>
+                          <Selector
+                            theme="dropdown" // Default: 'simple'
+                            items={props.values.year}
+                            // Specify key
+                            valueKey="value" // Default: 'value'
+                            labelKey="value" // Default: 'label'
+                            defaultValue={`${props.values.vehicle.FromDate} Years`} // Set default value
+                            placeholder="Select Year"
+                            onChange={value => {
+                              let i = 0;
+                              props.values.year.map((val, index) => {
+                                if (val.value === value) i = index;
+                              });
+                              props.setFieldValue(
+                                `vehicle.FromDate`,
+                                props.values.year[i].name,
+                              );
+                            }}
+                          />
+                          <View style={{marginTop: 10, marginBottom: 15}}>
+                            <Selector
+                              theme="dropdown" // Default: 'simple'
+                              items={props.values.months}
+                              // Specify key
+                              valueKey="value" // Default: 'value'
+                              labelKey="value" // Default: 'label'
+                              defaultValue={`${props.values.vehicle.Todate} months`} // Set default value
+                              placeholder="Select Months"
+                              onChange={value => {
+                                let i = 0;
+                                props.values.months.map((val, index) => {
+                                  if (val.value === value) i = index;
+                                });
+                                props.setFieldValue(
+                                  `vehicle.Todate`,
+                                  props.values.months[i].name,
+                                );
+                              }}
+                            />
+                          </View>
+                        </View>
+                        {/*<RowArea>
                           <View style={{width: '49%'}}>
                             <StyledDateAndTimePicker
                               style={{
@@ -349,7 +392,7 @@ class OwnerVehiclePreference extends Component {
                               defaultValue={props.values.vehicle.Todate}
                             />
                           </View>
-                        </RowArea>
+                        </RowArea>*/}
                       </View>
                       {props.isSubmitting ? (
                         <Button
