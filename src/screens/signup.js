@@ -24,6 +24,7 @@ import { withNextInputAutoFocusForm } from "react-native-formik";
 import FormikTextInput from "../components/common/FormikTextInput";
 import {GoogleSignin, statusCodes} from "react-native-google-signin";
 import {AccessToken, LoginButton,LoginManager,GraphRequest,GraphRequestManager} from "react-native-fbsdk";
+import NavigationService from "../config/NavigationService";
 /*import * as Google from "expo-google-app-auth";*/
 
 const Form = withNextInputAutoFocusForm(View);
@@ -350,7 +351,7 @@ class SignUpScreen extends Component {
 											color: theme.privacyPolicy,
 											fontSize: 16
 										}}
-										onPress={() => console.log("Terms")}
+										onPress={() => NavigationService.navigate('TermsAndCondition')}
 									>
 										Terms of Use
 									</StyledText>
@@ -362,7 +363,7 @@ class SignUpScreen extends Component {
 											color: theme.privacyPolicy,
 											fontSize: 16
 										}}
-										onPress={() => console.log("Policy")}
+										onPress={() => NavigationService.navigate('PrivacyPolicy')}
 									>
 										Privace Policy
 									</StyledText>

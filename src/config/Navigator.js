@@ -60,6 +60,8 @@ import LeaseFirmJobDetails from '../screens/lease/leaseFirmJobDetails';
 import OwnerPostedDetails from '../screens/owner/ownerPostedDetails';
 import ManualLocationScreen from '../screens/ManualLocation';
 import PaymentStatus from '../screens/paymentStatus';
+import TermsAndCondition from '../screens/TermsAndConditions';
+import PrivacyPolicy from '../screens/privacePolicy';
 
 // Stack Navigators
 
@@ -109,6 +111,7 @@ const UserStack = createStackNavigator(
     JobOfferDescriptionScreen,
     OwnerLeaseFirmDetails,
     FindAllLeaseFirmOwner,
+
     HomeScreenChildLeaseFirmTabs,
     OwnerLeaseFirmTabs,
     OwnerJobPost,
@@ -131,7 +134,8 @@ const Authentication = createStackNavigator(
   {
     LoginScreen,
     SignUpScreen,
-    ForgetPasswordScreen,
+    ForgetPasswordScreen,TermsAndCondition,
+      PrivacyPolicy,
     OtpVerificationScreen,
     CreatePasswordScreen,
     LogoutScreen,
