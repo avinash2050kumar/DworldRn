@@ -115,6 +115,13 @@ const initialState = {
     adsIndex: 0,
     postAdsDriverDummy: {},
     postAdsDriver: {
+      WorkType: [
+        {Id: 1, Name: 'Daily'},
+        {Id: 2, Name: 'Week Days'},
+        {Id: 3, Name: 'Weekend'},
+        {Id: 4, Name: 'Custom Days'},
+      ],
+      SelectedWork: {Id: 1, Name: 'Daily'},
       year: [
         {name: '0', value: '0 Years'},
         {name: '1', value: '1 Years'},
