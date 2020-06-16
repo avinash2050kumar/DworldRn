@@ -256,7 +256,7 @@ class DriverTripPay extends Component {
 															.VehicleList[i]
 													)
 												}}
-											/>{console.log('va',props.values)}
+											/>
 												<FormikTextInput
 													label="Per day(In Rupee)"
 													name={`TripPay[${index}].DayCharge`}

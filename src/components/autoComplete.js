@@ -164,7 +164,7 @@ export default class AutoComplete extends React.PureComponent {
             {...this.props}
           />
         </RowContainer>
-        {console.log('this is state', selectedKey, this.state)}
+
         {this.state.dropdownVisible && (
           <View
             elevation={7}

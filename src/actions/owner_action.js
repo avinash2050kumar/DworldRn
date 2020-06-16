@@ -42,7 +42,6 @@ export const getApplyOwnerFindDriver = (offerToClientId,JobId)=> async dispatch 
 export const approveDriverApplyJob=(ClientId,JobId)=> async dispatch=>{
 	try{
 		const res = await client.main.approveDriverApplyjob(ClientId,JobId)
-		console.log('res',res)
 		res.status===200 &&
 		dispatch(
 			setAppMessage(
@@ -65,7 +64,6 @@ export const approveDriverApplyJob=(ClientId,JobId)=> async dispatch=>{
 export const approveFirmApplyJob=(ClientId,FirmId)=> async dispatch=>{
 	try{
 		const res = await client.main.approveFirmApplyJob(ClientId,FirmId)
-		console.log('res',res)
 		res.status===200 &&
 		dispatch(
 			setAppMessage(
@@ -88,7 +86,6 @@ export const approveFirmApplyJob=(ClientId,FirmId)=> async dispatch=>{
 export const getApplyOwnerFindFirm = (OfferToClientId,JobId)=> async dispatch => {
 	try {
 		const res = await client.main.applyOwnerFindFirm(OfferToClientId,JobId);
-		console.log('res',res)
 		res.status===200 &&
 		dispatch(
 			setAppMessage(

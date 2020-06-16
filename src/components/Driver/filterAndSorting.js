@@ -139,18 +139,7 @@ export default class FilterAndSorting extends React.Component {
 	};
 
 	_renderSortBy = () => {
-		console.log(
-			"value",
-			this.props.data
-				.map(vehicle => vehicle.vehicleType)
-				.filter((value, index, self) => self.indexOf(value) === index)
-				.map(value => {
-					return {
-						name: value,
-						isSelected: false
-					};
-				})
-		);
+
 		return (
 			<View>
 				{this.state.filterOptions[0].options.map(
@@ -364,11 +353,6 @@ export default class FilterAndSorting extends React.Component {
 		};
 		await this.setState({ filterObj: filterObj });
 
-		console.log(
-			"this is filter Obj",
-			this.state.filterObj,
-			this.props.dataIndex
-		);
 		this.props.filtersAndSortingDriverData(
 			this.state.filterObj,
 			this.props.dataIndex

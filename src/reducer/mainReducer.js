@@ -16,11 +16,16 @@ import {
   RESET_OWNER_JOB_POST,
   SET_OWNER_ADS_INDEX,
   SET_OWNER_DASHBOARD,
+  DRIVER_ADD_NEW_VEHICLE,
   SAVE_LEASE_FIRM_VEHICLE_DETAILS,
   SAVE_LEASE_CONTRACT_DETAILS,
   SAVE_LEASE_PAY_SCALE,
   SAVE_DRIVER_EXPERIENCE,
   RESET_MAIN_REDUCER,
+  LEASE_ADD_NEW_VEHICLE,
+  SET_LEASE_VEHICLE_COMPANY,
+  SET_OWNER_VEHICLE_COMPANY,
+  OWNER_ADD_NEW_VEHICLE,
 } from '../actions/type';
 
 import Store from '../store';
@@ -40,6 +45,7 @@ const initialState = {
 
   lease: {
     postLeaseDummy: {},
+    vehicleCompany: [],
     postLeaseFirmRequirement: {
       year: [
         {name: '0', value: '0 Years'},
@@ -114,6 +120,7 @@ const initialState = {
     dashboard: {},
     adsIndex: 0,
     postAdsDriverDummy: {},
+    vehicleCompany: [],
     postAdsDriver: {
       WorkType: [
         {Id: 1, Name: 'Daily'},
@@ -226,6 +233,33 @@ const intro = (state = initialState, action) => {
     case RESET_MAIN_REDUCER:
       return initialState;
 
+    case OWNER_ADD_NEW_VEHICLE:
+      const ownerVehicle = state.owner.postAdsDriverDummy.vehicleCategories.map(
+        m1 => {
+          if (m1.VehicleCategoryName === 'Other')
+            return Object.assign({}, m1, {
+              VehicleType: m1.VehicleType.concat([action.payload]),
+            });
+          return m1;
+        },
+      );
+      return {
+        ...state,
+        owner: {
+          ...state.owner,
+          postAdsDriverDummy: {
+            ...state.owner.postAdsDriverDummy,
+            vehicleCategories: ownerVehicle,
+          },
+        },
+      };
+
+    case SET_OWNER_VEHICLE_COMPANY:
+      return {
+        ...state,
+        owner: {...state.owner, vehicleCompany: action.payload},
+      };
+
     case SET_MAIN_SCREEN_PERSONAL_DETAILS:
       return {...state, personalDetails: action.payload};
 
@@ -271,10 +305,55 @@ const intro = (state = initialState, action) => {
         experiences: {...state.experiences, license: action.payload},
       };
 
+    case DRIVER_ADD_NEW_VEHICLE:
+      const newCate = state.vehiclePreferences.vehicleCategoryDropdown.map(
+        drop => {
+          if (drop.VehicleCategoryName === 'Other')
+            return Object.assign({}, drop, {
+              VehicleType: drop.VehicleType.concat([action.payload]),
+            });
+          return drop;
+        },
+      );
+      return {
+        ...state,
+        vehiclePreferences: {
+          ...state.vehiclePreferences,
+          vehicleCategoryDropdown: newCate,
+        },
+      };
+
     case SET_MAIN_SCREEN_DRIVER_HOURLY_PAY:
       return {
         ...state,
         payScale: {...state.payScale, hourlyPay: action.payload},
+      };
+
+    case LEASE_ADD_NEW_VEHICLE:
+      const newVehicleType = state.lease.postLeaseDummy.vehicleCategories.map(
+        drop => {
+          if (drop.VehicleCategoryName === 'Other')
+            return Object.assign({}, drop, {
+              VehicleType: drop.VehicleType.concat([action.payload]),
+            });
+          return drop;
+        },
+      );
+      return {
+        ...state,
+        lease: {
+          ...state.lease,
+          postLeaseDummy: {
+            ...state.lease.postLeaseDummy,
+            vehicleCategories: newVehicleType,
+          },
+        },
+      };
+
+    case SET_LEASE_VEHICLE_COMPANY:
+      return {
+        ...state,
+        lease: {...state.lease, vehicleCompany: action.payload},
       };
 
     case SAVE_LEASE_FIRM_VEHICLE_DETAILS:

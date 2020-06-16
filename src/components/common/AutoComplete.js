@@ -70,8 +70,6 @@ export default class AutoComplete extends React.PureComponent {
   _onSelect = async item => {
     this.setState({searchText: item.description});
     this.props.onSelect(item);
-
-    console.log('on select click', item, this.state);
   };
 
   /*	_isInValid = (formikprops, input) => {

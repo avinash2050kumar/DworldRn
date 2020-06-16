@@ -2,7 +2,7 @@ import {
 	SET_AUTH_CLIENT_ID,
 	SET_SUCCESSFUL_LOGIN,
 	SET_LOGOUT,
-	RESET_AUTH
+	RESET_AUTH,SET_PROFILE_IMAGE_URL
 } from "../actions/type";
 
 const authReducer = (
@@ -13,7 +13,7 @@ const authReducer = (
 		Mobile: "",
 		FirstName: "",
 		LastName: "",
-		ClientTypeId: 0
+		ClientTypeId: 0,ProfileURL: ""
 	},
 	action
 ) => {
@@ -28,6 +28,9 @@ const authReducer = (
 				ClientTypeId: ClientTypeId ? ClientTypeId : state.ClientTypeId,
 				ClientId: ClientId ? ClientId : state.ClientId
 			};
+
+		case SET_PROFILE_IMAGE_URL:
+			return {...state, ProfileURL: action.payload}
 
 		case SET_SUCCESSFUL_LOGIN:
 			return {

@@ -9,7 +9,6 @@ import Store from "../store";
 export const saveSubscription = payload=> async dispatch => {
     try {
         const res = await client.main.saveSubscription(payload);
-        console.log('this is response', res)
         res.status===200&&dispatch(
             setAppMessage("Success", "Successfully Purchased", "success")
         );
@@ -30,7 +29,6 @@ export const saveSubscription = payload=> async dispatch => {
 export const getUserSubscription= ()=> async dispatch => {
     try {
         const res = await client.main.getUserSubscription();
-        console.log('this is response', res)
         res.status===200&&dispatch({ type: SET_USER_SUBSCRIPTION,payload:res.data });
     } catch (e) {
         dispatch(
@@ -43,7 +41,6 @@ export const getUserSubscription= ()=> async dispatch => {
 
 export const checkSubscription= ()=> async dispatch => {
     try {
-        console.log('loasdf',)
         return await client.main.checkSubscription();
     } catch (e) {
         dispatch(

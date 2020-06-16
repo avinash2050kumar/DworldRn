@@ -283,11 +283,7 @@ class DriverMonthlyPay extends Component {
 															.VehicleList[i]
 													)
 												}}
-											/>
-
-												{console.log('value', props.values)}
-
-												<FormikTextInput
+											/><FormikTextInput
 													label="Monthly Pricing"
 													name={`MonthlyPay[${index}].MonthlyCharge`}
 													type="name"

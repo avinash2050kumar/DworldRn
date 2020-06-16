@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   FlatList,
+  TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
@@ -24,6 +25,8 @@ import Button from '../../components/common/Buttons';
 import {
   ownerGetVehiclePreferences,
   saveOwnerVehiclePostDetail,
+  setOwnerVehicleCompany,
+  ownerAddNewVehicle,
 } from '../../actions';
 import {withNextInputAutoFocusForm} from 'react-native-formik';
 import update from 'immutability-helper';
@@ -56,6 +59,7 @@ class OwnerVehiclePreference extends Component {
 
   state = {
     postAdsDriver: {},
+    newVehicle: '',
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -72,6 +76,7 @@ class OwnerVehiclePreference extends Component {
 
   componentDidMount() {
     this.props.ownerGetVehiclePreferences();
+    this.props.setOwnerVehicleCompany();
   }
 
   isEmpty = obj => {
@@ -139,6 +144,7 @@ class OwnerVehiclePreference extends Component {
                   {props => (
                     <Form>
                       <View>
+                        {console.log('logrt', props)}
                         <Selector
                           theme="dropdown" // Default: 'simple'
                           items={
@@ -172,73 +178,136 @@ class OwnerVehiclePreference extends Component {
                             );
                           }}
                         />
-                        <FormikTextInput
+                        <Selector
+                          theme="dropdown" // Default: 'simple'
+                          items={this.props.vehicleCompany.map(vehicle => {
+                            return {
+                              ...vehicle,
+                              value: vehicle.Name,
+                            };
+                          })}
+                          // Specify key
+                          valueKey="value" // Default: 'value'
+                          labelKey="value" // Default: 'label'
+                          defaultValue={`${props.values.vehicle.vehicleCompany}`} // Set default value
+                          placeholder="Vehicle Company"
+                          placeholderContainerStyle={{
+                            paddingVertical: 15,
+                            marginTop: 10,
+                          }}
+                          iconStyle={{tintColor: 'black'}}
+                          onChange={value => {
+                            let i = 0;
+                            this.props.vehicleCompany.map((val, index) => {
+                              if (val.Name === value) i = index;
+                            });
+                            props.setFieldValue(
+                              `vehicle.vehicleCompany`,
+
+                              this.props.vehicleCompany[i].Name,
+                            );
+                          }}
+                        />
+                        {/*<FormikTextInput
                           label="Company"
                           name="vehicle.vehicleCompany"
                           type="name"
                           formikprops={props}
-                        />
-                        {/*<Text style={{ marginTop: 10 }}>
-													Vehicle Type
-												</Text>
-												<View
-													style={{
-														borderWidth: 1,
-														borderColor: "#eee",
-														paddingTop: 5,
-														paddingBottom: 5,
-														marginBottom: 10,
-														marginTop: 10
-													}}
-												>
-													{this.props.vehicleCategories.filter(dropdown=>
-													dropdown.VehicleCategoryId===props.values.vehicle.vehicleCategory.VehicleCategoryId)[0].VehicleType.map(
-														(vehicle, i) => (
-															<CheckBox
-																onPress={() =>
-																	props.values.vehicle.vehicleCategory.VehicleType.filter(type=>
-																		type.Id===vehicle.Id).length>0?
-																		props.setFieldValue(
-																			`vehicle.vehicleCategory.VehicleType`,
-																			props.values.vehicle.vehicleCategory.VehicleType.filter(type=>
-																				type.Id!==vehicle.Id)
-																		):props.setFieldValue(
-																		`vehicle.vehicleCategory.VehicleType`,
-																		[...props.values.vehicle.vehicleCategory.VehicleType,vehicle]
-																		)
-
-																}
-															>{props.values.vehicle.vehicleCategory.VehicleType.filter(vehicl=> vehicl.Id===vehicle.Id).length>0?
-																<Ionicons
-																	name={
-																		"ios-checkbox"
-																	}
-																	size={24}
-																	color={
-																		theme.primary
-																	}
-																/>:<Ionicons
-																	name={
-																		"ios-checkbox-outline"
-																	}
-																	size={24}
-																	color={
-																		theme.primary
-																	}
-																/>}
-																<Text
-																	style={{
-																		marginLeft: 10
-																	}}
-																>
-																	{
-																		vehicle.Name
-																	}
-																</Text>
-															</CheckBox>
-														)
-													)}
-												</View>*/}
+                        />*/}
+                        <Text style={{marginTop: 10}}>Vehicle Type</Text>
+                        <View
+                          style={{
+                            borderWidth: 1,
+                            borderColor: '#eee',
+                            paddingTop: 5,
+                            paddingBottom: 5,
+                            marginBottom: 10,
+                            marginTop: 10,
+                          }}>
+                          {console.log(
+                            'yaha kar de bas',
+                            this.props.vehicleCategories.filter(
+                              dropdown =>
+                                dropdown.VehicleCategoryId ===
+                                props.values.vehicle.vehicleCategory
+                                  .VehicleCategoryId,
+                            )[0].VehicleType,
+                          )}
+                          {this.props.vehicleCategories
+                            .filter(
+                              dropdown =>
+                                dropdown.VehicleCategoryId ===
+                                props.values.vehicle.vehicleCategory
+                                  .VehicleCategoryId,
+                            )[0]
+                            .VehicleType.map((vehicle, i) => (
+                              <CheckBox
+                                onPress={() =>
+                                  props.values.vehicle.vehicleCategory.VehicleType.filter(
+                                    type => type.Id === vehicle.Id,
+                                  ).length > 0
+                                    ? props.setFieldValue(
+                                        `vehicle.vehicleCategory.VehicleType`,
+                                        props.values.vehicle.vehicleCategory.VehicleType.filter(
+                                          type => type.Id !== vehicle.Id,
+                                        ),
+                                      )
+                                    : props.setFieldValue(
+                                        `vehicle.vehicleCategory.VehicleType`,
+                                        [
+                                          ...props.values.vehicle
+                                            .vehicleCategory.VehicleType,
+                                          vehicle,
+                                        ],
+                                      )
+                                }>
+                                {props.values.vehicle.vehicleCategory.VehicleType.filter(
+                                  vehicl => vehicl.Id === vehicle.Id,
+                                ).length > 0 ? (
+                                  <Ionicons
+                                    name={'ios-checkbox'}
+                                    size={24}
+                                    color={theme.primary}
+                                  />
+                                ) : (
+                                  <Ionicons
+                                    name={'ios-checkbox-outline'}
+                                    size={24}
+                                    color={theme.primary}
+                                  />
+                                )}
+                                <Text
+                                  style={{
+                                    marginLeft: 10,
+                                  }}>
+                                  {vehicle.Name}
+                                </Text>
+                              </CheckBox>
+                            ))}
+                        </View>
+                        {props.values.vehicle.vehicleCategory
+                          .VehicleCategoryName === 'Other' && (
+                          <View
+                            style={[
+                              styles.flex_row,
+                              {justifyContent: 'space-between'},
+                            ]}>
+                            <TextInput
+                              style={{width: '80%'}}
+                              placeholder={'Add new vehicle type here'}
+                              onChangeText={text =>
+                                this.setState({newVehicle: text})
+                              }
+                              value={this.state.newVehicle}
+                            />
+                            <Button
+                              onPress={() => this.AddVehicle(props)}
+                              label="Add"
+                              disabled={this.state.newVehicle.length === 0}
+                              color="secondary"
+                            />
+                          </View>
+                        )}
                         <FormikTextInput
                           label="Accepting vehicles beyond the age of"
                           name="vehicle.MFGYear"
@@ -420,11 +489,20 @@ class OwnerVehiclePreference extends Component {
       </ScrollView>
     );
   }
+  AddVehicle = async props => {
+    const res = await this.props.ownerAddNewVehicle(this.state.newVehicle);
+    await props.setFieldValue(
+      'vehicle.vehicleCategory.VehicleType',
+      props.values.vehicle.vehicleCategory.VehicleType.concat([res]),
+    );
+    await this.setState({newVehicle: ''});
+  };
 }
 
 const mapStateToProps = state => ({
   postAdsDriver: state.main.owner.postAdsDriver,
   postAdsDriverDummy: state.main.owner.postAdsDriverDummy,
+  vehicleCompany: state.main.owner.vehicleCompany,
   vehicleCategories: state.main.owner.postAdsDriverDummy.vehicleCategories,
   PayScale: state.main.owner.postAdsDriverDummy.PayScale,
   adsIndex: state.main.owner.adsIndex,
@@ -433,6 +511,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   ownerGetVehiclePreferences,
   saveOwnerVehiclePostDetail,
+  setOwnerVehicleCompany,
+  ownerAddNewVehicle,
 };
 
 export default connect(

@@ -87,10 +87,8 @@ class WorkScheduleScreen extends Component {
         PreferDays: beforeValue.PreferDays,
       },
     );
-    console.log(JSON.stringify(afterValue));
 
     const res = await this.props.postWorkSchedule(afterValue);
-    console.log('this is response', res);
     if (res && res.status === 200) NavigationService.navigate('PayScaleScreen');
   };
 
@@ -328,7 +326,6 @@ class WorkScheduleScreen extends Component {
     day = IsSat ? day + 'Sat,,' : day;
     day = IsSun ? day + 'Sun' : day;
 
-    console.log('day', day);
     return day;
   }
 }
