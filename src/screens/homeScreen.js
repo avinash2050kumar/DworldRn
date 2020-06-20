@@ -178,13 +178,13 @@ class HomeScreen extends Component {
               />
               <View style={{marginLeft: 10, width: '70%'}}>
                 <Text style={{color: theme.textLightColor}}>You are here</Text>
-                  <Text numberOfLines={1}>
-                      {this.props.home.isManualAddress
-                          ? `${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},${address.location?address.location:''}`
-                          : address
-                              ? address.formatted_address
-                              : 'unable to get Location'}
-                  </Text>
+                <Text numberOfLines={1}>
+                  {this.props.home.isManualAddress
+                    ? `${address.location ? address.location : ''}` //${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},
+                    : address
+                    ? address.formatted_address
+                    : 'unable to get Location'}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>

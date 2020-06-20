@@ -205,7 +205,7 @@ class OwnerHomeScreen extends Component {
                 <Text style={{color: theme.textLightColor}}>You are here</Text>
                 <Text numberOfLines={1}>
                   {this.props.home.isManualAddress
-                    ? `${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},${address.location?address.location:''}`
+                    ? `${address.location?address.location:''}` //${address.Address1?address.Address1:''},${address.Address2?address.Address2:''},
                     : address
                     ? address.formatted_address
                     : 'unable to get Location'}

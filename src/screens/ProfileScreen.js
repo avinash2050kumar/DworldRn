@@ -42,7 +42,7 @@ class ProfileScreen extends Component {
           {
             icon: require('../assets/images/policy.png'),
             name: i18n.t('profileScreenDriverOption2'),
-            route: 'Policy',
+            route: 'PrivacyPolicy',
           },
           {
             icon: require('../assets/images/language.png'),
@@ -86,7 +86,7 @@ class ProfileScreen extends Component {
           {
             icon: require('../assets/images/policy.png'),
             name: i18n.t('profileScreenOwnerOption3'),
-            route: 'Policy',
+            route: 'PrivacyPolicy',
           },
           {
             icon: require('../assets/images/partner.png'),
@@ -124,7 +124,7 @@ class ProfileScreen extends Component {
           {
             icon: require('../assets/images/policy.png'),
             name: i18n.t('profileScreenLeaseOption3'),
-            route: 'Policy',
+            route: 'PrivacyPolicy',
           },
           {
             icon: require('../assets/images/partner.png'),

@@ -184,7 +184,7 @@ class ManualLocationScreen extends Component {
               {props => (
                 <Card style={{marginTop: 30}}>
                   <Form>
-                    <FormikTextInput
+                    {/*<FormikTextInput
                       label="Address 1"
                       name="Address1"
                       type="name"
@@ -195,7 +195,7 @@ class ManualLocationScreen extends Component {
                       name="Address2"
                       type="name"
                       formikprops={props}
-                    />
+                    />*/}
                     <AutoComplete
                       autoCapitalize="none"
                       autoCorrect={false}

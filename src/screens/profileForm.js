@@ -87,7 +87,7 @@ class ProfileFormScreen extends Component {
     return Object.keys(obj).length === 0;
   };
 
-  uploadImage = (response , saveImage,saveImageToTheServer)=> {
+  uploadImage = (response, saveImage, saveImageToTheServer) => {
     axios
       .post(`${API_URL}/api/Driver/UploadMobileAttachment`, {
         data: response.data, //put here base 64 string
@@ -99,7 +99,7 @@ class ProfileFormScreen extends Component {
         },
       })
       .then(function(imageUrl) {
-        console.warn(imageUrl.data,saveImageToTheServer,saveImage)
+        console.warn(imageUrl.data, saveImageToTheServer, saveImage);
         saveImage(imageUrl.data);
         saveImageToTheServer({
           Id: this.props.auth.ClientId,
@@ -312,7 +312,11 @@ class ProfileFormScreen extends Component {
                 onPress={() => {
                   this.BackImage.close();
                   ImagePicker.launchCamera(options, response => {
-                    this.uploadImage(response,this.props.setImageUrl,this.props.saveProfileImageServer); // Same code as in above section!
+                    this.uploadImage(
+                      response,
+                      this.props.setImageUrl,
+                      this.props.saveProfileImageServer,
+                    ); // Same code as in above section!
                   });
                 }}
                 style={{
