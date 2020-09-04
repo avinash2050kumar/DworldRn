@@ -30,10 +30,6 @@ const validationSchema = yup.object({
     .string()
     .nullable()
     .required('First Name is required'),
-  LastName: yup
-    .string()
-    .nullable()
-    .required('First Name is required'),
   Address: yup
     .string()
     .nullable()
@@ -77,6 +73,7 @@ class PersonalDetailScreen extends Component {
   };
 
   render() {
+    const {ClientTypeId} = this.props.auth;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <Screen style={{backgroundColor: '#f1f1f1'}}>
@@ -97,23 +94,32 @@ class PersonalDetailScreen extends Component {
                 validationSchema={validationSchema}>
                 {props => (
                   <View style={[styles.flex_col_btwn]}>
+                    {console.log('rpos', props)}
                     <Form>
                       <FormikTextInput
-                        label="First Name"
+                        label={
+                          ClientTypeId === 3 ? 'Name of Firm' : 'First Name'
+                        }
                         name="FirstName"
                         type="name"
                         formikprops={props}
                         disabled={true}
                       />
+                      {ClientTypeId !== 3 && (
+                        <FormikTextInput
+                          label="Last Name"
+                          name="LastName"
+                          type="name"
+                          formikprops={props}
+                          disabled={true}
+                        />
+                      )}
                       <FormikTextInput
-                        label="Last Name"
-                        name="LastName"
-                        type="name"
-                        formikprops={props}
-                        disabled={true}
-                      />
-                      <FormikTextInput
-                        label="Mobile Number"
+                        label={
+                          ClientTypeId === 3
+                            ? 'Contact number'
+                            : 'Mobile Number'
+                        }
                         name="Mobile"
                         type="name"
                         prefix={'+91'}
@@ -170,15 +176,18 @@ class PersonalDetailScreen extends Component {
                           formikprops={props}
                         />
                       )}
-                      <FormikTextInput
-                        label="Any other special message(s) that you want to add(optional)
+
+                      {this.props.auth.ClientTypeId !== 3 && (
+                        <FormikTextInput
+                          label="Any other special message(s) that you want to add(optional)
 "
-                        name="Instruction"
-                        type="name"
-                        multiline={true}
-                        numberOfLines={3}
-                        formikprops={props}
-                      />
+                          name="Instruction"
+                          type="name"
+                          multiline={true}
+                          numberOfLines={3}
+                          formikprops={props}
+                        />
+                      )}
                     </Form>
                     <View style={{marginTop: 30}}>
                       <Button

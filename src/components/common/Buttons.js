@@ -50,7 +50,7 @@ export default ({
 	);
 
 	return (
-		<BG size={size} color={color} {...rest}>
+		<BG size={size} color={color} {...rest} >
 			{content}
 			{component ? component : null}
 		</BG>

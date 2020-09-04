@@ -32,6 +32,7 @@ import update from 'immutability-helper';
 import RadioButton from '../../components/common/RadioButtons';
 import TextInput from 'react-native-web/src/exports/TextInput';
 import Selector from 'react-native-easy-select';
+import MaterialIcons from "react-native-vector-icons/dist/MaterialIcons";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -89,14 +90,14 @@ class OwnerDriverWorkSchedule extends Component {
           props.setFieldValue(input, !props.values[first][second])
         }>
         {props.values[first][second] && (
-          <Ionicons name={'ios-checkbox'} size={24} color={theme.primary} />
+            <MaterialIcons name={'check-box'} size={24} color={theme.primary} />
         )}
         {!props.values[first][second] && (
-          <Ionicons
-            name={'ios-checkbox-outline'}
-            size={24}
-            color={theme.primary}
-          />
+            <MaterialIcons
+                name={'check-box-outline-blank'}
+                size={24}
+                color={theme.primary}
+            />
         )}
         <Text
           style={{

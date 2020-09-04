@@ -32,6 +32,7 @@ import update from 'immutability-helper';
 import Selector from 'react-native-easy-select';
 import * as yup from 'yup';
 import NavigationService from '../../config/NavigationService';
+import MaterialIcons from "react-native-vector-icons/dist/MaterialIcons";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -197,17 +198,13 @@ class VehiclePreference extends Component {
                               {props.values.vehicleCategory.VehicleType.filter(
                                 type => type.Id === vehicle.Id,
                               ).length > 0 ? (
-                                <Ionicons
-                                  name={'ios-checkbox'}
-                                  size={24}
-                                  color={theme.primary}
-                                />
+                                  <MaterialIcons name={'check-box'} size={24} color={theme.primary} />
                               ) : (
-                                <Ionicons
-                                  name={'ios-checkbox-outline'}
-                                  size={24}
-                                  color={theme.primary}
-                                />
+                                  <MaterialIcons
+                                      name={'check-box-outline-blank'}
+                                      size={24}
+                                      color={theme.primary}
+                                  />
                               )}
                               <Text
                                 style={{

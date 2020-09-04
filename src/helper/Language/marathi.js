@@ -27,7 +27,7 @@ export default {
 	profileScreenLeaseOption3: "पोलिस",
 	profileScreenLeaseOption4: "आमच्याबरोबर भागीदारी करा",
 	profileScreenLeaseOption5: "ग्राहक सेवा",
-	profileScreenLeaseOption6: "संकेतशब्द बदला",
+	profileScreenLeaseOption6: "संकेतशब्द बदला", profileSwitch: 'சுயவிவர சுவிட்ச்',
 	profile: "प्रोफाइल",
 	profileDetail: "प्रोफाइल तपशील",
 	chooseLanguage: "भाषा",

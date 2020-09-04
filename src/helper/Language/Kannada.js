@@ -27,7 +27,7 @@ export default {
 	profileScreenLeaseOption3: "ನೀತಿಗಳು",
 	profileScreenLeaseOption4: "ನಮ್ಮೊಂದಿಗೆ ಪಾಲುದಾರ",
 	profileScreenLeaseOption5: "ಗ್ರಾಹಕ ಬೆಂಬಲ",
-	profileScreenLeaseOption6: "ಗುಪ್ತಪದವನ್ನು ಬದಲಿಸಿ",
+	profileScreenLeaseOption6: "ಗುಪ್ತಪದವನ್ನು ಬದಲಿಸಿ", profileSwitch: 'ಪ್ರೊಫೈಲ್ ಸ್ವಿಚ್',
 	profile: "ಪ್ರೊಫೈಲ್",
 	profileDetail: "ಪ್ರೊಫೈಲ್ ವಿವರಗಳು",
 	chooseLanguage: "ಭಾಷೆ",

@@ -23,7 +23,6 @@ const Client = () => {
         return instance.get(`/api/Login/ResendOTP?ClientId=${clientId}`);
       },
       saveProfileImage(img_obj) {
-        console.error('call hua', img_obj);
         return instance.post(`/api/Login/SaveProfileImage`, img_obj);
       },
       login(loginId, password, IsLoginBySocialMedia) {
@@ -33,8 +32,17 @@ const Client = () => {
           IsLoginBySocialMedia,
         });
       },
+      upgradeRole(roleType) {
+        const {ClientId} = Store().store.getState().auth;
+        console.warn(
+          'url',
+          `/api/Login/UpdateRole?ClientId=${ClientId}&RoleType=${roleType}`,
+        );
+        return instance.get(
+          `/api/Login/UpdateRole?ClientId=${ClientId}&RoleType=${roleType}`,
+        );
+      },
       createPassword(clientId, Password) {
-
         return instance.get(
           `/api/Login/CreatePassword?ClientId=${clientId}&Password=${Password}`,
         );
@@ -48,9 +56,7 @@ const Client = () => {
       },
 
       getVehicleCompany() {
-        return instance.get(
-          `api/Driver/GetVehicleCompany`,
-        );
+        return instance.get(`api/Driver/GetVehicleCompany`);
       },
 
       getPersonalDetails() {

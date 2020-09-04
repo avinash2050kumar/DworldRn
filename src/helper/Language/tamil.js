@@ -27,7 +27,7 @@ export default {
 	profileScreenLeaseOption3: "கொள்கைகளை",
 	profileScreenLeaseOption4: "எங்களுடன் கூட்டாளர்",
 	profileScreenLeaseOption5: "வாடிக்கையாளர் ஆதரவு",
-	profileScreenLeaseOption6: "கடவுச்சொல்லை மாற்று",
+	profileScreenLeaseOption6: "கடவுச்சொல்லை மாற்று", profileSwitch: 'சுயவிவர சுவிட்ச்',
 	profile: "செய்தது",
 	profileDetail: "Profile Details",
 	chooseLanguage: "Language",

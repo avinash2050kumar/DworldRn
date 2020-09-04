@@ -16,6 +16,7 @@ import {Screen, StyledText, StyledTitle} from '../theme/styledComponent';
 import theme from '../theme/lightTheme';
 // import { Dropdown } from "react-native-material-dropdown";
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import update from 'immutability-helper';
 import Button from '../components/common/Buttons';
 import Selector from 'react-native-easy-select';
@@ -102,7 +103,7 @@ class WorkScheduleScreen extends Component {
             }),
           )
         }>
-        <Ionicons name={'ios-checkbox'} size={24} color={theme.primary} />
+        <MaterialIcons name={'check-box'} size={24} color={theme.primary} />
         <Text style={{marginLeft: 10}}>{text}</Text>
       </CheckBox>
     ) : (
@@ -114,8 +115,8 @@ class WorkScheduleScreen extends Component {
             }),
           )
         }>
-        <Ionicons
-          name={'ios-checkbox-outline'}
+        <MaterialIcons
+          name={'check-box-outline-blank'}
           size={24}
           color={theme.primary}
         />

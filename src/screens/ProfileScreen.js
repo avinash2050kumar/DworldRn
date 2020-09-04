@@ -5,7 +5,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Image,
+  Image,Text
 } from 'react-native';
 import {connect} from 'react-redux';
 import {
@@ -40,6 +40,11 @@ class ProfileScreen extends Component {
             route: 'MainScreen',
           },
           {
+            icon: require('../assets/images/profile.png'),
+            name: i18n.t('profileSwitch'),
+            route: 'ProfileSwitch',
+          },
+          {
             icon: require('../assets/images/policy.png'),
             name: i18n.t('profileScreenDriverOption2'),
             route: 'PrivacyPolicy',
@@ -72,6 +77,11 @@ class ProfileScreen extends Component {
             icon: require('../assets/images/identification.png'),
             name: i18n.t('profileScreenOwnerOption1'),
             route: 'MainScreen',
+          },
+          {
+            icon: require('../assets/images/profile.png'),
+            name: i18n.t('profileSwitch'),
+            route: 'ProfileSwitch',
           },
           {
             icon: require('../assets/images/subscription.png'),
@@ -110,6 +120,11 @@ class ProfileScreen extends Component {
             icon: require('../assets/images/identification.png'),
             name: i18n.t('profileScreenLeaseOption1'),
             route: 'MainScreen',
+          },
+          {
+            icon: require('../assets/images/profile.png'),
+            name: i18n.t('profileSwitch'),
+            route: 'ProfileSwitch',
           },
           {
             icon: require('../assets/images/subscription.png'),
@@ -226,8 +241,7 @@ class ProfileScreen extends Component {
                   {this.props.auth.ProfileURL !== '' && (
                     <Image
                       source={{
-                        uri:
-						this.props.auth.ProfileURL,
+                        uri: this.props.auth.ProfileURL,
                       }}
                       style={{
                         width: 80,

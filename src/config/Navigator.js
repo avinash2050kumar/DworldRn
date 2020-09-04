@@ -24,6 +24,7 @@ import VehiclePreferenceScreen from '../screens/driver/vehiclePreference';
 import HomeTabs from '../screens/homeTabs';
 import ChangePasswordScreen from '../screens/changePassword';
 import ProfileScreen from '../screens/ProfileScreen';
+import ProfileSwitch from '../screens/profileSwitch'
 
 import DrawerMenu from '../components/DrawerMenu';
 import CustomerSupportScreen from '../screens/customerSupport';
@@ -103,7 +104,8 @@ const UserStack = createStackNavigator(
     OwnerRequestJobDetails,
     LeaseFirmJobDetails,
     OwnerPostedDetails,
-    Policy,
+      ProfileSwitch,
+
     SubscriptionPlan,
     PostRequirementsFirm,
     DriverJobOfferScreen,
@@ -134,11 +136,13 @@ const Authentication = createStackNavigator(
   {
     LoginScreen,
     SignUpScreen,
-    ForgetPasswordScreen,TermsAndCondition,
-      PrivacyPolicy,
+    ForgetPasswordScreen,
+    TermsAndCondition,
+    PrivacyPolicy,
     OtpVerificationScreen,
     CreatePasswordScreen,
     LogoutScreen,
+    Policy,
   },
   {
     initialRouteName: 'LoginScreen',

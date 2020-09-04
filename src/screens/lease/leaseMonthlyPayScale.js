@@ -143,7 +143,7 @@ class LeaseMonthlyPayScale extends Component {
                     />*/}
                     {console.log('weel', props.values)}
                     <FormikTextInput
-                      label="Monthly Price"
+                      label="Price Per Month"
                       name={`Price`}
                       type="name"
                       defaultValue={props.values.Price + ''}

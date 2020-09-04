@@ -71,45 +71,51 @@ class ProfileFormScreen extends Component {
       PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
       PERMISSIONS.IOS.CAMERA,
       PERMISSIONS.IOS.PHOTO_LIBRARY,
-    ]).then(statuses => {
-      /*if(statuses[PERMISSIONS.ANDROID.CAMERA]=='granted')
-					ImagePicker.launchCamera(options, (response) => {
-						console.log('res',response)
-					})
-				if(statuses[PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE]=='granted')
-					ImagePicker.launchCamera(options, (response) => {
-						console.log('res',response)
-					})*/
-    });
+    ]).then(statuses => {});
   }
 
   isEmpty = obj => {
     return Object.keys(obj).length === 0;
   };
 
-  uploadImage = (response, saveImage, saveImageToTheServer) => {
-    axios
-      .post(`${API_URL}/api/Driver/UploadMobileAttachment`, {
-        data: response.data, //put here base 64 string
-        type: response.type, //put file type
-        fileName: response.fileName, //file name,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*',
+  uploadImage = async (response, saveImage, saveImageToTheServer) => {
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/Driver/UploadMobileAttachment`,
+        {
+          data: response.data, //put here base 64 string
+          type: response.type, //put file type
+          fileName: response.fileName, //file name,
         },
-      })
-      .then(function(imageUrl) {
-        console.warn(imageUrl.data, saveImageToTheServer, saveImage);
-        saveImage(imageUrl.data);
+      );
+      if (res.data) {
+        console.warn('Image upload ho gya', res.data);
         saveImageToTheServer({
           Id: this.props.auth.ClientId,
-          Name: imageUrl.data,
+          Name: res.data,
         });
-        // set Final value here
-      })
-      .catch(function(error) {
-        // Error will goes here
-      });
+        saveImage(res.data);
+        console.warn(res.data, saveImageToTheServer, saveImage);
+      }
+      /*.then(function(imageUrl) {
+       console.warn(
+         'Ok good fine chal done',
+         imageUrl.data,
+         saveImageToTheServer,
+         saveImage,
+       );
+       saveImage(imageUrl.data);
+       saveImageToTheServer({
+         Id: this.props.auth.ClientId,
+         Name: imageUrl.data,
+       });
+       console.warn(imageUrl.data, saveImageToTheServer, saveImage);
+
+       // set Final value here
+     })*/
+    } catch (error) {
+      // Error will goes here
+    }
   };
 
   render() {
@@ -169,7 +175,6 @@ class ProfileFormScreen extends Component {
                   ]}>
                   <TouchableOpacity
                     onPress={() => {
-                      console.log('this', this);
                       this.BackImage.open();
                     }}>
                     <Ionicons name={'ios-camera'} size={30} />
@@ -330,7 +335,11 @@ class ProfileFormScreen extends Component {
                 onPress={() => {
                   this.BackImage.close();
                   ImagePicker.launchImageLibrary(options, response => {
-                    this.uploadImage(response);
+                    this.uploadImage(
+                      response,
+                      this.props.setImageUrl,
+                      this.props.saveProfileImageServer,
+                    );
                   });
                 }}
                 style={{

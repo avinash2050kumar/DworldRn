@@ -3,7 +3,9 @@ import {
   SET_LOGOUT,
   SET_SUCCESSFUL_LOGIN,
   RESET_AUTH,
+  SET_CLIENT_ID,
   SET_PROFILE_IMAGE_URL,
+  UPDATE_ROLE,
 } from './type';
 
 import client from '../helper/ApiClient';
@@ -31,17 +33,21 @@ export const saveProfileImageServer = image_Obj => async dispatch => {
   try {
     const res = await client.auth.saveProfileImage(image_Obj);
     if (res.data) {
-      dispatch(
+      /*dispatch(
         setAppMessage('Success', 'Successfully saved profile image', 'success'),
-      );
+      );*/
     }
   } catch (e) {
-    dispatch(setAppMessage('Error', 'Unable save profile image', 'danger'));
+    //  dispatch(setAppMessage('Error', 'Unable save profile image', 'danger'));
   }
 };
 
 export const resetAuth = () => async dispatch => {
   dispatch({type: RESET_AUTH});
+};
+
+export const setClientIdProfile = clientId => async dispatch => {
+  dispatch({type: SET_CLIENT_ID, payload: clientId});
 };
 
 export const resendOtp = clientId => async dispatch => {
@@ -59,6 +65,24 @@ export const resendOtp = clientId => async dispatch => {
         'danger',
       ),
     );
+  }
+};
+export const upgradeRole = roleType => async dispatch => {
+  console.warn('call hua');
+  try {
+    const res = await client.auth.upgradeRole(roleType);
+
+    dispatch(setAppMessage('Success', 'Successfully Upgrade', 'success'));
+    dispatch({type: UPDATE_ROLE, payload: roleType});
+    return res.status;
+  } catch (e) {
+    /*dispatch(
+      setAppMessage(
+        'Error',
+        'Something Went wrong, Unable to send OTP',
+        'danger',
+      ),
+    );*/
   }
 };
 

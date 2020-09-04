@@ -17,7 +17,6 @@ import {
 import styles from "../theme/styles";
 import theme from "../theme/lightTheme";
 import styled from "styled-components";
-import { login, setHomeScreenVisibility, setLoginSuccessFul } from "../actions";
 import { connect } from "react-redux";
 import { NavigationBar, Screen } from "../theme/styledComponent";
 import Ionicons from "react-native-vector-icons/dist/Ionicons";

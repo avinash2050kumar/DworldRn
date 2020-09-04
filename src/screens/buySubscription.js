@@ -260,7 +260,7 @@ class BuySubscription extends React.Component {
               description: 'Dworld',
               image: require('../assets/images/traveo.jpg') /*https://i.imgur.com/3g7nmJC.png',*/,
               currency: 'INR',
-              key: 'rzp_test_tFZq3APEo2OP2O',
+              key: 'rzp_test_t3i01PWaU1ohTJ',
               amount: `${item.price}`,
               name: `${FirstName ? FirstName : ''} ${LastName ? LastName : ''}`,
               prefill: {
@@ -284,7 +284,6 @@ class BuySubscription extends React.Component {
                   PaymentId: data.razorpay_payment_id,
                 };
                 const res = await this.props.saveSubscription(save);
-                console.log('res', res, data);
                 NavigationService.navigate('PaymentStatus', {
                   amount: item.price,
                   transactionId: data.razorpay_payment_id,

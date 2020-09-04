@@ -145,7 +145,7 @@ class LeaseTripPayScale extends Component {
                     />*/}
 
                     <FormikTextInput
-                      label="Price day(In Rupee)"
+                      label="Price Per day(In Rupee)"
                       name={`Price`}
                       type="name"
                       defaultValue={props.values.Price + ''}
@@ -153,7 +153,7 @@ class LeaseTripPayScale extends Component {
                       keyboardType={'number-pad'}
                     />
                     <FormikTextInput
-                      label="Price day(In Rupee)"
+                      label="Price Per Night(In Rupee)"
                       name={`night`}
                       type="name"
                       defaultValue={props.values.night + ''}

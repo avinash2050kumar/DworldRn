@@ -8,6 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
+    "submit": "gradlew bundleRelease",
     "release": "concurrently \"yarn clean && cd android && gradlew assembleRelease && cd app/build/outputs/apk/debug && cd .\"",
     "emulator": "cd C:\\Users\\Avinash\\AppData\\Local\\Android\\Sdk\\emulator && emulator -avd Google2",
     "clean": "cd android && gradlew clean"

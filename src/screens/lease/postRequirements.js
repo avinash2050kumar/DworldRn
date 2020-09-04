@@ -142,10 +142,7 @@ class PostRequirementsFirm extends Component {
       <ScrollView>
         <Screen style={{backgroundColor: theme.white}}>
           <View>
-            <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
-            </Text>
+            <Text>Enter the default vehicle preference for your firm</Text>
             {!this.isEmpty(this.props.postLeaseDummy) && (
               <KeyboardAvoidingView behavior="padding" enabled>
                 <Formik
@@ -231,12 +228,12 @@ class PostRequirementsFirm extends Component {
                             );
                           }}
                         />
-                       {/* <FormikTextInput
+                        <FormikTextInput
                           label="Company"
                           name="FirmVehicle.Company"
                           type="name"
                           formikprops={props}
-                        />*/}
+                        />
                         <Text style={{marginTop: 10}}>Vehicle Type</Text>
                         <View
                           style={{

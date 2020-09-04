@@ -80,67 +80,6 @@ class LoginScreen extends Component {
 		}
 	};
 
-	/*_googleLogin = async () => {
-		const config = {
-			expoClientId: `YOUR_WEB_CLIENT_ID`,
-			iosClientId: `35124116827-f6j6ue4j0c3obphpndm24npatto7rmp6.apps.googleusercontent.com`,
-			androidClientId: `35124116827-dpgetvd80tgm2364i8c0bpnmiis03quj.apps.googleusercontent.com`
-		};
-		const res = await Google.logInAsync(config);
-
-		const { type, accessToken, user } = res;
-		const googleInfo = Object.assign(
-			{},
-			{
-				loginId: user.email,
-				password: null,
-				IsLoginBySocialMedia: true
-			}
-		);
-		this._handleSubmit(googleInfo, props);
-
-		if (type === "success") {
-			/!* Log-Out *!/
-			await Google.logOutAsync({ accessToken, ...config });
-			/!* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests *!/
-		}
-	};
-
-	_faceBookLogin = async props => {
-		try {
-			await Facebook.initializeAsync("2880136255379048");
-			const {
-				type,
-				token,
-				expires,
-				permissions,
-				declinedPermissions
-			} = await Facebook.logInWithReadPermissionsAsync({
-				permissions: ["public_profile", "email"]
-			});
-			if (type === "success") {
-				// Get the user's name using Facebook's Graph API
-				const response = await fetch(
-					`https://graph.facebook.com/me/?fields=id,email,birthday,hometown,picture.height(600),name&access_token=${token}`
-				);
-				const res = await response.json();
-				const facebookInfo = Object.assign(
-					{},
-					{
-						loginId: res.email,
-						password: null,
-						IsLoginBySocialMedia: true
-					}
-				);
-				console.log("faceboo", facebookInfo);
-				this._handleSubmit(facebookInfo, props);
-			} else {
-				// type === 'cancel'
-			}
-		} catch ({ message }) {
-			alert(`Facebook Login Error: ${message}`);
-		}
-	};*/
 
 	initUser =async (token) => {
 		console.log('token',token)

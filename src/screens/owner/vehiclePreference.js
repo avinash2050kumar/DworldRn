@@ -33,6 +33,7 @@ import update from 'immutability-helper';
 import RadioButton from '../../components/common/RadioButtons';
 import StyledDateAndTimePicker from '../../components/common/StyledDateAndTimePicker';
 import Selector from 'react-native-easy-select';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -208,12 +209,12 @@ class OwnerVehiclePreference extends Component {
                             );
                           }}
                         />
-                        {/*<FormikTextInput
+                        <FormikTextInput
                           label="Company"
                           name="vehicle.vehicleCompany"
                           type="name"
                           formikprops={props}
-                        />*/}
+                        />
                         <Text style={{marginTop: 10}}>Vehicle Type</Text>
                         <View
                           style={{
@@ -264,14 +265,14 @@ class OwnerVehiclePreference extends Component {
                                 {props.values.vehicle.vehicleCategory.VehicleType.filter(
                                   vehicl => vehicl.Id === vehicle.Id,
                                 ).length > 0 ? (
-                                  <Ionicons
-                                    name={'ios-checkbox'}
+                                  <MaterialIcons
+                                    name={'check-box'}
                                     size={24}
                                     color={theme.primary}
                                   />
                                 ) : (
-                                  <Ionicons
-                                    name={'ios-checkbox-outline'}
+                                  <MaterialIcons
+                                    name={'check-box-outline-blank'}
                                     size={24}
                                     color={theme.primary}
                                   />

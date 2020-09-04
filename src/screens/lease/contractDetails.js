@@ -33,6 +33,7 @@ import * as yup from 'yup';
 import moment from 'moment';
 import Selector from 'react-native-easy-select';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+import MaterialIcons from "react-native-vector-icons/dist/MaterialIcons";
 
 const Form = withNextInputAutoFocusForm(View);
 
@@ -139,8 +140,7 @@ class LeaseContractDetails extends Component {
         <Screen style={{backgroundColor: theme.white}}>
           <View>
             <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+             Please Fill contract details
             </Text>
             {!this.isEmpty(this.props.postLeaseDummy) && (
               <KeyboardAvoidingView behavior="padding" enabled>
@@ -250,17 +250,13 @@ class LeaseContractDetails extends Component {
                             )
                           }>
                           {props.values.FirmVehicle.IsWithDriver ? (
-                            <Ionicons
-                              name={'ios-checkbox'}
-                              size={24}
-                              color={theme.primary}
-                            />
+                              <MaterialIcons name={'check-box'} size={24} color={theme.primary} />
                           ) : (
-                            <Ionicons
-                              name={'ios-checkbox-outline'}
-                              size={24}
-                              color={theme.primary}
-                            />
+                              <MaterialIcons
+                                  name={'check-box-outline-blank'}
+                                  size={24}
+                                  color={theme.primary}
+                              />
                           )}
                           <Text
                             style={{
